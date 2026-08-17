@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Philip Bong is a Kuching-based real estate negotiator specialising in property subsales and rentals for new buyers, expat families and investors.">
+  <meta name="theme-color" content="#081b2f">
+  <title>Philip Bong | Kuching Real Estate Negotiator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #081b2f;
+      --navy-2: #102a46;
+      --gold: #c79b52;
+      --gold-soft: #e6c98f;
+      --cream: #f8f5ef;
+      --white: #fff;
+      --ink: #102235;
+      --muted: #657384;
+      --line: rgba(8, 27, 47, .11);
+      --shadow: 0 24px 70px rgba(8, 27, 47, .12);
+      --radius: 24px;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body { margin: 0; font-family: Inter, sans-serif; color: var(--ink); background: var(--white); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    body.menu-open { overflow: hidden; }
+    h1, h2, h3, .brand { font-family: Poppins, sans-serif; line-height: 1.16; margin-top: 0; }
+    p { margin-top: 0; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 3px solid var(--gold-soft); outline-offset: 3px; }
+    .container { width: min(calc(100% - 40px), var(--max)); margin-inline: auto; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 18px; color: var(--gold); font-size: .76rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 30px; height: 1px; background: currentColor; }
+    .section { padding: 112px 0; }
+    .section-head { max-width: 680px; margin-bottom: 52px; }
+    .section-head h2 { font-size: clamp(2rem, 4vw, 3.25rem); letter-spacing: -.035em; margin-bottom: 18px; }
+    .section-head p { color: var(--muted); font-size: 1.05rem; }
+    .btn { display: inline-flex; min-height: 52px; align-items: center; justify-content: center; gap: 10px; padding: 0 22px; border: 1px solid transparent; border-radius: 999px; font-weight: 700; font-size: .92rem; transition: transform .2s, box-shadow .2s, background .2s; cursor: pointer; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-gold { color: var(--navy); background: var(--gold-soft); box-shadow: 0 12px 28px rgba(199, 155, 82, .22); }
+    .btn-gold:hover { background: #efd6a5; box-shadow: 0 16px 34px rgba(199, 155, 82, .3); }
+    .btn-outline { color: var(--white); border-color: rgba(255,255,255,.28); background: rgba(255,255,255,.04); }
+
+    header { position: fixed; inset: 0 0 auto; z-index: 50; transition: background .25s, box-shadow .25s; }
+    header.scrolled { background: rgba(8,27,47,.95); box-shadow: 0 8px 30px rgba(0,0,0,.12); backdrop-filter: blur(14px); }
+    nav { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+    .brand { display: flex; align-items: center; gap: 12px; color: var(--white); font-weight: 600; font-size: 1rem; letter-spacing: -.01em; }
+    .brand-mark { width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid rgba(230,201,143,.6); border-radius: 12px; color: var(--gold-soft); font-size: .8rem; letter-spacing: .04em; }
+    .brand small { display: block; font: 500 .62rem Inter, sans-serif; color: rgba(255,255,255,.62); letter-spacing: .12em; margin-top: 2px; }
+    .nav-links { display: flex; align-items: center; gap: 30px; color: rgba(255,255,255,.75); font-size: .88rem; font-weight: 600; }
+    .nav-links a:not(.btn):hover { color: var(--gold-soft); }
+    .nav-toggle { display: none; width: 44px; height: 44px; border: 0; border-radius: 12px; background: rgba(255,255,255,.08); color: white; cursor: pointer; }
+
+    .hero { position: relative; min-height: 760px; display: grid; align-items: center; overflow: hidden; padding: 140px 0 90px; color: white; background: var(--navy); }
+    .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 80% 42%, rgba(199,155,82,.17), transparent 31%), linear-gradient(110deg, transparent 49%, rgba(255,255,255,.035) 49.2%, transparent 49.5%); }
+    .hero-grid { position: relative; display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(40px, 8vw, 100px); align-items: center; }
+    .hero-copy { max-width: 650px; }
+    .hero h1 { font-size: clamp(2.8rem, 6.3vw, 5.45rem); letter-spacing: -.055em; margin-bottom: 24px; }
+    .hero h1 em { display: block; color: var(--gold-soft); font-style: normal; }
+    .hero-copy > p { max-width: 580px; color: rgba(255,255,255,.7); font-size: clamp(1rem, 1.5vw, 1.16rem); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin: 34px 0 38px; }
+    .trust-row { display: flex; flex-wrap: wrap; gap: 22px; color: rgba(255,255,255,.62); font-size: .82rem; }
+    .trust-row span { display: flex; align-items: center; gap: 8px; }
+    .trust-row i { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+    .property-visual { position: relative; min-height: 500px; }
+    .property-card { position: absolute; inset: 18px 0 42px 24px; overflow: hidden; border-radius: 160px 24px 24px 24px; background: linear-gradient(155deg, #d8d0c2, #8c9aa0); box-shadow: 0 40px 90px rgba(0,0,0,.28); }
+    .property-art { position: absolute; inset: 0; }
+    .property-art::before { content: ""; position: absolute; width: 84%; height: 56%; right: -3%; bottom: 12%; background: #e7e2d8; clip-path: polygon(0 22%, 56% 0, 100% 17%, 100% 100%, 0 100%); box-shadow: inset 0 -90px 100px rgba(10,29,45,.13); }
+    .property-art::after { content: ""; position: absolute; width: 46%; height: 34%; right: 6%; bottom: 17%; background: repeating-linear-gradient(90deg, #21384a 0 29%, #b3c2c3 30% 33%); border: 8px solid #ece9e1; box-shadow: -160px 56px 0 -42px #24394a; }
+    .sun { position: absolute; width: 120px; height: 120px; top: 14%; left: 12%; border-radius: 50%; background: rgba(248,229,188,.58); filter: blur(1px); }
+    .visual-label { position: absolute; left: 0; bottom: 0; z-index: 3; max-width: 250px; padding: 22px 24px; color: var(--navy); background: white; border-radius: 18px; box-shadow: var(--shadow); }
+    .visual-label strong { display: block; font: 600 1rem Poppins, sans-serif; }
+    .visual-label span { color: var(--muted); font-size: .78rem; }
+    .ren-badge { position: absolute; right: -18px; top: 0; z-index: 3; width: 118px; height: 118px; display: grid; place-content: center; text-align: center; border-radius: 50%; color: var(--navy); background: var(--gold-soft); box-shadow: 0 20px 45px rgba(0,0,0,.2); }
+    .ren-badge small { display: block; font-size: .57rem; letter-spacing: .12em; text-transform: uppercase; }
+    .ren-badge strong { font: 700 .9rem Poppins, sans-serif; }
+
+    .intro { background: var(--cream); }
+    .intro-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(50px, 10vw, 130px); align-items: center; }
+    .quote-card { position: relative; padding: 50px; border-radius: var(--radius); background: var(--navy); color: white; box-shadow: var(--shadow); }
+    .quote-card::before { content: "“"; position: absolute; right: 30px; top: 5px; color: rgba(230,201,143,.15); font: 700 8rem Georgia, serif; line-height: 1; }
+    .quote-card p { position: relative; font: 500 clamp(1.25rem, 2.3vw, 1.75rem) Poppins, sans-serif; line-height: 1.5; }
+    .quote-card footer { color: var(--gold-soft); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; }
+    .intro-copy h2 { font-size: clamp(2.1rem, 4vw, 3.4rem); letter-spacing: -.04em; margin-bottom: 24px; }
+    .intro-copy p { color: var(--muted); }
+    .credentials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 30px; }
+    .credential { padding: 18px 12px; border-top: 1px solid var(--line); }
+    .credential strong { display: block; font: 600 .95rem Poppins, sans-serif; }
+    .credential span { color: var(--muted); font-size: .76rem; }
+
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .service-card { min-height: 320px; padding: 34px; display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--radius); background: white; transition: transform .25s, box-shadow .25s, border-color .25s; }
+    .service-card:hover { transform: translateY(-6px); border-color: rgba(199,155,82,.5); box-shadow: var(--shadow); }
+    .service-card.featured { color: white; background: var(--navy); border-color: var(--navy); }
+    .icon { width: 54px; height: 54px; display: grid; place-items: center; margin-bottom: 44px; border-radius: 16px; color: var(--gold); background: rgba(199,155,82,.12); font-size: 1.3rem; }
+    .service-card h3 { font-size: 1.25rem; margin-bottom: 12px; }
+    .service-card p { color: var(--muted); font-size: .92rem; }
+    .service-card.featured p { color: rgba(255,255,255,.64); }
+    .service-card a { margin-top: auto; color: var(--gold); font-size: .83rem; font-weight: 700; }
+
+    .process { background: var(--cream); }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; counter-reset: step; }
+    .step { position: relative; padding: 28px 24px; border-radius: 20px; background: white; box-shadow: 0 12px 40px rgba(8,27,47,.06); counter-increment: step; }
+    .step::before { content: "0" counter(step); display: block; margin-bottom: 40px; color: var(--gold); font: 600 .78rem Poppins, sans-serif; letter-spacing: .1em; }
+    .step:not(:last-child)::after { content: ""; position: absolute; top: 34px; right: -12px; z-index: 2; width: 24px; height: 1px; background: var(--gold); }
+    .step h3 { font-size: 1rem; margin-bottom: 10px; }
+    .step p { margin: 0; color: var(--muted); font-size: .84rem; }
+
+    .audience-grid { display: grid; grid-template-columns: .75fr 1.25fr; gap: 22px; }
+    .audience-lead { padding: 42px; border-radius: var(--radius); color: white; background: var(--navy); }
+    .audience-lead h2 { font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -.04em; }
+    .audience-lead p { color: rgba(255,255,255,.62); }
+    .audience-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .audience-card { padding: 30px 26px; border: 1px solid var(--line); border-radius: var(--radius); }
+    .audience-card span { display: block; margin-bottom: 50px; color: var(--gold); font: 600 1.7rem Poppins, sans-serif; }
+    .audience-card h3 { font-size: 1.03rem; }
+    .audience-card p { margin: 0; color: var(--muted); font-size: .82rem; }
+
+    .contact { padding: 112px 0; color: white; background: var(--navy); }
+    .contact-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(45px, 9vw, 110px); align-items: center; }
+    .contact-copy h2 { max-width: 520px; font-size: clamp(2.25rem, 5vw, 4rem); letter-spacing: -.045em; }
+    .contact-copy p { max-width: 480px; color: rgba(255,255,255,.65); }
+    .contact-details { margin-top: 34px; display: grid; gap: 15px; color: rgba(255,255,255,.76); font-size: .9rem; }
+    .contact-details b { display: inline-block; min-width: 100px; color: var(--gold-soft); }
+    .contact-form { padding: 36px; border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius); background: rgba(255,255,255,.055); box-shadow: 0 30px 70px rgba(0,0,0,.18); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    label { display: block; margin-bottom: 15px; color: rgba(255,255,255,.72); font-size: .76rem; font-weight: 600; }
+    input, select, textarea { width: 100%; margin-top: 7px; padding: 13px 14px; border: 1px solid rgba(255,255,255,.14); border-radius: 12px; color: white; background: rgba(255,255,255,.07); outline: 0; }
+    input:focus, select:focus, textarea:focus { border-color: var(--gold); }
+    input::placeholder, textarea::placeholder { color: rgba(255,255,255,.35); }
+    select option { color: var(--ink); }
+    textarea { min-height: 92px; resize: vertical; }
+    .contact-form .btn { width: 100%; border: 0; }
+    .privacy { margin: 12px 0 0; text-align: center; color: rgba(255,255,255,.42); font-size: .7rem; }
+
+    footer.site-footer { padding: 28px 0; color: rgba(255,255,255,.5); background: #061524; font-size: .76rem; }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .footer-row strong { color: white; }
+    .wa-float { position: fixed; right: 22px; bottom: 22px; z-index: 40; width: 58px; height: 58px; display: grid; place-items: center; border-radius: 50%; color: white; background: #25d366; box-shadow: 0 14px 34px rgba(9,40,25,.28); transition: transform .2s; }
+    .wa-float:hover { transform: scale(1.07); }
+    .wa-float svg { width: 28px; height: 28px; fill: currentColor; }
+
+    @media (max-width: 900px) {
+      .section, .contact { padding: 82px 0; }
+      .nav-toggle { display: grid; place-items: center; }
+      .nav-links { position: fixed; inset: 82px 0 auto; display: none; padding: 28px 20px 34px; flex-direction: column; background: var(--navy); box-shadow: 0 30px 40px rgba(0,0,0,.2); }
+      .nav-links.open { display: flex; }
+      .hero-grid, .intro-grid, .contact-grid, .audience-grid { grid-template-columns: 1fr; }
+      .hero { min-height: auto; }
+      .hero-copy { padding-top: 20px; }
+      .property-visual { min-height: 440px; width: min(100%, 580px); }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .services-grid .service-card:last-child { grid-column: 1 / -1; min-height: 260px; }
+      .steps { grid-template-columns: repeat(2, 1fr); }
+      .step:nth-child(2)::after { display: none; }
+    }
+    @media (max-width: 620px) {
+      .container { width: min(calc(100% - 28px), var(--max)); }
+      .hero { padding-top: 120px; }
+      .hero h1 { font-size: clamp(2.55rem, 13vw, 4rem); }
+      .hero-actions .btn { width: 100%; }
+      .property-visual { min-height: 350px; }
+      .property-card { inset: 10px 4px 30px 8px; border-radius: 100px 20px 20px 20px; }
+      .ren-badge { right: -2px; width: 92px; height: 92px; }
+      .visual-label { padding: 16px 18px; }
+      .quote-card, .audience-lead, .contact-form { padding: 28px; }
+      .credentials, .services-grid, .audience-list, .form-row { grid-template-columns: 1fr; }
+      .services-grid .service-card:last-child { grid-column: auto; }
+      .service-card { min-height: 270px; }
+      .steps { grid-template-columns: 1fr; }
+      .step::after { display: none; }
+      .audience-card span { margin-bottom: 25px; }
+      .footer-row { flex-direction: column; align-items: flex-start; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <!-- EDIT: Navigation and brand details -->
+  <header id="header">
+    <nav class="container" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="Philip Bong home"><span class="brand-mark">PB</span><span>Philip Bong<small>REAL ESTATE NEGOTIATOR</small></span></a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#about">About</a><a href="#services">Services</a><a href="#process">Process</a><a href="#contact">Contact</a>
+        <a class="btn btn-gold" href="https://wa.me/60128810895?text=Hi%20Philip%2C%20I%27d%20like%20to%20discuss%20a%20property%20in%20Kuching." target="_blank" rel="noopener">WhatsApp Philip</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Kuching, Sarawak</span>
+          <h1 id="hero-title">A better way to <em>move forward.</em></h1>
+          <p>Clear advice, considered service and local insight for buying, selling or renting property in Kuching.</p>
+          <div class="hero-actions">
+            <a class="btn btn-gold" href="https://wa.me/60128810895?text=Hi%20Philip%2C%20I%27d%20like%20to%20discuss%20a%20property%20in%20Kuching." target="_blank" rel="noopener">Start on WhatsApp <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-outline" href="#services">Explore services</a>
+          </div>
+          <div class="trust-row"><span><i></i> Subsales &amp; rental</span><span><i></i> Personal guidance</span><span><i></i> REN23177</span></div>
+        </div>
+        <div class="property-visual" aria-label="Contemporary Kuching home illustration">
+          <div class="property-card"><div class="sun"></div><div class="property-art"></div></div>
+          <div class="ren-badge"><small>Registered</small><strong>REN23177</strong></div>
+          <div class="visual-label"><strong>Property, made personal.</strong><span>Local perspective. Straight answers.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section intro" id="about">
+      <div class="container intro-grid">
+        <blockquote class="quote-card"><p>A home decision is a life decision. You deserve guidance that feels clear, unhurried and genuinely on your side.</p><footer>— Philip Bong</footer></blockquote>
+        <div class="intro-copy">
+          <span class="eyebrow">Meet your negotiator</span>
+          <h2>Local knowledge.<br>Professional care.</h2>
+          <p>I’m Philip Bong, a Senior Negotiator helping people navigate Kuching’s property market with confidence. From first viewing to final handover, I keep the process organised, transparent and focused on what matters to you.</p>
+          <div class="credentials">
+            <div class="credential"><strong>Philip Bong</strong><span>Senior Negotiator</span></div>
+            <div class="credential"><strong>REN23177</strong><span>Registration no.</span></div>
+            <div class="credential"><strong>Kuching</strong><span>Sarawak, Malaysia</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head"><span class="eyebrow">How I can help</span><h2>Property guidance built around your next move.</h2><p>Whether you are searching, selling or securing a tenant, you’ll get practical support at every stage.</p></div>
+        <div class="services-grid">
+          <article class="service-card featured"><div class="icon" aria-hidden="true">⌂</div><h3>Buy a property</h3><p>Shortlist with purpose, understand the details and move forward at the right pace.</p><a href="#contact">Tell me what you’re looking for →</a></article>
+          <article class="service-card"><div class="icon" aria-hidden="true">◇</div><h3>Sell with confidence</h3><p>Thoughtful positioning, qualified enquiries and clear communication from listing to completion.</p><a href="#contact">Discuss your property →</a></article>
+          <article class="service-card"><div class="icon" aria-hidden="true">↔</div><h3>Rent or let</h3><p>A smoother rental experience for owners, local tenants and families relocating to Kuching.</p><a href="#contact">Start a rental enquiry →</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section process" id="process">
+      <div class="container">
+        <div class="section-head"><span class="eyebrow">Simple by design</span><h2>A clear path from conversation to keys.</h2></div>
+        <div class="steps">
+          <article class="step"><h3>Share your goals</h3><p>We start with your needs, timing, budget and non-negotiables.</p></article>
+          <article class="step"><h3>Review your options</h3><p>Get a focused shortlist or a clear market approach for your property.</p></article>
+          <article class="step"><h3>Decide with clarity</h3><p>View, compare and negotiate with informed, practical guidance.</p></article>
+          <article class="step"><h3>Move forward</h3><p>I help coordinate the details through agreement and handover.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container audience-grid">
+        <div class="audience-lead"><span class="eyebrow">Who I work with</span><h2>Different goals. The same attentive service.</h2><p>Property needs are personal. My advice is too.</p></div>
+        <div class="audience-list">
+          <article class="audience-card"><span>01</span><h3>New buyers</h3><p>Plain-language support for a confident first purchase.</p></article>
+          <article class="audience-card"><span>02</span><h3>Expat families</h3><p>Area and rental guidance for a smoother move to Kuching.</p></article>
+          <article class="audience-card"><span>03</span><h3>Investors</h3><p>Practical insight to help assess fit, demand and potential.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-copy"><span class="eyebrow">Let’s talk property</span><h2>Your next move starts with a conversation.</h2><p>Tell me what you have in mind. I’ll reply personally and help you work out the most useful next step.</p><div class="contact-details"><div><b>WhatsApp</b> +60 12-881 0895</div><div><b>Location</b> Kuching, Sarawak</div><div><b>Specialty</b> Subsales &amp; Rental</div></div></div>
+        <form class="contact-form" id="enquiryForm">
+          <div class="form-row">
+            <label>Your name<input id="name" name="name" autocomplete="name" placeholder="e.g. Michelle" required></label>
+            <label>I’m looking to<select id="intent" name="intent" required><option value="Buy a property">Buy a property</option><option value="Sell a property">Sell a property</option><option value="Rent a property">Rent a property</option><option value="Let a property">Let a property</option><option value="Discuss an investment">Discuss an investment</option></select></label>
+          </div>
+          <label>Tell me a little more<textarea id="message" name="message" placeholder="Preferred area, property type, budget or timeline…"></textarea></label>
+          <button class="btn btn-gold" type="submit">Continue on WhatsApp <span aria-hidden="true">↗</span></button>
+          <p class="privacy">This opens WhatsApp with your message ready to send.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-row"><div><strong>Philip Bong</strong> · Senior Negotiator · REN23177</div><div>© <span id="year"></span> Philip Bong. All rights reserved.</div></div></footer>
+  <a class="wa-float" href="https://wa.me/60128810895?text=Hi%20Philip%2C%20I%27d%20like%20to%20discuss%20a%20property%20in%20Kuching." target="_blank" rel="noopener" aria-label="Chat with Philip on WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M19.1 17.7c-.4-.2-2.2-1.1-2.6-1.2-.3-.1-.6-.2-.8.2-.2.4-.9 1.2-1.1 1.4-.2.3-.4.3-.8.1-2.2-1.1-3.7-2-5.2-4.5-.4-.7.4-.7 1.1-2.1.1-.3.1-.5 0-.7-.1-.2-.8-2-1.2-2.8-.3-.8-.7-.7-.9-.7h-.8c-.3 0-.7.1-1 .5-.4.4-1.4 1.4-1.4 3.4s1.5 4 1.7 4.3c.2.3 2.9 4.5 7.1 6.3 2.6 1.1 3.7 1.2 5 .9.8-.1 2.2-.9 2.5-1.8.3-.9.3-1.7.2-1.8-.2-.3-.5-.4-.8-.5M16 28.5c-2.3 0-4.5-.6-6.4-1.8l-.5-.3-4.8 1.3 1.3-4.7-.3-.5A12.5 12.5 0 1 1 16 28.5m0-25A12.5 12.5 0 0 0 5.2 22.3L3.4 29l6.8-1.8A12.5 12.5 0 1 0 16 3.5"/></svg></a>
+
+  <script>
+    const header = document.getElementById('header');
+    const toggle = document.getElementById('navToggle');
+    const links = document.getElementById('navLinks');
+    const setHeader = () => header.classList.toggle('scrolled', scrollY > 20);
+    addEventListener('scroll', setHeader, { passive: true }); setHeader();
+    toggle.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open);
+      toggle.textContent = open ? '×' : '☰';
+      document.body.classList.toggle('menu-open', open);
+    });
+    links.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      links.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); toggle.textContent = '☰'; document.body.classList.remove('menu-open');
+    }));
+    document.getElementById('enquiryForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const intent = document.getElementById('intent').value;
+      const details = document.getElementById('message').value.trim();
+      const text = `Hi Philip, I'm ${name}. I'd like to ${intent.toLowerCase()}.${details ? `\n\nDetails: ${details}` : ''}`;
+      window.open(`https://wa.me/60128810895?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
