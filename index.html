@@ -107,6 +107,23 @@
     .service-card.featured p { color: rgba(255,255,255,.64); }
     .service-card a { margin-top: auto; color: var(--gold); font-size: .83rem; font-weight: 700; }
 
+    .listing { position: relative; overflow: hidden; color: white; background: var(--navy); }
+    .listing::before { content: ""; position: absolute; width: 620px; height: 620px; top: -330px; right: -220px; border: 1px solid rgba(230,201,143,.16); border-radius: 50%; box-shadow: 0 0 0 90px rgba(230,201,143,.025), 0 0 0 180px rgba(230,201,143,.018); }
+    .listing-intro { position: relative; display: grid; grid-template-columns: 1.08fr .92fr; gap: clamp(45px, 9vw, 110px); align-items: end; margin-bottom: 48px; }
+    .listing-intro h2 { max-width: 690px; margin-bottom: 0; font-size: clamp(2.2rem, 5vw, 4rem); letter-spacing: -.045em; }
+    .listing-intro h2 em { color: var(--gold-soft); font-style: normal; }
+    .listing-summary p { color: rgba(255,255,255,.66); }
+    .listing-facts { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 22px; }
+    .listing-facts span { padding: 8px 12px; border: 1px solid rgba(230,201,143,.22); border-radius: 999px; color: var(--gold-soft); font-size: .72rem; }
+    .listing-gallery { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .listing-image { position: relative; min-width: 0; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 20px; background: var(--navy-2); }
+    .listing-image img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .5s ease; }
+    .listing-image:first-child img { object-position: center; }
+    .listing-image:hover img { transform: scale(1.035); }
+    .listing-image span { position: absolute; left: 16px; top: 16px; width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.22); border-radius: 50%; color: var(--navy); background: var(--gold-soft); font: 600 .76rem Poppins, sans-serif; box-shadow: 0 8px 22px rgba(0,0,0,.2); }
+    .listing-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 34px; }
+    .listing-disclaimer { margin: 15px 0 0; color: rgba(255,255,255,.42); font-size: .7rem; }
+
     .process { background: var(--cream); }
     .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; counter-reset: step; }
     .step { position: relative; padding: 28px 24px; border-radius: 20px; background: white; box-shadow: 0 12px 40px rgba(8,27,47,.06); counter-increment: step; }
@@ -160,6 +177,9 @@
       .property-visual { min-height: 440px; width: min(100%, 580px); }
       .services-grid { grid-template-columns: repeat(2, 1fr); }
       .services-grid .service-card:last-child { grid-column: 1 / -1; min-height: 260px; }
+      .listing-intro { grid-template-columns: 1fr; }
+      .listing-gallery { grid-template-columns: 1fr 1fr; }
+      .listing-image:first-child { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
       .steps { grid-template-columns: repeat(2, 1fr); }
       .step:nth-child(2)::after { display: none; }
     }
@@ -178,6 +198,9 @@
       .credentials, .services-grid, .audience-list, .form-row { grid-template-columns: 1fr; }
       .services-grid .service-card:last-child { grid-column: auto; }
       .service-card { min-height: 270px; }
+      .listing-gallery { grid-template-columns: 1fr; }
+      .listing-image, .listing-image:first-child { grid-column: auto; aspect-ratio: 4 / 3; }
+      .listing-actions .btn { width: 100%; }
       .steps { grid-template-columns: 1fr; }
       .step::after { display: none; }
       .audience-card span { margin-bottom: 25px; }
@@ -193,7 +216,7 @@
       <a class="brand" href="#top" aria-label="Philip Bong home"><span class="brand-mark">PB</span><span>Philip Bong<small>REAL ESTATE NEGOTIATOR</small></span></a>
       <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">☰</button>
       <div class="nav-links" id="navLinks">
-        <a href="#about">About</a><a href="#services">Services</a><a href="#process">Process</a><a href="#contact">Contact</a>
+        <a href="#about">About</a><a href="#services">Services</a><a href="#luxury-listing">Listing</a><a href="#process">Process</a><a href="#contact">Contact</a>
         <a class="btn btn-gold" href="https://wa.me/60128810895?text=Hi%20Philip%2C%20I%27d%20like%20to%20discuss%20a%20property%20in%20Kuching." target="_blank" rel="noopener">WhatsApp Philip</a>
       </div>
     </nav>
@@ -247,6 +270,31 @@
           <article class="service-card"><div class="icon" aria-hidden="true">◇</div><h3>Sell with confidence</h3><p>Thoughtful positioning, qualified enquiries and clear communication from listing to completion.</p><a href="#contact">Discuss your property →</a></article>
           <article class="service-card"><div class="icon" aria-hidden="true">↔</div><h3>Rent or let</h3><p>A smoother rental experience for owners, local tenants and families relocating to Kuching.</p><a href="#contact">Start a rental enquiry →</a></article>
         </div>
+      </div>
+    </section>
+
+    <section class="section listing" id="luxury-listing" aria-labelledby="listing-title">
+      <div class="container">
+        <div class="listing-intro">
+          <div>
+            <span class="eyebrow">Featured luxury listing</span>
+            <h2 id="listing-title">WOZO Suites — exclusive low-density living in the <em>heart of Jalan Song.</em></h2>
+          </div>
+          <div class="listing-summary">
+            <p>Discover a more private expression of urban living in Kuching. WOZO Suites offers only 73 exclusive residences, with spacious layouts from approximately 1,367 to 3,799 sq ft, a prime Jalan Song address and convenient access to shopping, dining, schools and essential amenities.</p>
+            <div class="listing-facts" aria-label="Property highlights"><span>Only 73 residences</span><span>1,367–3,799 sq ft</span><span>Infinity pool</span><span>Gymnasium</span><span>Sky lounge</span><span>24/7 security</span></div>
+          </div>
+        </div>
+        <div class="listing-gallery" aria-label="WOZO Suites gallery">
+          <figure class="listing-image"><img src="wozo-listing-1.webp" alt="WOZO Suites luxury residences at Jalan Song, Kuching" width="1256" height="1256" loading="lazy"><span aria-hidden="true">01</span></figure>
+          <figure class="listing-image"><img src="wozo-listing-2.webp" alt="WOZO Suites building and surrounding Jalan Song neighbourhood" width="1600" height="1146" loading="lazy"><span aria-hidden="true">02</span></figure>
+          <figure class="listing-image"><img src="wozo-listing-3.webp" alt="Aerial location view showing amenities near WOZO Suites" width="1600" height="900" loading="lazy"><span aria-hidden="true">03</span></figure>
+        </div>
+        <div class="listing-actions">
+          <a class="btn btn-gold" href="https://wa.me/60128810895?text=Hi%20Philip%2C%20I%27m%20interested%20in%20WOZO%20Suites%20at%20Jalan%20Song.%20Please%20share%20the%20latest%20prices%2C%20available%20units%2C%20layouts%20and%20viewing%20arrangements." target="_blank" rel="noopener">Request Price &amp; Available Units <span aria-hidden="true">↗</span></a>
+          <a class="btn btn-outline" href="https://wa.me/60128810895?text=Hi%20Philip%2C%20I%27d%20like%20to%20arrange%20a%20private%20viewing%20for%20WOZO%20Suites%20at%20Jalan%20Song." target="_blank" rel="noopener">Arrange a Private Viewing</a>
+        </div>
+        <p class="listing-disclaimer">Artist’s impressions and location visuals are for presentation purposes. Property details, availability and specifications are subject to confirmation.</p>
       </div>
     </section>
 
