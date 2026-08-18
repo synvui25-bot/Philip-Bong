@@ -83,10 +83,13 @@
 
     .intro { background: var(--cream); }
     .intro-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(50px, 10vw, 130px); align-items: center; }
-    .quote-card { position: relative; padding: 50px; border-radius: var(--radius); background: var(--navy); color: white; box-shadow: var(--shadow); }
-    .quote-card::before { content: "“"; position: absolute; right: 30px; top: 5px; color: rgba(230,201,143,.15); font: 700 8rem Georgia, serif; line-height: 1; }
-    .quote-card p { position: relative; font: 500 clamp(1.25rem, 2.3vw, 1.75rem) Poppins, sans-serif; line-height: 1.5; }
-    .quote-card footer { color: var(--gold-soft); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; }
+    .portrait-card { position: relative; min-height: 540px; display: flex; align-items: flex-end; justify-content: center; overflow: hidden; border-radius: 160px 24px 24px 24px; background: linear-gradient(145deg, #183856, var(--navy)); box-shadow: var(--shadow); isolation: isolate; }
+    .portrait-card::before { content: ""; position: absolute; width: 280px; height: 280px; top: 45px; right: 20px; z-index: -1; border: 1px solid rgba(230,201,143,.45); border-radius: 50%; }
+    .portrait-card::after { content: ""; position: absolute; inset: auto 28px 26px auto; width: 78px; height: 4px; border-radius: 99px; background: var(--gold); }
+    .portrait-card img { display: block; width: 112%; max-width: none; height: 520px; object-fit: contain; object-position: center bottom; filter: drop-shadow(0 24px 30px rgba(0,0,0,.23)); }
+    .portrait-caption { position: absolute; left: 24px; bottom: 22px; z-index: 2; padding: 13px 16px; border: 1px solid rgba(255,255,255,.13); border-radius: 14px; color: white; background: rgba(8,27,47,.82); backdrop-filter: blur(12px); }
+    .portrait-caption strong { display: block; font: 600 .9rem Poppins, sans-serif; }
+    .portrait-caption span { color: var(--gold-soft); font-size: .69rem; letter-spacing: .08em; text-transform: uppercase; }
     .intro-copy h2 { font-size: clamp(2.1rem, 4vw, 3.4rem); letter-spacing: -.04em; margin-bottom: 24px; }
     .intro-copy p { color: var(--muted); }
     .credentials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 30px; }
@@ -169,7 +172,9 @@
       .property-card { inset: 10px 4px 30px 8px; border-radius: 100px 20px 20px 20px; }
       .ren-badge { right: -2px; width: 92px; height: 92px; }
       .visual-label { padding: 16px 18px; }
-      .quote-card, .audience-lead, .contact-form { padding: 28px; }
+      .portrait-card { min-height: 430px; width: min(100%, 470px); margin-inline: auto; border-radius: 110px 22px 22px 22px; }
+      .portrait-card img { height: 420px; }
+      .audience-lead, .contact-form { padding: 28px; }
       .credentials, .services-grid, .audience-list, .form-row { grid-template-columns: 1fr; }
       .services-grid .service-card:last-child { grid-column: auto; }
       .service-card { min-height: 270px; }
@@ -217,7 +222,10 @@
 
     <section class="section intro" id="about">
       <div class="container intro-grid">
-        <blockquote class="quote-card"><p>A home decision is a life decision. You deserve guidance that feels clear, unhurried and genuinely on your side.</p><footer>— Philip Bong</footer></blockquote>
+        <figure class="portrait-card">
+          <img src="philip-bong-portrait.webp" alt="Philip Bong, Senior Negotiator" width="900" height="1424" loading="lazy">
+          <figcaption class="portrait-caption"><strong>Philip Bong</strong><span>Senior Negotiator</span></figcaption>
+        </figure>
         <div class="intro-copy">
           <span class="eyebrow">Meet your negotiator</span>
           <h2>Local knowledge.<br>Professional care.</h2>
@@ -311,3 +319,4 @@
   </script>
 </body>
 </html>
+
