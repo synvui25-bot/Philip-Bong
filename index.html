@@ -27,7 +27,7 @@
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; scroll-padding-top: 90px; }
     body { margin: 0; font-family: Inter, sans-serif; color: var(--ink); background: var(--white); line-height: 1.65; -webkit-font-smoothing: antialiased; }
-    body.menu-open { overflow: hidden; }
+    body.menu-open, body.lightbox-open { overflow: hidden; }
     h1, h2, h3, .brand { font-family: Poppins, sans-serif; line-height: 1.16; margin-top: 0; }
     p { margin-top: 0; }
     a { color: inherit; text-decoration: none; }
@@ -116,13 +116,25 @@
     .listing-facts { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 22px; }
     .listing-facts span { padding: 8px 12px; border: 1px solid rgba(230,201,143,.22); border-radius: 999px; color: var(--gold-soft); font-size: .72rem; }
     .listing-gallery { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    .listing-image { position: relative; min-width: 0; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 20px; background: var(--navy-2); }
+    .listing-image { position: relative; min-width: 0; aspect-ratio: 4 / 3; overflow: hidden; margin: 0; border-radius: 20px; background: var(--navy-2); }
+    .listing-trigger { width: 100%; height: 100%; display: block; padding: 0; border: 0; color: inherit; background: transparent; cursor: zoom-in; }
     .listing-image img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .5s ease; }
     .listing-image:first-child img { object-position: center; }
     .listing-image:hover img { transform: scale(1.035); }
     .listing-image span { position: absolute; left: 16px; top: 16px; width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.22); border-radius: 50%; color: var(--navy); background: var(--gold-soft); font: 600 .76rem Poppins, sans-serif; box-shadow: 0 8px 22px rgba(0,0,0,.2); }
     .listing-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 34px; }
     .listing-disclaimer { margin: 15px 0 0; color: rgba(255,255,255,.42); font-size: .7rem; }
+
+    .lightbox[hidden] { display: none; }
+    .lightbox { position: fixed; inset: 0; z-index: 100; display: grid; grid-template-columns: 76px minmax(0, 1fr) 76px; align-items: center; gap: 18px; padding: 34px; color: white; background: rgba(3, 12, 22, .96); backdrop-filter: blur(12px); }
+    .lightbox-figure { min-width: 0; margin: 0; text-align: center; }
+    .lightbox-image { display: block; max-width: 100%; max-height: calc(100vh - 130px); width: auto; height: auto; margin: auto; object-fit: contain; border-radius: 14px; box-shadow: 0 30px 90px rgba(0,0,0,.46); }
+    .lightbox-caption { display: flex; justify-content: center; gap: 20px; margin-top: 14px; color: rgba(255,255,255,.72); font-size: .8rem; }
+    .lightbox-counter { flex: 0 0 auto; color: var(--gold-soft); font-weight: 700; }
+    .lightbox-control { width: 58px; height: 58px; display: grid; place-items: center; padding: 0; border: 1px solid rgba(255,255,255,.22); border-radius: 50%; color: white; background: rgba(255,255,255,.08); cursor: pointer; transition: background .2s, transform .2s; }
+    .lightbox-control:hover { background: rgba(230,201,143,.2); transform: scale(1.05); }
+    .lightbox-prev, .lightbox-next { font-size: 2rem; line-height: 1; }
+    .lightbox-close { position: absolute; top: 22px; right: 22px; width: 46px; height: 46px; font-size: 1.65rem; }
 
     .process { background: var(--cream); }
     .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; counter-reset: step; }
@@ -201,6 +213,11 @@
       .listing-gallery { grid-template-columns: 1fr; }
       .listing-image, .listing-image:first-child { grid-column: auto; aspect-ratio: 4 / 3; }
       .listing-actions .btn { width: 100%; }
+      .lightbox { grid-template-columns: 48px minmax(0, 1fr) 48px; gap: 6px; padding: 72px 10px 24px; }
+      .lightbox-control { width: 44px; height: 44px; }
+      .lightbox-close { top: 14px; right: 14px; }
+      .lightbox-image { max-height: calc(100vh - 150px); }
+      .lightbox-caption { padding-inline: 8px; font-size: .7rem; }
       .steps { grid-template-columns: 1fr; }
       .step::after { display: none; }
       .audience-card span { margin-bottom: 25px; }
@@ -286,9 +303,9 @@
           </div>
         </div>
         <div class="listing-gallery" aria-label="WOZO Suites gallery">
-          <figure class="listing-image"><img src="wozo-listing-1.webp" alt="WOZO Suites luxury residences at Jalan Song, Kuching" width="1256" height="1256" loading="lazy"><span aria-hidden="true">01</span></figure>
-          <figure class="listing-image"><img src="wozo-listing-2.webp" alt="WOZO Suites building and surrounding Jalan Song neighbourhood" width="1600" height="1146" loading="lazy"><span aria-hidden="true">02</span></figure>
-          <figure class="listing-image"><img src="wozo-listing-3.webp" alt="Aerial location view showing amenities near WOZO Suites" width="1600" height="900" loading="lazy"><span aria-hidden="true">03</span></figure>
+          <figure class="listing-image"><button class="listing-trigger" type="button" aria-label="View WOZO Suites photo 1 full size"><img src="wozo-listing-1.webp" alt="WOZO Suites luxury residences at Jalan Song, Kuching" width="1256" height="1256" loading="lazy"><span aria-hidden="true">01</span></button></figure>
+          <figure class="listing-image"><button class="listing-trigger" type="button" aria-label="View WOZO Suites photo 2 full size"><img src="wozo-listing-2.webp" alt="WOZO Suites building and surrounding Jalan Song neighbourhood" width="1600" height="1146" loading="lazy"><span aria-hidden="true">02</span></button></figure>
+          <figure class="listing-image"><button class="listing-trigger" type="button" aria-label="View WOZO Suites photo 3 full size"><img src="wozo-listing-3.webp" alt="Aerial location view showing amenities near WOZO Suites" width="1600" height="900" loading="lazy"><span aria-hidden="true">03</span></button></figure>
         </div>
         <div class="listing-actions">
           <a class="btn btn-gold" href="https://wa.me/60128810895?text=Hi%20Philip%2C%20I%27m%20interested%20in%20WOZO%20Suites%20at%20Jalan%20Song.%20Please%20share%20the%20latest%20prices%2C%20available%20units%2C%20layouts%20and%20viewing%20arrangements." target="_blank" rel="noopener">Request Price &amp; Available Units <span aria-hidden="true">↗</span></a>
@@ -337,6 +354,16 @@
     </section>
   </main>
 
+  <div class="lightbox" id="listingLightbox" role="dialog" aria-modal="true" aria-labelledby="lightboxCaption" hidden>
+    <button class="lightbox-control lightbox-close" id="lightboxClose" type="button" aria-label="Close photo viewer">×</button>
+    <button class="lightbox-control lightbox-prev" id="lightboxPrev" type="button" aria-label="Previous photo">‹</button>
+    <figure class="lightbox-figure">
+      <img class="lightbox-image" id="lightboxImage" src="" alt="">
+      <figcaption class="lightbox-caption"><span id="lightboxCaption"></span><span class="lightbox-counter" id="lightboxCounter"></span></figcaption>
+    </figure>
+    <button class="lightbox-control lightbox-next" id="lightboxNext" type="button" aria-label="Next photo">›</button>
+  </div>
+
   <footer class="site-footer"><div class="container footer-row"><div><strong>Philip Bong</strong> · Senior Negotiator · REN23177</div><div>© <span id="year"></span> Philip Bong. All rights reserved.</div></div></footer>
   <a class="wa-float" href="https://wa.me/60128810895?text=Hi%20Philip%2C%20I%27d%20like%20to%20discuss%20a%20property%20in%20Kuching." target="_blank" rel="noopener" aria-label="Chat with Philip on WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M19.1 17.7c-.4-.2-2.2-1.1-2.6-1.2-.3-.1-.6-.2-.8.2-.2.4-.9 1.2-1.1 1.4-.2.3-.4.3-.8.1-2.2-1.1-3.7-2-5.2-4.5-.4-.7.4-.7 1.1-2.1.1-.3.1-.5 0-.7-.1-.2-.8-2-1.2-2.8-.3-.8-.7-.7-.9-.7h-.8c-.3 0-.7.1-1 .5-.4.4-1.4 1.4-1.4 3.4s1.5 4 1.7 4.3c.2.3 2.9 4.5 7.1 6.3 2.6 1.1 3.7 1.2 5 .9.8-.1 2.2-.9 2.5-1.8.3-.9.3-1.7.2-1.8-.2-.3-.5-.4-.8-.5M16 28.5c-2.3 0-4.5-.6-6.4-1.8l-.5-.3-4.8 1.3 1.3-4.7-.3-.5A12.5 12.5 0 1 1 16 28.5m0-25A12.5 12.5 0 0 0 5.2 22.3L3.4 29l6.8-1.8A12.5 12.5 0 1 0 16 3.5"/></svg></a>
 
@@ -362,6 +389,45 @@
       const details = document.getElementById('message').value.trim();
       const text = `Hi Philip, I'm ${name}. I'd like to ${intent.toLowerCase()}.${details ? `\n\nDetails: ${details}` : ''}`;
       window.open(`https://wa.me/60128810895?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+    });
+    const lightbox = document.getElementById('listingLightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const lightboxCounter = document.getElementById('lightboxCounter');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const listingTriggers = [...document.querySelectorAll('.listing-trigger')];
+    let currentPhoto = 0;
+    let lastPhotoTrigger = null;
+    const showPhoto = index => {
+      currentPhoto = (index + listingTriggers.length) % listingTriggers.length;
+      const source = listingTriggers[currentPhoto].querySelector('img');
+      lightboxImage.src = source.src;
+      lightboxImage.alt = source.alt;
+      lightboxCaption.textContent = source.alt;
+      lightboxCounter.textContent = `${currentPhoto + 1} / ${listingTriggers.length}`;
+    };
+    const openLightbox = index => {
+      lastPhotoTrigger = listingTriggers[index];
+      showPhoto(index);
+      lightbox.hidden = false;
+      document.body.classList.add('lightbox-open');
+      lightboxClose.focus();
+    };
+    const closeLightbox = () => {
+      lightbox.hidden = true;
+      document.body.classList.remove('lightbox-open');
+      lastPhotoTrigger?.focus();
+    };
+    listingTriggers.forEach((trigger, index) => trigger.addEventListener('click', () => openLightbox(index)));
+    document.getElementById('lightboxPrev').addEventListener('click', () => showPhoto(currentPhoto - 1));
+    document.getElementById('lightboxNext').addEventListener('click', () => showPhoto(currentPhoto + 1));
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', event => { if (event.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', event => {
+      if (lightbox.hidden) return;
+      if (event.key === 'Escape') closeLightbox();
+      if (event.key === 'ArrowLeft') showPhoto(currentPhoto - 1);
+      if (event.key === 'ArrowRight') showPhoto(currentPhoto + 1);
     });
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
