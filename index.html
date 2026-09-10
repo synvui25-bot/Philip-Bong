@@ -1,435 +1,55 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Philip Bong is a Kuching-based real estate negotiator specialising in property subsales and rentals for new buyers, expat families and investors.">
-  <meta name="theme-color" content="#081b2f">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <!-- EDIT: SEO -->
   <title>Philip Bong | Kuching Real Estate Negotiator</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <meta name="description" content="Philip Bong, Senior Real Estate Negotiator REN23177, provides trusted property buying, selling and rental guidance in Kuching, Sarawak.">
+  <link rel="canonical" href="https://synvui25-bot.github.io/Philip-Bong/"><meta name="theme-color" content="#081b2f">
+  <!-- EDIT: Open Graph -->
+  <meta property="og:type" content="website"><meta property="og:title" content="Philip Bong | Kuching Real Estate Negotiator"><meta property="og:description" content="Personal property guidance for buyers, sellers, landlords and investors in Kuching, Sarawak."><meta property="og:url" content="https://synvui25-bot.github.io/Philip-Bong/"><meta property="og:image" content="https://synvui25-bot.github.io/Philip-Bong/wozo-listing-1.webp"><meta property="og:image:alt" content="Featured Kuching property represented by Philip Bong"><meta property="og:locale" content="en_MY"><meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- EDIT: Keep schema aligned with visible agent and FAQ content -->
+  <script type="application/ld+json">[{"@context":"https://schema.org","@type":"RealEstateAgent","name":"Philip Bong","description":"Senior Real Estate Negotiator specialising in subsales and rentals in Kuching, Sarawak.","url":"https://synvui25-bot.github.io/Philip-Bong/","image":"https://synvui25-bot.github.io/Philip-Bong/philip-bong-portrait.webp","telephone":"+60128810895","address":{"@type":"PostalAddress","addressLocality":"Kuching","addressRegion":"Sarawak","addressCountry":"MY"},"areaServed":{"@type":"City","name":"Kuching"}},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which areas does Philip Bong serve?","acceptedAnswer":{"@type":"Answer","text":"Philip Bong serves property buyers, sellers, landlords and tenants throughout Kuching, Sarawak."}},{"@type":"Question","name":"What property services are available?","acceptedAnswer":{"@type":"Answer","text":"Services include residential and commercial subsales, rentals, property searches and viewing coordination."}},{"@type":"Question","name":"How can I arrange a property viewing?","acceptedAnswer":{"@type":"Answer","text":"Send Philip a WhatsApp message with your preferred property and viewing schedule."}}]}]</script>
   <style>
-    :root {
-      --navy: #081b2f;
-      --navy-2: #102a46;
-      --gold: #c79b52;
-      --gold-soft: #e6c98f;
-      --cream: #f8f5ef;
-      --white: #fff;
-      --ink: #102235;
-      --muted: #657384;
-      --line: rgba(8, 27, 47, .11);
-      --shadow: 0 24px 70px rgba(8, 27, 47, .12);
-      --radius: 24px;
-      --max: 1180px;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
-    body { margin: 0; font-family: Inter, sans-serif; color: var(--ink); background: var(--white); line-height: 1.65; -webkit-font-smoothing: antialiased; }
-    body.menu-open, body.lightbox-open { overflow: hidden; }
-    h1, h2, h3, .brand { font-family: Poppins, sans-serif; line-height: 1.16; margin-top: 0; }
-    p { margin-top: 0; }
-    a { color: inherit; text-decoration: none; }
-    button, input, select, textarea { font: inherit; }
-    button, a { -webkit-tap-highlight-color: transparent; }
-    :focus-visible { outline: 3px solid var(--gold-soft); outline-offset: 3px; }
-    .container { width: min(calc(100% - 40px), var(--max)); margin-inline: auto; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 18px; color: var(--gold); font-size: .76rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
-    .eyebrow::before { content: ""; width: 30px; height: 1px; background: currentColor; }
-    .section { padding: 112px 0; }
-    .section-head { max-width: 680px; margin-bottom: 52px; }
-    .section-head h2 { font-size: clamp(2rem, 4vw, 3.25rem); letter-spacing: -.035em; margin-bottom: 18px; }
-    .section-head p { color: var(--muted); font-size: 1.05rem; }
-    .btn { display: inline-flex; min-height: 52px; align-items: center; justify-content: center; gap: 10px; padding: 0 22px; border: 1px solid transparent; border-radius: 999px; font-weight: 700; font-size: .92rem; transition: transform .2s, box-shadow .2s, background .2s; cursor: pointer; }
-    .btn:hover { transform: translateY(-2px); }
-    .btn-gold { color: var(--navy); background: var(--gold-soft); box-shadow: 0 12px 28px rgba(199, 155, 82, .22); }
-    .btn-gold:hover { background: #efd6a5; box-shadow: 0 16px 34px rgba(199, 155, 82, .3); }
-    .btn-outline { color: var(--white); border-color: rgba(255,255,255,.28); background: rgba(255,255,255,.04); }
-
-    header { position: fixed; inset: 0 0 auto; z-index: 50; transition: background .25s, box-shadow .25s; }
-    header.scrolled { background: rgba(8,27,47,.95); box-shadow: 0 8px 30px rgba(0,0,0,.12); backdrop-filter: blur(14px); }
-    nav { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 30px; }
-    .brand { display: flex; align-items: center; gap: 12px; color: var(--white); font-weight: 600; font-size: 1rem; letter-spacing: -.01em; }
-    .brand-mark { width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid rgba(230,201,143,.6); border-radius: 12px; color: var(--gold-soft); font-size: .8rem; letter-spacing: .04em; }
-    .brand small { display: block; font: 500 .62rem Inter, sans-serif; color: rgba(255,255,255,.62); letter-spacing: .12em; margin-top: 2px; }
-    .nav-links { display: flex; align-items: center; gap: 30px; color: rgba(255,255,255,.75); font-size: .88rem; font-weight: 600; }
-    .nav-links a:not(.btn):hover { color: var(--gold-soft); }
-    .nav-toggle { display: none; width: 44px; height: 44px; border: 0; border-radius: 12px; background: rgba(255,255,255,.08); color: white; cursor: pointer; }
-
-    .hero { position: relative; min-height: 760px; display: grid; align-items: center; overflow: hidden; padding: 140px 0 90px; color: white; background: var(--navy); }
-    .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 80% 42%, rgba(199,155,82,.17), transparent 31%), linear-gradient(110deg, transparent 49%, rgba(255,255,255,.035) 49.2%, transparent 49.5%); }
-    .hero-grid { position: relative; display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(40px, 8vw, 100px); align-items: center; }
-    .hero-copy { max-width: 650px; }
-    .hero h1 { font-size: clamp(2.8rem, 6.3vw, 5.45rem); letter-spacing: -.055em; margin-bottom: 24px; }
-    .hero h1 em { display: block; color: var(--gold-soft); font-style: normal; }
-    .hero-copy > p { max-width: 580px; color: rgba(255,255,255,.7); font-size: clamp(1rem, 1.5vw, 1.16rem); }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin: 34px 0 38px; }
-    .trust-row { display: flex; flex-wrap: wrap; gap: 22px; color: rgba(255,255,255,.62); font-size: .82rem; }
-    .trust-row span { display: flex; align-items: center; gap: 8px; }
-    .trust-row i { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
-    .property-visual { position: relative; min-height: 500px; }
-    .property-card { position: absolute; inset: 18px 0 42px 24px; overflow: hidden; border-radius: 160px 24px 24px 24px; background: linear-gradient(155deg, #d8d0c2, #8c9aa0); box-shadow: 0 40px 90px rgba(0,0,0,.28); }
-    .property-art { position: absolute; inset: 0; }
-    .property-art::before { content: ""; position: absolute; width: 84%; height: 56%; right: -3%; bottom: 12%; background: #e7e2d8; clip-path: polygon(0 22%, 56% 0, 100% 17%, 100% 100%, 0 100%); box-shadow: inset 0 -90px 100px rgba(10,29,45,.13); }
-    .property-art::after { content: ""; position: absolute; width: 46%; height: 34%; right: 6%; bottom: 17%; background: repeating-linear-gradient(90deg, #21384a 0 29%, #b3c2c3 30% 33%); border: 8px solid #ece9e1; box-shadow: -160px 56px 0 -42px #24394a; }
-    .sun { position: absolute; width: 120px; height: 120px; top: 14%; left: 12%; border-radius: 50%; background: rgba(248,229,188,.58); filter: blur(1px); }
-    .visual-label { position: absolute; left: 0; bottom: 0; z-index: 3; max-width: 250px; padding: 22px 24px; color: var(--navy); background: white; border-radius: 18px; box-shadow: var(--shadow); }
-    .visual-label strong { display: block; font: 600 1rem Poppins, sans-serif; }
-    .visual-label span { color: var(--muted); font-size: .78rem; }
-    .ren-badge { position: absolute; right: -18px; top: 0; z-index: 3; width: 118px; height: 118px; display: grid; place-content: center; text-align: center; border-radius: 50%; color: var(--navy); background: var(--gold-soft); box-shadow: 0 20px 45px rgba(0,0,0,.2); }
-    .ren-badge small { display: block; font-size: .57rem; letter-spacing: .12em; text-transform: uppercase; }
-    .ren-badge strong { font: 700 .9rem Poppins, sans-serif; }
-
-    .intro { background: var(--cream); }
-    .intro-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(50px, 10vw, 130px); align-items: center; }
-    .portrait-card { position: relative; min-height: 540px; display: flex; align-items: flex-end; justify-content: center; overflow: hidden; border-radius: 160px 24px 24px 24px; background: linear-gradient(145deg, #183856, var(--navy)); box-shadow: var(--shadow); isolation: isolate; }
-    .portrait-card::before { content: ""; position: absolute; width: 280px; height: 280px; top: 45px; right: 20px; z-index: -1; border: 1px solid rgba(230,201,143,.45); border-radius: 50%; }
-    .portrait-card::after { content: ""; position: absolute; inset: auto 28px 26px auto; width: 78px; height: 4px; border-radius: 99px; background: var(--gold); }
-    .portrait-card img { display: block; width: 112%; max-width: none; height: 520px; object-fit: contain; object-position: center bottom; filter: drop-shadow(0 24px 30px rgba(0,0,0,.23)); }
-    .portrait-caption { position: absolute; left: 24px; bottom: 22px; z-index: 2; padding: 13px 16px; border: 1px solid rgba(255,255,255,.13); border-radius: 14px; color: white; background: rgba(8,27,47,.82); backdrop-filter: blur(12px); }
-    .portrait-caption strong { display: block; font: 600 .9rem Poppins, sans-serif; }
-    .portrait-caption span { color: var(--gold-soft); font-size: .69rem; letter-spacing: .08em; text-transform: uppercase; }
-    .intro-copy h2 { font-size: clamp(2.1rem, 4vw, 3.4rem); letter-spacing: -.04em; margin-bottom: 24px; }
-    .intro-copy p { color: var(--muted); }
-    .credentials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 30px; }
-    .credential { padding: 18px 12px; border-top: 1px solid var(--line); }
-    .credential strong { display: block; font: 600 .95rem Poppins, sans-serif; }
-    .credential span { color: var(--muted); font-size: .76rem; }
-
-    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .service-card { min-height: 320px; padding: 34px; display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--radius); background: white; transition: transform .25s, box-shadow .25s, border-color .25s; }
-    .service-card:hover { transform: translateY(-6px); border-color: rgba(199,155,82,.5); box-shadow: var(--shadow); }
-    .service-card.featured { color: white; background: var(--navy); border-color: var(--navy); }
-    .icon { width: 54px; height: 54px; display: grid; place-items: center; margin-bottom: 44px; border-radius: 16px; color: var(--gold); background: rgba(199,155,82,.12); font-size: 1.3rem; }
-    .service-card h3 { font-size: 1.25rem; margin-bottom: 12px; }
-    .service-card p { color: var(--muted); font-size: .92rem; }
-    .service-card.featured p { color: rgba(255,255,255,.64); }
-    .service-card a { margin-top: auto; color: var(--gold); font-size: .83rem; font-weight: 700; }
-
-    .listing { position: relative; overflow: hidden; color: white; background: var(--navy); }
-    .listing::before { content: ""; position: absolute; width: 620px; height: 620px; top: -330px; right: -220px; border: 1px solid rgba(230,201,143,.16); border-radius: 50%; box-shadow: 0 0 0 90px rgba(230,201,143,.025), 0 0 0 180px rgba(230,201,143,.018); }
-    .listing-intro { position: relative; display: grid; grid-template-columns: 1.08fr .92fr; gap: clamp(45px, 9vw, 110px); align-items: end; margin-bottom: 48px; }
-    .listing-intro h2 { max-width: 690px; margin-bottom: 0; font-size: clamp(2.2rem, 5vw, 4rem); letter-spacing: -.045em; }
-    .listing-intro h2 em { color: var(--gold-soft); font-style: normal; }
-    .listing-summary p { color: rgba(255,255,255,.66); }
-    .listing-facts { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 22px; }
-    .listing-facts span { padding: 8px 12px; border: 1px solid rgba(230,201,143,.22); border-radius: 999px; color: var(--gold-soft); font-size: .72rem; }
-    .listing-gallery { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    .listing-image { position: relative; min-width: 0; aspect-ratio: 4 / 3; overflow: hidden; margin: 0; border-radius: 20px; background: var(--navy-2); }
-    .listing-trigger { width: 100%; height: 100%; display: block; padding: 0; border: 0; color: inherit; background: transparent; cursor: zoom-in; }
-    .listing-image img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .5s ease; }
-    .listing-image:first-child img { object-position: center; }
-    .listing-image:hover img { transform: scale(1.035); }
-    .listing-image span { position: absolute; left: 16px; top: 16px; width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.22); border-radius: 50%; color: var(--navy); background: var(--gold-soft); font: 600 .76rem Poppins, sans-serif; box-shadow: 0 8px 22px rgba(0,0,0,.2); }
-    .listing-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 34px; }
-    .listing-disclaimer { margin: 15px 0 0; color: rgba(255,255,255,.42); font-size: .7rem; }
-
-    .lightbox[hidden] { display: none; }
-    .lightbox { position: fixed; inset: 0; z-index: 100; display: grid; grid-template-columns: 76px minmax(0, 1fr) 76px; align-items: center; gap: 18px; padding: 34px; color: white; background: rgba(3, 12, 22, .96); backdrop-filter: blur(12px); }
-    .lightbox-figure { min-width: 0; margin: 0; text-align: center; }
-    .lightbox-image { display: block; max-width: 100%; max-height: calc(100vh - 130px); width: auto; height: auto; margin: auto; object-fit: contain; border-radius: 14px; box-shadow: 0 30px 90px rgba(0,0,0,.46); }
-    .lightbox-caption { display: flex; justify-content: center; gap: 20px; margin-top: 14px; color: rgba(255,255,255,.72); font-size: .8rem; }
-    .lightbox-counter { flex: 0 0 auto; color: var(--gold-soft); font-weight: 700; }
-    .lightbox-control { width: 58px; height: 58px; display: grid; place-items: center; padding: 0; border: 1px solid rgba(255,255,255,.22); border-radius: 50%; color: white; background: rgba(255,255,255,.08); cursor: pointer; transition: background .2s, transform .2s; }
-    .lightbox-control:hover { background: rgba(230,201,143,.2); transform: scale(1.05); }
-    .lightbox-prev, .lightbox-next { font-size: 2rem; line-height: 1; }
-    .lightbox-close { position: absolute; top: 22px; right: 22px; width: 46px; height: 46px; font-size: 1.65rem; }
-
-    .process { background: var(--cream); }
-    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; counter-reset: step; }
-    .step { position: relative; padding: 28px 24px; border-radius: 20px; background: white; box-shadow: 0 12px 40px rgba(8,27,47,.06); counter-increment: step; }
-    .step::before { content: "0" counter(step); display: block; margin-bottom: 40px; color: var(--gold); font: 600 .78rem Poppins, sans-serif; letter-spacing: .1em; }
-    .step:not(:last-child)::after { content: ""; position: absolute; top: 34px; right: -12px; z-index: 2; width: 24px; height: 1px; background: var(--gold); }
-    .step h3 { font-size: 1rem; margin-bottom: 10px; }
-    .step p { margin: 0; color: var(--muted); font-size: .84rem; }
-
-    .audience-grid { display: grid; grid-template-columns: .75fr 1.25fr; gap: 22px; }
-    .audience-lead { padding: 42px; border-radius: var(--radius); color: white; background: var(--navy); }
-    .audience-lead h2 { font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -.04em; }
-    .audience-lead p { color: rgba(255,255,255,.62); }
-    .audience-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .audience-card { padding: 30px 26px; border: 1px solid var(--line); border-radius: var(--radius); }
-    .audience-card span { display: block; margin-bottom: 50px; color: var(--gold); font: 600 1.7rem Poppins, sans-serif; }
-    .audience-card h3 { font-size: 1.03rem; }
-    .audience-card p { margin: 0; color: var(--muted); font-size: .82rem; }
-
-    .contact { padding: 112px 0; color: white; background: var(--navy); }
-    .contact-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(45px, 9vw, 110px); align-items: center; }
-    .contact-copy h2 { max-width: 520px; font-size: clamp(2.25rem, 5vw, 4rem); letter-spacing: -.045em; }
-    .contact-copy p { max-width: 480px; color: rgba(255,255,255,.65); }
-    .contact-details { margin-top: 34px; display: grid; gap: 15px; color: rgba(255,255,255,.76); font-size: .9rem; }
-    .contact-details b { display: inline-block; min-width: 100px; color: var(--gold-soft); }
-    .contact-form { padding: 36px; border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius); background: rgba(255,255,255,.055); box-shadow: 0 30px 70px rgba(0,0,0,.18); }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    label { display: block; margin-bottom: 15px; color: rgba(255,255,255,.72); font-size: .76rem; font-weight: 600; }
-    input, select, textarea { width: 100%; margin-top: 7px; padding: 13px 14px; border: 1px solid rgba(255,255,255,.14); border-radius: 12px; color: white; background: rgba(255,255,255,.07); outline: 0; }
-    input:focus, select:focus, textarea:focus { border-color: var(--gold); }
-    input::placeholder, textarea::placeholder { color: rgba(255,255,255,.35); }
-    select option { color: var(--ink); }
-    textarea { min-height: 92px; resize: vertical; }
-    .contact-form .btn { width: 100%; border: 0; }
-    .privacy { margin: 12px 0 0; text-align: center; color: rgba(255,255,255,.42); font-size: .7rem; }
-
-    footer.site-footer { padding: 28px 0; color: rgba(255,255,255,.5); background: #061524; font-size: .76rem; }
-    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-    .footer-row strong { color: white; }
-    .wa-float { position: fixed; right: 22px; bottom: 22px; z-index: 40; width: 58px; height: 58px; display: grid; place-items: center; border-radius: 50%; color: white; background: #25d366; box-shadow: 0 14px 34px rgba(9,40,25,.28); transition: transform .2s; }
-    .wa-float:hover { transform: scale(1.07); }
-    .wa-float svg { width: 28px; height: 28px; fill: currentColor; }
-
-    @media (max-width: 900px) {
-      .section, .contact { padding: 82px 0; }
-      .nav-toggle { display: grid; place-items: center; }
-      .nav-links { position: fixed; inset: 82px 0 auto; display: none; padding: 28px 20px 34px; flex-direction: column; background: var(--navy); box-shadow: 0 30px 40px rgba(0,0,0,.2); }
-      .nav-links.open { display: flex; }
-      .hero-grid, .intro-grid, .contact-grid, .audience-grid { grid-template-columns: 1fr; }
-      .hero { min-height: auto; }
-      .hero-copy { padding-top: 20px; }
-      .property-visual { min-height: 440px; width: min(100%, 580px); }
-      .services-grid { grid-template-columns: repeat(2, 1fr); }
-      .services-grid .service-card:last-child { grid-column: 1 / -1; min-height: 260px; }
-      .listing-intro { grid-template-columns: 1fr; }
-      .listing-gallery { grid-template-columns: 1fr 1fr; }
-      .listing-image:first-child { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
-      .steps { grid-template-columns: repeat(2, 1fr); }
-      .step:nth-child(2)::after { display: none; }
-    }
-    @media (max-width: 620px) {
-      .container { width: min(calc(100% - 28px), var(--max)); }
-      .hero { padding-top: 120px; }
-      .hero h1 { font-size: clamp(2.55rem, 13vw, 4rem); }
-      .hero-actions .btn { width: 100%; }
-      .property-visual { min-height: 350px; }
-      .property-card { inset: 10px 4px 30px 8px; border-radius: 100px 20px 20px 20px; }
-      .ren-badge { right: -2px; width: 92px; height: 92px; }
-      .visual-label { padding: 16px 18px; }
-      .portrait-card { min-height: 430px; width: min(100%, 470px); margin-inline: auto; border-radius: 110px 22px 22px 22px; }
-      .portrait-card img { height: 420px; }
-      .audience-lead, .contact-form { padding: 28px; }
-      .credentials, .services-grid, .audience-list, .form-row { grid-template-columns: 1fr; }
-      .services-grid .service-card:last-child { grid-column: auto; }
-      .service-card { min-height: 270px; }
-      .listing-gallery { grid-template-columns: 1fr; }
-      .listing-image, .listing-image:first-child { grid-column: auto; aspect-ratio: 4 / 3; }
-      .listing-actions .btn { width: 100%; }
-      .lightbox { grid-template-columns: 48px minmax(0, 1fr) 48px; gap: 6px; padding: 72px 10px 24px; }
-      .lightbox-control { width: 44px; height: 44px; }
-      .lightbox-close { top: 14px; right: 14px; }
-      .lightbox-image { max-height: calc(100vh - 150px); }
-      .lightbox-caption { padding-inline: 8px; font-size: .7rem; }
-      .steps { grid-template-columns: 1fr; }
-      .step::after { display: none; }
-      .audience-card span { margin-bottom: 25px; }
-      .footer-row { flex-direction: column; align-items: flex-start; }
-    }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
+    :root{--n:#081b2f;--n2:#112d49;--g:#c79b52;--g2:#ebce94;--c:#f8f5ee;--w:#fff;--i:#122437;--m:#687687;--l:rgba(8,27,47,.12);--s:0 22px 60px rgba(8,27,47,.13);--r:22px;--max:1160px}*,*::before,*::after{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:82px}body{margin:0;color:var(--i);background:#fff;font-family:Inter,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}body.locked{overflow:hidden}h1,h2,h3,.brand{margin-top:0;font-family:Poppins,sans-serif;line-height:1.15}p{margin-top:0}a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}img{max-width:100%}:focus-visible{outline:3px solid var(--g2);outline-offset:3px}.container{width:min(calc(100% - 32px),var(--max));margin-inline:auto}.section{padding:78px 0}.eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:14px;color:var(--g);font-size:.74rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase}.eyebrow::before{width:28px;height:1px;content:"";background:currentColor}.section-head{max-width:680px;margin-bottom:38px}.section-head h2{margin-bottom:14px;font-size:clamp(2rem,8vw,3.35rem);letter-spacing:-.04em}.section-head p{margin:0;color:var(--m)}.btn{min-height:50px;display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:0 20px;border:1px solid transparent;border-radius:999px;font-weight:700;font-size:.9rem;cursor:pointer;transition:.2s}.btn:hover{transform:translateY(-2px)}.btn-gold{color:var(--n);background:var(--g2);box-shadow:0 12px 28px rgba(199,155,82,.24)}.btn-outline{color:#fff;border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.04)}.btn-navy{color:#fff;background:var(--n)}
+    .site-header{position:sticky;top:0;z-index:50;color:#fff;background:rgba(8,27,47,.97);box-shadow:0 8px 30px rgba(0,0,0,.12);backdrop-filter:blur(14px)}.nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:11px;font-size:.96rem;font-weight:600}.brand-mark{width:40px;height:40px;display:grid;place-items:center;border:1px solid rgba(235,206,148,.55);border-radius:12px;color:var(--g2);font-size:.78rem}.brand small{display:block;margin-top:2px;color:rgba(255,255,255,.63);font:500 .54rem Inter,sans-serif;letter-spacing:.08em}.menu-toggle{width:44px;height:44px;display:grid;place-items:center;border:0;border-radius:12px;color:#fff;background:rgba(255,255,255,.08);cursor:pointer}.nav-links{position:fixed;inset:74px 0 auto;display:none;padding:28px 20px 34px;flex-direction:column;align-items:center;gap:22px;color:rgba(255,255,255,.78);background:var(--n);box-shadow:0 30px 40px rgba(0,0,0,.18);font-size:.87rem;font-weight:600}.nav-links.open{display:flex}.nav-links a:not(.btn):hover{color:var(--g2)}
+    .hero{position:relative;overflow:hidden;padding:64px 0 74px;color:#fff;background:radial-gradient(circle at 80% 20%,rgba(199,155,82,.2),transparent 32%),var(--n)}.hero-grid{display:grid;gap:38px}.hero h1{margin-bottom:20px;font-size:clamp(2.55rem,12vw,5.2rem);letter-spacing:-.055em}.hero h1 em{display:block;color:var(--g2);font-style:normal}.hero-copy>p{max-width:600px;margin:0;color:rgba(255,255,255,.72)}.hero-actions{display:grid;gap:12px;margin-top:28px}.hero-trust{display:flex;flex-wrap:wrap;gap:15px;margin-top:28px;color:rgba(255,255,255,.58);font-size:.78rem}.hero-trust span::before{margin-right:7px;color:var(--g2);content:"✓"}.hero-portrait{position:relative;min-height:390px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;margin:0;border:1px solid rgba(235,206,148,.15);border-radius:120px 22px 22px 22px;background:linear-gradient(145deg,#183a59,#061728);box-shadow:0 35px 85px rgba(0,0,0,.3)}.hero-portrait::before{position:absolute;top:36px;right:18px;width:230px;height:230px;border:1px solid rgba(235,206,148,.38);border-radius:50%;content:""}.hero-portrait img{position:relative;z-index:1;width:112%;height:380px;display:block;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 22px 28px rgba(0,0,0,.28))}.hero-badge{position:absolute;right:16px;bottom:16px;z-index:2;padding:11px 14px;border-radius:13px;color:var(--g2);background:rgba(8,27,47,.86);font-size:.7rem;font-weight:700;letter-spacing:.08em}
+    .about{background:var(--c)}.about-grid{display:grid;gap:38px;align-items:center}.about-copy h2{margin-bottom:20px;font-size:clamp(2rem,8vw,3.5rem);letter-spacing:-.04em}.about-copy p{color:var(--m)}.trust-stats{display:grid;gap:12px}.stat{padding:22px;border:1px solid var(--l);border-radius:18px;background:#fff;box-shadow:0 12px 35px rgba(8,27,47,.06)}.stat strong{display:block;color:var(--n);font:600 1.1rem Poppins,sans-serif}.stat span{color:var(--m);font-size:.78rem}
+    .listing-grid{display:grid;gap:20px}.listing-card{overflow:hidden;border:1px solid var(--l);border-radius:var(--r);background:#fff;box-shadow:0 14px 42px rgba(8,27,47,.07);transition:.25s}.listing-card:hover{transform:translateY(-5px);box-shadow:var(--s)}.gallery-trigger{position:relative;width:100%;display:block;padding:0;border:0;background:var(--n2);cursor:zoom-in}.listing-photo{aspect-ratio:4/3;overflow:hidden}.listing-photo img{width:100%;height:100%;display:block;object-fit:cover;transition:.5s}.listing-card:hover .listing-photo img{transform:scale(1.035)}.listing-label,.photo-count{position:absolute;padding:7px 11px;border-radius:999px;font-size:.68rem;font-weight:700}.listing-label{top:14px;left:14px;color:var(--n);background:var(--g2);letter-spacing:.07em;text-transform:uppercase}.photo-count{right:14px;bottom:14px;color:#fff;background:rgba(8,27,47,.82)}.listing-content{padding:24px}.listing-location{margin-bottom:8px;color:var(--g);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}.listing-content h3{margin-bottom:8px;font-size:1.23rem}.listing-price{margin-bottom:16px;color:var(--n);font:700 1.13rem Poppins,sans-serif}.listing-facts{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:17px}.listing-facts span{padding:6px 9px;border-radius:8px;color:var(--m);background:var(--c);font-size:.72rem}.listing-description{color:var(--m);font-size:.82rem}.listing-code{margin:-5px 0 18px;color:var(--g);font-size:.72rem;font-weight:700}.listing-content .btn{width:100%}
+    .why,.contact{color:#fff;background:var(--n)}.why .section-head p{color:rgba(255,255,255,.65)}.reason-grid{display:grid;gap:16px}.reason{padding:28px;border:1px solid rgba(255,255,255,.11);border-radius:var(--r);background:rgba(255,255,255,.05)}.reason-number{width:44px;height:44px;display:grid;place-items:center;margin-bottom:30px;border-radius:13px;color:var(--g2);background:rgba(199,155,82,.14);font:600 .78rem Poppins,sans-serif}.reason h3{margin-bottom:10px;font-size:1.08rem}.reason p{margin:0;color:rgba(255,255,255,.63);font-size:.87rem}.testimonials{background:var(--c)}.testimonial-grid{display:grid;gap:18px}.testimonial{margin:0;padding:30px;border-radius:var(--r);background:#fff;box-shadow:0 14px 42px rgba(8,27,47,.07)}.testimonial::before{display:block;margin-bottom:18px;color:var(--g);content:"“";font:700 3.6rem/.7 Georgia,serif}.testimonial p{font-size:.94rem}.testimonial footer{color:var(--m);font-size:.77rem}.testimonial footer strong{display:block;color:var(--n);font-family:Poppins,sans-serif}
+    .contact-grid{display:grid;gap:38px}.contact-copy h2{margin-bottom:18px;font-size:clamp(2.1rem,9vw,3.8rem);letter-spacing:-.045em}.contact-copy>p{color:rgba(255,255,255,.65)}.contact-details{display:grid;gap:11px;margin-top:26px;color:rgba(255,255,255,.74);font-size:.86rem}.contact-details strong{display:inline-block;min-width:88px;color:var(--g2)}.lead-form{padding:26px;border:1px solid rgba(255,255,255,.1);border-radius:var(--r);background:rgba(255,255,255,.055);box-shadow:0 30px 70px rgba(0,0,0,.18)}.field{display:block;margin-bottom:15px;color:rgba(255,255,255,.75);font-size:.75rem;font-weight:600}.field input,.field textarea{width:100%;margin-top:7px;padding:13px 14px;border:1px solid rgba(255,255,255,.14);border-radius:12px;outline:0;color:#fff;background:rgba(255,255,255,.07)}.field input:focus,.field textarea:focus{border-color:var(--g)}.field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.38)}.field textarea{min-height:110px;resize:vertical}.lead-form .btn{width:100%;border:0}.form-note{margin:11px 0 0;color:rgba(255,255,255,.44);text-align:center;font-size:.68rem}.faq{margin-top:46px;padding-top:38px;border-top:1px solid rgba(255,255,255,.1)}.faq details{padding:16px 0;border-bottom:1px solid rgba(255,255,255,.1)}.faq summary{color:var(--g2);font-weight:700;cursor:pointer}.faq details p{margin:10px 0 0;color:rgba(255,255,255,.62);font-size:.84rem}
+    .site-footer{padding:26px 0 92px;color:rgba(255,255,255,.5);background:#061522;font-size:.74rem}.footer-row{display:flex;flex-direction:column;gap:8px}.footer-row strong{color:#fff}.wa-float{position:fixed;right:18px;bottom:18px;z-index:45;width:58px;height:58px;display:grid;place-items:center;border-radius:50%;color:#fff;background:#25d366;box-shadow:0 14px 34px rgba(9,40,25,.3);transition:.2s}.wa-float:hover{transform:scale(1.07)}.wa-float svg{width:29px;height:29px;fill:currentColor}
+    .gallery[hidden],.gallery-data{display:none}.gallery{position:fixed;inset:0;z-index:100;display:grid;grid-template-columns:46px minmax(0,1fr) 46px;align-items:center;gap:5px;padding:70px 8px 24px;color:#fff;background:rgba(3,12,22,.97);backdrop-filter:blur(12px)}.gallery-figure{min-width:0;margin:0;text-align:center}.gallery-image{display:block;width:auto;height:auto;max-width:100%;max-height:calc(100vh - 155px);margin:auto;object-fit:contain;border-radius:12px;box-shadow:0 30px 90px rgba(0,0,0,.46)}.gallery-caption{display:flex;justify-content:center;gap:15px;margin-top:12px;padding-inline:6px;color:rgba(255,255,255,.7);font-size:.7rem}.gallery-counter{flex:0 0 auto;color:var(--g2);font-weight:700}.gallery-control{width:42px;height:42px;display:grid;place-items:center;padding:0;border:1px solid rgba(255,255,255,.22);border-radius:50%;color:#fff;background:rgba(255,255,255,.08);cursor:pointer}.gallery-prev,.gallery-next{font-size:1.7rem}.gallery-close{position:absolute;top:14px;right:14px;font-size:1.5rem}
+    @media(min-width:560px){.hero-actions{display:flex;flex-wrap:wrap}.trust-stats,.testimonial-grid,.listing-grid{grid-template-columns:repeat(2,1fr)}.listing-card:first-child{grid-column:1/-1}.trust-stats .stat:last-child{grid-column:1/-1}.footer-row{flex-direction:row;justify-content:space-between}.gallery{grid-template-columns:64px minmax(0,1fr) 64px;gap:14px;padding:35px}.gallery-control{width:54px;height:54px}.gallery-caption{font-size:.8rem}}@media(min-width:760px){.container{width:min(calc(100% - 48px),var(--max))}.section{padding:100px 0}.about-grid,.contact-grid{grid-template-columns:.9fr 1.1fr;gap:clamp(50px,8vw,100px)}.trust-stats{grid-template-columns:repeat(3,1fr)}.trust-stats .stat:last-child{grid-column:auto}.reason-grid{grid-template-columns:repeat(3,1fr)}.site-footer{padding-bottom:28px}}@media(min-width:920px){.nav{min-height:82px}.menu-toggle{display:none}.nav-links{position:static;display:flex;padding:0;flex-direction:row;gap:28px;background:transparent;box-shadow:none}.hero{min-height:690px;display:grid;align-items:center;padding:76px 0}.hero-grid{grid-template-columns:1.08fr .92fr;gap:clamp(55px,8vw,100px);align-items:center}.hero-portrait{min-height:520px}.hero-portrait img{height:510px}.listing-grid{grid-template-columns:repeat(3,1fr)}.listing-card:first-child{grid-column:auto}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition-duration:.01ms!important}}
   </style>
 </head>
 <body>
-  <!-- EDIT: Navigation and brand details -->
-  <header id="header">
-    <nav class="container" aria-label="Main navigation">
-      <a class="brand" href="#top" aria-label="Philip Bong home"><span class="brand-mark">PB</span><span>Philip Bong<small>SENIOR REAL ESTATE NEGOTIATOR</small></span></a>
-      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">☰</button>
-      <div class="nav-links" id="navLinks">
-        <a href="#about">About</a><a href="#services">Services</a><a href="#luxury-listing">Listing</a><a href="#process">Process</a><a href="#contact">Contact</a>
-        <a class="btn btn-gold" href="https://wa.me/60128810895?text=Hi%20Philip%2C%20I%27d%20like%20to%20discuss%20a%20property%20in%20Kuching." target="_blank" rel="noopener">WhatsApp Philip</a>
-      </div>
-    </nav>
-  </header>
-
+  <header class="site-header"><nav class="nav container" aria-label="Main navigation"><!-- EDIT: Agent identity --><a class="brand" href="#top"><span class="brand-mark">PB</span><span>Philip Bong<small>SENIOR REAL ESTATE NEGOTIATOR</small></span></a><button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Open navigation menu">☰</button><!-- EDIT: Navigation and WhatsApp CTA --><div class="nav-links" id="navLinks"><a href="#about">About</a><a href="#listings">Listings</a><a href="#why-me">Why Me</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a><a class="btn btn-gold" href="https://wa.me/60128810895?text=Hi%20Philip%2C%20I%27d%20like%20to%20discuss%20a%20property%20in%20Kuching." target="_blank" rel="noopener">WhatsApp Philip</a></div></nav></header>
   <main id="top">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <span class="eyebrow">Kuching, Sarawak</span>
-          <h1 id="hero-title">A better way to <em>move forward.</em></h1>
-          <p>Clear advice, considered service and local insight for buying, selling or renting property in Kuching.</p>
-          <div class="hero-actions">
-            <a class="btn btn-gold" href="https://wa.me/60128810895?text=Hi%20Philip%2C%20I%27d%20like%20to%20discuss%20a%20property%20in%20Kuching." target="_blank" rel="noopener">Start on WhatsApp <span aria-hidden="true">↗</span></a>
-            <a class="btn btn-outline" href="#services">Explore services</a>
-          </div>
-          <div class="trust-row"><span><i></i> Subsales &amp; rental</span><span><i></i> Personal guidance</span><span><i></i> REN23177</span></div>
-        </div>
-        <div class="property-visual" aria-label="Contemporary Kuching home illustration">
-          <div class="property-card"><div class="sun"></div><div class="property-art"></div></div>
-          <div class="ren-badge"><small>Registered</small><strong>REN23177</strong></div>
-          <div class="visual-label"><strong>Property, made personal.</strong><span>Local perspective. Straight answers.</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section intro" id="about">
-      <div class="container intro-grid">
-        <figure class="portrait-card">
-          <img src="philip-bong-portrait.webp" alt="Philip Bong, Senior Negotiator" width="900" height="1424" loading="lazy">
-          <figcaption class="portrait-caption"><strong>Philip Bong</strong><span>Senior Negotiator</span></figcaption>
-        </figure>
-        <div class="intro-copy">
-          <span class="eyebrow">Meet your negotiator</span>
-          <h2>Local knowledge.<br>Professional care.</h2>
-          <p>I’m Philip Bong, a Senior Negotiator helping people navigate Kuching’s property market with confidence. From first viewing to final handover, I keep the process organised, transparent and focused on what matters to you.</p>
-          <div class="credentials">
-            <div class="credential"><strong>Philip Bong</strong><span>Senior Negotiator</span></div>
-            <div class="credential"><strong>REN23177</strong><span>Registration no.</span></div>
-            <div class="credential"><strong>Kuching</strong><span>Sarawak, Malaysia</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="services">
-      <div class="container">
-        <div class="section-head"><span class="eyebrow">How I can help</span><h2>Property guidance built around your next move.</h2><p>Whether you are searching, selling or securing a tenant, you’ll get practical support at every stage.</p></div>
-        <div class="services-grid">
-          <article class="service-card featured"><div class="icon" aria-hidden="true">⌂</div><h3>Buy a property</h3><p>Shortlist with purpose, understand the details and move forward at the right pace.</p><a href="#contact">Tell me what you’re looking for →</a></article>
-          <article class="service-card"><div class="icon" aria-hidden="true">◇</div><h3>Sell with confidence</h3><p>Thoughtful positioning, qualified enquiries and clear communication from listing to completion.</p><a href="#contact">Discuss your property →</a></article>
-          <article class="service-card"><div class="icon" aria-hidden="true">↔</div><h3>Rent or let</h3><p>A smoother rental experience for owners, local tenants and families relocating to Kuching.</p><a href="#contact">Start a rental enquiry →</a></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section listing" id="luxury-listing" aria-labelledby="listing-title">
-      <div class="container">
-        <div class="listing-intro">
-          <div>
-            <span class="eyebrow">Featured luxury listing</span>
-            <h2 id="listing-title">WOZO Suites — exclusive low-density living in the <em>heart of Jalan Song.</em></h2>
-          </div>
-          <div class="listing-summary">
-            <p>Discover a more private expression of urban living in Kuching. WOZO Suites offers only 73 exclusive residences, with spacious layouts from approximately 1,367 to 3,799 sq ft, a prime Jalan Song address and convenient access to shopping, dining, schools and essential amenities.</p>
-            <div class="listing-facts" aria-label="Property highlights"><span>Only 73 residences</span><span>1,367–3,799 sq ft</span><span>Infinity pool</span><span>Gymnasium</span><span>Sky lounge</span><span>24/7 security</span></div>
-          </div>
-        </div>
-        <div class="listing-gallery" aria-label="WOZO Suites gallery">
-          <figure class="listing-image"><button class="listing-trigger" type="button" aria-label="View WOZO Suites photo 1 full size"><img src="wozo-listing-1.webp" alt="WOZO Suites luxury residences at Jalan Song, Kuching" width="1256" height="1256" loading="lazy"><span aria-hidden="true">01</span></button></figure>
-          <figure class="listing-image"><button class="listing-trigger" type="button" aria-label="View WOZO Suites photo 2 full size"><img src="wozo-listing-2.webp" alt="WOZO Suites building and surrounding Jalan Song neighbourhood" width="1600" height="1146" loading="lazy"><span aria-hidden="true">02</span></button></figure>
-          <figure class="listing-image"><button class="listing-trigger" type="button" aria-label="View WOZO Suites photo 3 full size"><img src="wozo-listing-3.webp" alt="Aerial location view showing amenities near WOZO Suites" width="1600" height="900" loading="lazy"><span aria-hidden="true">03</span></button></figure>
-        </div>
-        <div class="listing-actions">
-          <a class="btn btn-gold" href="https://wa.me/60128810895?text=Hi%20Philip%2C%20I%27m%20interested%20in%20WOZO%20Suites%20at%20Jalan%20Song.%20Please%20share%20the%20latest%20prices%2C%20available%20units%2C%20layouts%20and%20viewing%20arrangements." target="_blank" rel="noopener">Request Price &amp; Available Units <span aria-hidden="true">↗</span></a>
-          <a class="btn btn-outline" href="https://wa.me/60128810895?text=Hi%20Philip%2C%20I%27d%20like%20to%20arrange%20a%20private%20viewing%20for%20WOZO%20Suites%20at%20Jalan%20Song." target="_blank" rel="noopener">Arrange a Private Viewing</a>
-        </div>
-        <p class="listing-disclaimer">Artist’s impressions and location visuals are for presentation purposes. Property details, availability and specifications are subject to confirmation.</p>
-      </div>
-    </section>
-
-    <section class="section process" id="process">
-      <div class="container">
-        <div class="section-head"><span class="eyebrow">Simple by design</span><h2>A clear path from conversation to keys.</h2></div>
-        <div class="steps">
-          <article class="step"><h3>Share your goals</h3><p>We start with your needs, timing, budget and non-negotiables.</p></article>
-          <article class="step"><h3>Review your options</h3><p>Get a focused shortlist or a clear market approach for your property.</p></article>
-          <article class="step"><h3>Decide with clarity</h3><p>View, compare and negotiate with informed, practical guidance.</p></article>
-          <article class="step"><h3>Move forward</h3><p>I help coordinate the details through agreement and handover.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container audience-grid">
-        <div class="audience-lead"><span class="eyebrow">Who I work with</span><h2>Different goals. The same attentive service.</h2><p>Property needs are personal. My advice is too.</p></div>
-        <div class="audience-list">
-          <article class="audience-card"><span>01</span><h3>New buyers</h3><p>Plain-language support for a confident first purchase.</p></article>
-          <article class="audience-card"><span>02</span><h3>Expat families</h3><p>Area and rental guidance for a smoother move to Kuching.</p></article>
-          <article class="audience-card"><span>03</span><h3>Investors</h3><p>Practical insight to help assess fit, demand and potential.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="contact" id="contact">
-      <div class="container contact-grid">
-        <div class="contact-copy"><span class="eyebrow">Let’s talk property</span><h2>Your next move starts with a conversation.</h2><p>Tell me what you have in mind. I’ll reply personally and help you work out the most useful next step.</p><div class="contact-details"><div><b>WhatsApp</b> +60 12-881 0895</div><div><b>Location</b> Kuching, Sarawak</div><div><b>Specialty</b> Subsales &amp; Rental</div></div></div>
-        <form class="contact-form" id="enquiryForm">
-          <div class="form-row">
-            <label>Your name<input id="name" name="name" autocomplete="name" placeholder="e.g. Michelle" required></label>
-            <label>I’m looking to<select id="intent" name="intent" required><option value="Buy a property">Buy a property</option><option value="Sell a property">Sell a property</option><option value="Rent a property">Rent a property</option><option value="Let a property">Let a property</option><option value="Discuss an investment">Discuss an investment</option></select></label>
-          </div>
-          <label>Tell me a little more<textarea id="message" name="message" placeholder="Preferred area, property type, budget or timeline…"></textarea></label>
-          <button class="btn btn-gold" type="submit">Continue on WhatsApp <span aria-hidden="true">↗</span></button>
-          <p class="privacy">This opens WhatsApp with your message ready to send.</p>
-        </form>
-      </div>
-    </section>
+    <section class="hero" aria-labelledby="hero-title"><div class="container hero-grid"><div class="hero-copy"><!-- EDIT: Hero promise and CTAs --><span class="eyebrow">Kuching, Sarawak</span><h1 id="hero-title">Your property journey, <em>made clearer.</em></h1><p>Personal guidance, local knowledge and straightforward advice for buying, selling or renting property in Kuching.</p><div class="hero-actions"><a class="btn btn-gold" href="https://wa.me/60128810895?text=Hi%20Philip%2C%20I%27d%20like%20help%20with%20a%20property%20in%20Kuching." target="_blank" rel="noopener">Start on WhatsApp ↗</a><a class="btn btn-outline" href="#listings">View Featured Listings</a></div><div class="hero-trust"><span>Subsales &amp; rental</span><span>Personal service</span><span>REN23177</span></div></div><figure class="hero-portrait"><!-- EDIT: Hero headshot --><img src="philip-bong-portrait.webp" alt="Philip Bong, Senior Real Estate Negotiator" width="900" height="1424" fetchpriority="high"><figcaption class="hero-badge">REN23177</figcaption></figure></div></section>
+    <section class="section about" id="about"><div class="container about-grid"><div class="about-copy"><!-- EDIT: About copy --><span class="eyebrow">Meet your negotiator</span><h2>Local insight. Professional care.</h2><p>I’m Philip Bong, a Senior Real Estate Negotiator helping buyers, sellers, landlords and tenants navigate Kuching’s property market with confidence.</p><p>From the first conversation to viewing, negotiation and handover, I keep the process organised, transparent and focused on your goals.</p></div><div class="trust-stats"><!-- EDIT: Trust statistics --><article class="stat"><strong>REN23177</strong><span>Registered negotiator</span></article><article class="stat"><strong>Kuching</strong><span>Local market focus</span></article><article class="stat"><strong>Subsales &amp; Rental</strong><span>Property specialty</span></article></div></div></section>
+    <section class="section" id="listings"><div class="container"><div class="section-head"><!-- EDIT: Listings introduction --><span class="eyebrow">Featured properties</span><h2>Properties worth a closer look.</h2><p>Explore selected residential and commercial opportunities across Kuching.</p></div><div class="listing-grid">
+      <article class="listing-card"><button class="gallery-trigger listing-photo" type="button" data-gallery="wozo" aria-label="View WOZO Suites photos"><img src="wozo-listing-1.webp" alt="WOZO Suites residences at Jalan Song" width="1256" height="1256" loading="lazy"><span class="listing-label">For Sale</span><span class="photo-count">3 photos</span></button><div class="listing-content"><!-- EDIT: WOZO Suites listing --><p class="listing-location">Jalan Song · Kuching</p><h3>WOZO Suites</h3><p class="listing-price">Price on application</p><div class="listing-facts"><span>73 residences</span><span>1,367–3,799 sq ft</span><span>Low density</span></div><p class="listing-description">Private urban living with spacious layouts, infinity pool, gymnasium, sky lounge and 24/7 security.</p><a class="btn btn-navy" href="https://wa.me/60128810895?text=Hi%20Philip%2C%20I%27m%20interested%20in%20WOZO%20Suites.%20Please%20share%20the%20latest%20price%20and%20available%20units." target="_blank" rel="noopener">Request Property Details</a></div></article>
+      <article class="listing-card"><button class="gallery-trigger listing-photo" type="button" data-gallery="warehouse" aria-label="View Demak Laut warehouse photos"><img src="warehouse-1.webp" alt="Detached warehouse near BCCK in Demak Laut" width="810" height="1080" loading="lazy"><span class="listing-label">For Rent</span><span class="photo-count">6 photos</span></button><div class="listing-content"><!-- EDIT: Warehouse listing --><p class="listing-location">Near BCCK · Demak Laut</p><h3>Detached Warehouse</h3><p class="listing-price">RM27,300/month · Negotiable</p><div class="listing-facts"><span>RM1.30 psf</span><span>Approx. 21,000 sq ft</span><span>Gated &amp; guarded</span></div><p class="listing-description">Newly resurfaced, flat warehouse floor with a shared compound area.</p><p class="listing-code">Reference: WC</p><a class="btn btn-navy" href="https://wa.me/60128810895?text=Hi%20Philip%2C%20I%27m%20interested%20in%20the%20Demak%20Laut%20warehouse.%20Reference%3A%20WC.%20Please%20confirm%20availability%20and%20viewing%20arrangements." target="_blank" rel="noopener">Check Availability</a></div></article>
+      <article class="listing-card"><button class="gallery-trigger listing-photo" type="button" data-gallery="shoplot" aria-label="View Galacity shoplot photos"><img src="shoplot-1.webp" alt="Second-floor corner shoplot at Galacity" width="1152" height="648" loading="lazy"><span class="listing-label">For Rent</span><span class="photo-count">9 photos</span></button><div class="listing-content"><!-- EDIT: Shoplot listing --><p class="listing-location">Galacity · Near Premier 101</p><h3>Corner Shoplot — 2nd Floor</h3><p class="listing-price">RM3,000/month · Negotiable</p><div class="listing-facts"><span>Approx. 1,488 sq ft</span><span>Minimum 1 year</span><span>Corner unit</span></div><p class="listing-description">Deposits: two months’ security, one month’s utility and one month’s advance rental. Legal fee shared equally.</p><p class="listing-code">Reference: ALW</p><a class="btn btn-navy" href="https://wa.me/60128810895?text=Hi%20Philip%2C%20I%27m%20interested%20in%20the%20Galacity%20corner%20shoplot.%20Reference%3A%20ALW.%20Please%20confirm%20availability%20and%20viewing%20arrangements." target="_blank" rel="noopener">Check Availability</a></div></article>
+    </div></div></section>
+    <section class="section why" id="why-me"><div class="container"><div class="section-head"><!-- EDIT: Why-me content --><span class="eyebrow">Why work with me</span><h2>Clear advice at every step.</h2><p>Property decisions deserve responsive, practical guidance centred on your needs.</p></div><div class="reason-grid"><article class="reason"><span class="reason-number">01</span><h3>Local market perspective</h3><p>Focused knowledge of Kuching neighbourhoods, property choices and everyday considerations.</p></article><article class="reason"><span class="reason-number">02</span><h3>Straightforward communication</h3><p>Timely updates and clear explanations without unnecessary pressure or confusing jargon.</p></article><article class="reason"><span class="reason-number">03</span><h3>Personal guidance</h3><p>An approach shaped around your budget, timeline, priorities and long-term goals.</p></article></div></div></section>
+    <section class="section testimonials" id="reviews"><div class="container"><div class="section-head"><span class="eyebrow">Client experiences</span><h2>Trusted through important moves.</h2></div><div class="testimonial-grid"><!-- EDIT: Genuine testimonial 1 --><blockquote class="testimonial"><p>“I had wanted to own a home in Kuching City for a long time. Thanks to Philip’s patient coordination with the homeowner, I successfully secured the home I wanted.”</p><footer><strong>Mr. Augustine</strong>Home buyer · Kuching</footer></blockquote><!-- EDIT: Genuine testimonial 2 --><blockquote class="testimonial"><p>“I met Philip through my boss. He advised me not to accept a booking fee before checking the buyer’s loan eligibility. Thank you, Philip, for helping me sell my property to the right buyer.”</p><footer><strong>Mr. Jin</strong>Property seller · Kuching</footer></blockquote></div></div></section>
+    <section class="section contact" id="contact"><div class="container"><div class="contact-grid"><div class="contact-copy"><!-- EDIT: Contact content --><span class="eyebrow">Let’s talk property</span><h2>Tell me about your next move.</h2><p>Share what you are looking for and I’ll respond personally with the most useful next step.</p><div class="contact-details"><div><strong>WhatsApp</strong> +60 12-881 0895</div><div><strong>Location</strong> Kuching, Sarawak</div><div><strong>Specialty</strong> Subsales &amp; Rental</div></div></div><form class="lead-form" id="leadForm"><!-- EDIT: Lead-form copy --><label class="field">Your name<input id="leadName" type="text" autocomplete="name" placeholder="e.g. Michelle" required></label><label class="field">Phone number<input id="leadPhone" type="tel" autocomplete="tel" inputmode="tel" placeholder="e.g. +60 12-345 6789" required></label><label class="field">Your message<textarea id="leadMessage" placeholder="Property, preferred area, budget or timeline…" required></textarea></label><button class="btn btn-gold" type="submit">Send via WhatsApp ↗</button><p class="form-note">This opens WhatsApp with your enquiry ready to send.</p></form></div><div class="faq"><!-- EDIT: Keep FAQs aligned with schema --><h3>Frequently asked questions</h3><details><summary>Which areas do you serve?</summary><p>I serve buyers, sellers, landlords and tenants throughout Kuching, Sarawak.</p></details><details><summary>What property services do you provide?</summary><p>I assist with residential and commercial subsales, rentals, property searches and viewing coordination.</p></details><details><summary>How can I arrange a viewing?</summary><p>Send me a WhatsApp message with the property and your preferred schedule.</p></details></div></div></section>
   </main>
-
-  <div class="lightbox" id="listingLightbox" role="dialog" aria-modal="true" aria-labelledby="lightboxCaption" hidden>
-    <button class="lightbox-control lightbox-close" id="lightboxClose" type="button" aria-label="Close photo viewer">×</button>
-    <button class="lightbox-control lightbox-prev" id="lightboxPrev" type="button" aria-label="Previous photo">‹</button>
-    <figure class="lightbox-figure">
-      <img class="lightbox-image" id="lightboxImage" src="" alt="">
-      <figcaption class="lightbox-caption"><span id="lightboxCaption"></span><span class="lightbox-counter" id="lightboxCounter"></span></figcaption>
-    </figure>
-    <button class="lightbox-control lightbox-next" id="lightboxNext" type="button" aria-label="Next photo">›</button>
+  <footer class="site-footer"><div class="container footer-row"><!-- EDIT: Footer --><div><strong>Philip Bong</strong> · Senior Real Estate Negotiator · REN23177</div><div>© <span id="year"></span> Philip Bong. All rights reserved.</div></div></footer>
+  <!-- EDIT: Floating WhatsApp CTA --><a class="wa-float" href="https://wa.me/60128810895?text=Hi%20Philip%2C%20I%27d%20like%20to%20discuss%20a%20property%20in%20Kuching." target="_blank" rel="noopener" aria-label="Chat with Philip on WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M19.1 17.7c-.4-.2-2.2-1.1-2.6-1.2-.3-.1-.6-.2-.8.2-.2.4-.9 1.2-1.1 1.4-.2.3-.4.3-.8.1-2.2-1.1-3.7-2-5.2-4.5-.4-.7.4-.7 1.1-2.1.1-.3.1-.5 0-.7-.1-.2-.8-2-1.2-2.8-.3-.8-.7-.7-.9-.7h-.8c-.3 0-.7.1-1 .5-.4.4-1.4 1.4-1.4 3.4s1.5 4 1.7 4.3c.2.3 2.9 4.5 7.1 6.3 2.6 1.1 3.7 1.2 5 .9.8-.1 2.2-.9 2.5-1.8.3-.9.3-1.7.2-1.8-.2-.3-.5-.4-.8-.5M16 28.5c-2.3 0-4.5-.6-6.4-1.8l-.5-.3-4.8 1.3 1.3-4.7-.3-.5A12.5 12.5 0 1 1 16 28.5m0-25A12.5 12.5 0 0 0 5.2 22.3L3.4 29l6.8-1.8A12.5 12.5 0 1 0 16 3.5"/></svg></a>
+  <div class="gallery-data" aria-hidden="true">
+    <!-- EDIT: WOZO gallery --><img data-gallery-item="wozo" data-src="wozo-listing-1.webp" alt="WOZO Suites residences at Jalan Song"><img data-gallery-item="wozo" data-src="wozo-listing-2.webp" alt="WOZO Suites and the surrounding Jalan Song neighbourhood"><img data-gallery-item="wozo" data-src="wozo-listing-3.webp" alt="Aerial location view around WOZO Suites">
+    <!-- EDIT: Warehouse gallery --><img data-gallery-item="warehouse" data-src="warehouse-1.webp" alt="Warehouse dimensions and ceiling heights"><img data-gallery-item="warehouse" data-src="warehouse-2.webp" alt="Wide interior view of the resurfaced warehouse"><img data-gallery-item="warehouse" data-src="warehouse-3.webp" alt="Warehouse interior and clear floor area"><img data-gallery-item="warehouse" data-src="warehouse-4.webp" alt="Bright detached warehouse interior"><img data-gallery-item="warehouse" data-src="warehouse-5.webp" alt="Warehouse floor and loading access"><img data-gallery-item="warehouse" data-src="warehouse-6.webp" alt="Large open warehouse space">
+    <!-- EDIT: Shoplot gallery --><img data-gallery-item="shoplot" data-src="shoplot-1.webp" alt="Galacity shoplot interior with corner windows"><img data-gallery-item="shoplot" data-src="shoplot-2.webp" alt="Window corridor inside the Galacity shoplot"><img data-gallery-item="shoplot" data-src="shoplot-3.webp" alt="Carpeted staircase to the second-floor shoplot"><img data-gallery-item="shoplot" data-src="shoplot-4.webp" alt="Partitioned room inside the shoplot"><img data-gallery-item="shoplot" data-src="shoplot-5.webp" alt="Open shoplot interior"><img data-gallery-item="shoplot" data-src="shoplot-6.webp" alt="Bright office area with glass partition"><img data-gallery-item="shoplot" data-src="shoplot-7.webp" alt="Corner window area inside the shoplot"><img data-gallery-item="shoplot" data-src="shoplot-8.webp" alt="Spacious carpeted shoplot floor"><img data-gallery-item="shoplot" data-src="shoplot-9.webp" alt="Galacity shoplot exterior access area">
   </div>
-
-  <footer class="site-footer"><div class="container footer-row"><div><strong>Philip Bong</strong> · Senior Negotiator · REN23177</div><div>© <span id="year"></span> Philip Bong. All rights reserved.</div></div></footer>
-  <a class="wa-float" href="https://wa.me/60128810895?text=Hi%20Philip%2C%20I%27d%20like%20to%20discuss%20a%20property%20in%20Kuching." target="_blank" rel="noopener" aria-label="Chat with Philip on WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M19.1 17.7c-.4-.2-2.2-1.1-2.6-1.2-.3-.1-.6-.2-.8.2-.2.4-.9 1.2-1.1 1.4-.2.3-.4.3-.8.1-2.2-1.1-3.7-2-5.2-4.5-.4-.7.4-.7 1.1-2.1.1-.3.1-.5 0-.7-.1-.2-.8-2-1.2-2.8-.3-.8-.7-.7-.9-.7h-.8c-.3 0-.7.1-1 .5-.4.4-1.4 1.4-1.4 3.4s1.5 4 1.7 4.3c.2.3 2.9 4.5 7.1 6.3 2.6 1.1 3.7 1.2 5 .9.8-.1 2.2-.9 2.5-1.8.3-.9.3-1.7.2-1.8-.2-.3-.5-.4-.8-.5M16 28.5c-2.3 0-4.5-.6-6.4-1.8l-.5-.3-4.8 1.3 1.3-4.7-.3-.5A12.5 12.5 0 1 1 16 28.5m0-25A12.5 12.5 0 0 0 5.2 22.3L3.4 29l6.8-1.8A12.5 12.5 0 1 0 16 3.5"/></svg></a>
-
+  <div class="gallery" id="galleryDialog" role="dialog" aria-modal="true" aria-labelledby="galleryCaption" hidden><button class="gallery-control gallery-close" id="galleryClose" type="button" aria-label="Close photo viewer">×</button><button class="gallery-control gallery-prev" id="galleryPrev" type="button" aria-label="Previous photo">‹</button><figure class="gallery-figure"><img class="gallery-image" id="galleryImage" src="" alt=""><figcaption class="gallery-caption"><span id="galleryCaption"></span><span class="gallery-counter" id="galleryCounter"></span></figcaption></figure><button class="gallery-control gallery-next" id="galleryNext" type="button" aria-label="Next photo">›</button></div>
   <script>
-    const header = document.getElementById('header');
-    const toggle = document.getElementById('navToggle');
-    const links = document.getElementById('navLinks');
-    const setHeader = () => header.classList.toggle('scrolled', scrollY > 20);
-    addEventListener('scroll', setHeader, { passive: true }); setHeader();
-    toggle.addEventListener('click', () => {
-      const open = links.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', open);
-      toggle.textContent = open ? '×' : '☰';
-      document.body.classList.toggle('menu-open', open);
-    });
-    links.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-      links.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); toggle.textContent = '☰'; document.body.classList.remove('menu-open');
-    }));
-    document.getElementById('enquiryForm').addEventListener('submit', event => {
-      event.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const intent = document.getElementById('intent').value;
-      const details = document.getElementById('message').value.trim();
-      const text = `Hi Philip, I'm ${name}. I'd like to ${intent.toLowerCase()}.${details ? `\n\nDetails: ${details}` : ''}`;
-      window.open(`https://wa.me/60128810895?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
-    });
-    const lightbox = document.getElementById('listingLightbox');
-    const lightboxImage = document.getElementById('lightboxImage');
-    const lightboxCaption = document.getElementById('lightboxCaption');
-    const lightboxCounter = document.getElementById('lightboxCounter');
-    const lightboxClose = document.getElementById('lightboxClose');
-    const listingTriggers = [...document.querySelectorAll('.listing-trigger')];
-    let currentPhoto = 0;
-    let lastPhotoTrigger = null;
-    const showPhoto = index => {
-      currentPhoto = (index + listingTriggers.length) % listingTriggers.length;
-      const source = listingTriggers[currentPhoto].querySelector('img');
-      lightboxImage.src = source.src;
-      lightboxImage.alt = source.alt;
-      lightboxCaption.textContent = source.alt;
-      lightboxCounter.textContent = `${currentPhoto + 1} / ${listingTriggers.length}`;
-    };
-    const openLightbox = index => {
-      lastPhotoTrigger = listingTriggers[index];
-      showPhoto(index);
-      lightbox.hidden = false;
-      document.body.classList.add('lightbox-open');
-      lightboxClose.focus();
-    };
-    const closeLightbox = () => {
-      lightbox.hidden = true;
-      document.body.classList.remove('lightbox-open');
-      lastPhotoTrigger?.focus();
-    };
-    listingTriggers.forEach((trigger, index) => trigger.addEventListener('click', () => openLightbox(index)));
-    document.getElementById('lightboxPrev').addEventListener('click', () => showPhoto(currentPhoto - 1));
-    document.getElementById('lightboxNext').addEventListener('click', () => showPhoto(currentPhoto + 1));
-    lightboxClose.addEventListener('click', closeLightbox);
-    lightbox.addEventListener('click', event => { if (event.target === lightbox) closeLightbox(); });
-    document.addEventListener('keydown', event => {
-      if (lightbox.hidden) return;
-      if (event.key === 'Escape') closeLightbox();
-      if (event.key === 'ArrowLeft') showPhoto(currentPhoto - 1);
-      if (event.key === 'ArrowRight') showPhoto(currentPhoto + 1);
-    });
-    document.getElementById('year').textContent = new Date().getFullYear();
+    const menuToggle=document.getElementById('menuToggle'),navLinks=document.getElementById('navLinks');menuToggle.addEventListener('click',()=>{const open=navLinks.classList.toggle('open');menuToggle.setAttribute('aria-expanded',open);menuToggle.textContent=open?'×':'☰';document.body.classList.toggle('locked',open)});navLinks.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{navLinks.classList.remove('open');menuToggle.setAttribute('aria-expanded','false');menuToggle.textContent='☰';document.body.classList.remove('locked')}));
+    const galleryDialog=document.getElementById('galleryDialog'),galleryImage=document.getElementById('galleryImage'),galleryCaption=document.getElementById('galleryCaption'),galleryCounter=document.getElementById('galleryCounter'),galleryClose=document.getElementById('galleryClose');let activePhotos=[],activeIndex=0,lastTrigger=null;const galleries={};document.querySelectorAll('[data-gallery-item]').forEach(img=>(galleries[img.dataset.galleryItem]??=[]).push({src:img.dataset.src,alt:img.alt}));function showPhoto(index){activeIndex=(index+activePhotos.length)%activePhotos.length;const photo=activePhotos[activeIndex];galleryImage.src=photo.src;galleryImage.alt=photo.alt;galleryCaption.textContent=photo.alt;galleryCounter.textContent=`${activeIndex+1} / ${activePhotos.length}`}function openGallery(trigger){activePhotos=galleries[trigger.dataset.gallery];lastTrigger=trigger;showPhoto(0);galleryDialog.hidden=false;document.body.classList.add('locked');galleryClose.focus()}function closeGallery(){galleryDialog.hidden=true;document.body.classList.remove('locked');lastTrigger?.focus()}document.querySelectorAll('.gallery-trigger').forEach(trigger=>trigger.addEventListener('click',()=>openGallery(trigger)));document.getElementById('galleryPrev').addEventListener('click',()=>showPhoto(activeIndex-1));document.getElementById('galleryNext').addEventListener('click',()=>showPhoto(activeIndex+1));galleryClose.addEventListener('click',closeGallery);galleryDialog.addEventListener('click',event=>{if(event.target===galleryDialog)closeGallery()});document.addEventListener('keydown',event=>{if(galleryDialog.hidden)return;if(event.key==='Escape')closeGallery();if(event.key==='ArrowLeft')showPhoto(activeIndex-1);if(event.key==='ArrowRight')showPhoto(activeIndex+1)});
+    document.getElementById('leadForm').addEventListener('submit',event=>{event.preventDefault();const name=document.getElementById('leadName').value.trim(),phone=document.getElementById('leadPhone').value.trim(),message=document.getElementById('leadMessage').value.trim();window.open(`https://wa.me/60128810895?text=${encodeURIComponent(`Hi Philip, I'm ${name}.\n\nPhone: ${phone}\n\nProperty enquiry: ${message}`)}`,'_blank','noopener')});document.getElementById('year').textContent=new Date().getFullYear();
   </script>
 </body>
 </html>
