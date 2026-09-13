@@ -99,6 +99,17 @@ def test_photo_album_single_permalink_is_accepted():
     assert len(posts[0]["media_urls"]) == 2
 
 
+def test_public_album_preserves_media_ownership_for_each_member():
+    html = FIXTURE.replace('https://t.me/sarawakpropertyguru/20?single" class="tgme_widget_message_photo_wrap" style="background-image: url',
+                           'https://t.me/sarawakpropertyguru/22?single" class="tgme_widget_message_photo_wrap" style="background-image: url')
+    post = public.parse_public_history(html)[0]
+    assert post.get("public_album_members") == {
+        "20": ["https://cdn1.cdn-telegram.org/a.jpg"],
+        "22": ["https://cdn1.cdn-telegram.org/b.jpg"],
+    }
+    assert post.get("caption_message_id") == 20
+
+
 @pytest.mark.parametrize("url", [
     "https://foreign.example/sarawakpropertyguru/20?single",
     "https://t.me/other_channel/20?single",
@@ -130,3 +141,4 @@ def test_default_scan_never_fetches_more_than_100_pages():
     with pytest.raises(public.PublicHistoryError, match="page limit"):
         public.scan_public_history(fetch=fetch)
     assert len(requests) == 100
+
