@@ -142,6 +142,7 @@ test('preserves Telegram copy formatting and shows exactly three prioritized hig
   assert.equal(await card.locator('.listing-description').textContent(), 'First line\n\n  Indented detail\nRefer code: JRL');
   assert.equal(await card.locator('.listing-description').evaluate(node => getComputedStyle(node).whiteSpace), 'pre-wrap');
   assert.deepEqual(await card.locator('.listing-highlights span').allTextContents(), ['RM 1,500/month', '1,200 sq ft', 'Jalan Uplands']);
+  assert.equal((await card.locator('.listing-highlights').textContent()).includes('JRL'), false);
   assert.equal(await card.locator('.listing-code').count(), 0);
 }));
 for (const [name, data, status] of [['HTTP failure', [], 503], ['invalid JSON', '{', 200], ['invalid shape', {}, 200]]) {
