@@ -294,3 +294,88 @@ def test_legacy_album_survives_first_upgrade_edit_and_later_known_member_replace
     assert replaced["file_ids"] == ["p3", "p2"]
     assert replaced["images"] == legacy["images"]
     assert second_asset.read_bytes() == before
+
+
+def public_album():
+    return {**post(), "message_ids": [20, 21], "caption_message_id": 20,
+            "public_album_members": {"20": ["https://cdn1.cdn-telegram.org/a.jpg"],
+                                     "21": ["https://cdn1.cdn-telegram.org/b.jpg"]}}
+
+
+@pytest.mark.parametrize("repeat_bootstrap", [False, True])
+def test_public_album_member_edit_updates_stable_listing_then_caption_clear_removes_it(monkeypatch, tmp_path, repeat_bootstrap):
+    paths = setup_files(tmp_path)
+    monkeypatch.setattr(sync, "scan_public_history", lambda: [public_album()])
+    monkeypatch.setattr(sync, "download_public_media", lambda url: picture("red" if "a.jpg" in url else "blue"))
+    monkeypatch.setattr(sync, "download_bot_media", lambda token, file_id: picture("blue"))
+    sync.run_bootstrap(*paths)
+    stored = json.loads(paths[0].read_text())[0]
+    assert stored.get("message_ids") == [20, 21]
+    assert stored.get("caption_message_id") == 20
+    edit = {"message_id": 21, "date": 100, "edit_date": 200, "chat": {"username": "sarawakpropertyguru"},
+            "caption": "House For Sale RM480,000", "media_group_id": "album-a", "photo": [{"file_id": "p2"}]}
+    monkeypatch.setattr(sync, "fetch_updates", lambda token, offset: [{"update_id": 5, "edited_channel_post": edit}])
+    sync.run_incremental("secret", *paths)
+    updated = json.loads(paths[0].read_text())
+    assert len(updated) == 1
+    assert updated[0]["id"] == "telegram-20"
+    assert updated[0]["price"] == "RM480,000"
+    assert updated[0]["caption_message_id"] == 21
+    assert len(updated[0]["images"]) == 2
+    if repeat_bootstrap:
+        sync.run_bootstrap(*paths)
+    monkeypatch.setattr(sync, "fetch_updates", lambda token, offset: [{"update_id": 6, "edited_channel_post": {**edit, "caption": ""}}])
+    sync.run_incremental("secret", *paths)
+    assert json.loads(paths[0].read_text()) == []
+
+
+@pytest.mark.parametrize("source", ["public", "bot"])
+def test_deleted_nonprimary_album_member_requires_two_scans_then_removes_only_its_media(monkeypatch, tmp_path, source):
+    paths = setup_files(tmp_path)
+    monkeypatch.setattr(sync, "scan_public_history", lambda: [public_album()])
+    monkeypatch.setattr(sync, "download_public_media", lambda url: picture("red" if "a.jpg" in url else "blue"))
+    monkeypatch.setattr(sync, "download_bot_media", lambda token, file_id: picture("red" if file_id == "p1" else "blue"))
+    messages = [{"message_id": mid, "date": 100, "chat": {"username": "sarawakpropertyguru"},
+                 "caption": "House For Sale RM500,000" if mid == 20 else "", "media_group_id": "album-a",
+                 "photo": [{"file_id": fid}]} for mid, fid in [(20, "p1"), (21, "p2")]]
+    monkeypatch.setattr(sync, "fetch_updates", lambda token, offset: [{"update_id": 5 + i, "channel_post": message} for i, message in enumerate(messages)])
+    sync.run_bootstrap(*paths) if source == "public" else sync.run_incremental("secret", *paths)
+    first_asset, second_asset = paths[2] / "20-0.webp", paths[2] / "20-1.webp"
+    before = first_asset.read_bytes()
+    incomplete = {**public_album(), "message_ids": [20], "media_urls": ["https://cdn1.cdn-telegram.org/a.jpg"],
+                  "public_album_members": {"20": ["https://cdn1.cdn-telegram.org/a.jpg"]}}
+    monkeypatch.setattr(sync, "scan_public_history", lambda: [incomplete])
+    monkeypatch.setattr(sync, "fetch_updates", lambda token, offset: [])
+    sync.run_incremental("secret", *paths)
+    assert second_asset.exists(), "one scan cannot confirm a member deletion"
+    assert len(json.loads(paths[0].read_text())[0]["images"]) == 2
+    sync.run_incremental("secret", *paths)
+    updated = json.loads(paths[0].read_text())
+    assert len(updated) == 1
+    assert updated[0]["images"] == ["assets/telegram/20-0.webp"]
+    assert first_asset.read_bytes() == before
+    assert not second_asset.exists()
+    assert "21" not in updated[0].get("album_members", {})
+    assert "21" not in updated[0].get("public_album_members", {})
+    assert updated[0].get("file_ids", []) == (["p1"] if source == "bot" else [])
+
+
+def test_deleted_album_member_with_only_photo_leaves_listing_without_stale_image(monkeypatch, tmp_path):
+    album = {**public_album(), "media_urls": ["https://cdn1.cdn-telegram.org/b.jpg"],
+             "public_album_members": {"21": ["https://cdn1.cdn-telegram.org/b.jpg"]}}
+    paths = setup_files(tmp_path)
+    monkeypatch.setattr(sync, "scan_public_history", lambda: [album])
+    monkeypatch.setattr(sync, "download_public_media", lambda url: picture())
+    monkeypatch.setattr(sync, "fetch_updates", lambda token, offset: [])
+    sync.run_bootstrap(*paths)
+    image = paths[2] / "20-0.webp"
+    missing = {**album, "message_ids": [20], "media_urls": [], "public_album_members": {}}
+    monkeypatch.setattr(sync, "scan_public_history", lambda: [missing])
+    sync.run_incremental("secret", *paths)
+    assert image.exists()
+    sync.run_incremental("secret", *paths)
+    updated = json.loads(paths[0].read_text())
+    assert len(updated) == 1
+    assert updated[0]["images"] == []
+    assert not image.exists()
+
