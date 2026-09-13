@@ -126,7 +126,6 @@
         if(typeof listing.price==='string'&&listing.price)candidates.push(listing.price);
         if(Array.isArray(listing.facts)){const primaryFact=listing.facts.find(fact=>typeof fact==='string'&&fact);if(primaryFact)candidates.push(primaryFact)}
         if(typeof listing.location==='string'&&listing.location)candidates.push(listing.location);
-        if(typeof listing.reference==='string'&&listing.reference)candidates.push(`Ref ${listing.reference}`);
         if(typeof listing.property_type==='string'&&listing.property_type)candidates.push(listing.property_type);
         for(const [key,label] of [['bedrooms','bedrooms'],['bathrooms','bathrooms'],['parking','car parks']]){
           if(Number.isInteger(listing[key])&&listing[key]>=0)candidates.push(`${listing[key]} ${label}`);
