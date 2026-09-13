@@ -1,0 +1,20 @@
+{
+  "rental_listing": {
+    "message_id": 42,
+    "date": 1789092000,
+    "caption": "🏭 Demak Laut Warehouse For RENT\nRM27,300/month\n21,000 sq ft\nRefer code: WC",
+    "photo": [
+      {"file_id": "small"},
+      {"file_id": "large"}
+    ]
+  },
+  "malay_sale_link_only": {
+    "message_id": 43,
+    "date": 1789092060,
+    "text": "\n  Rumah Teres untuk dijual  \nRM 450,000\nMore details: t.me/sarawakpropertyguru/43  \n"
+  },
+  "announcement": {
+    "message_id": 7,
+    "text": "Happy Malaysia Day!"
+  }
+}
