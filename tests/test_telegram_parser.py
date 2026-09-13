@@ -22,7 +22,7 @@ def test_parses_rental_listing():
     assert item["reference"] == "WC"
     assert item["facts"] == ["21,000 sq ft"]
     assert item["source_text"] == (
-        "🏭 Demak Laut Warehouse For RENT RM27,300/month 21,000 sq ft Refer code: WC"
+        "🏭 Demak Laut Warehouse For RENT\nRM27,300/month\n21,000 sq ft\nRefer code: WC"
     )
     assert item["telegram_url"] == "https://t.me/sarawakpropertyguru/42"
 
@@ -35,7 +35,7 @@ def test_parses_malay_sale_link_listing_and_omits_absent_fields():
     assert item["status"] == "For Sale"
     assert item["price"] == "RM 450,000"
     assert item["source_text"] == (
-        "Rumah Teres untuk dijual RM 450,000 More details: t.me/sarawakpropertyguru/43"
+        "Rumah Teres untuk dijual  \nRM 450,000\nMore details: t.me/sarawakpropertyguru/43"
     )
     assert item["telegram_url"] == "https://t.me/sarawakpropertyguru/43"
     assert "facts" not in item
