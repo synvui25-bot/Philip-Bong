@@ -11,7 +11,7 @@ import tempfile
 from scripts.telegram_client import fetch_updates
 from scripts.telegram_media import MediaError, download_bot_media, download_public_media, save_webp
 from scripts.telegram_parser import parse_listing
-from scripts.telegram_public import reconcile_missing, scan_public_history
+from scripts.telegram_public import PublicHistoryError, reconcile_missing, scan_public_history
 
 
 CHANNEL_USERNAME = "sarawakpropertyguru"
@@ -441,13 +441,21 @@ def run_incremental(
     if not isinstance(saved_offset, int):
         raise ValueError("last_update_id must be an integer")
 
-    visible_posts = scan_public_history()
+    updates = fetch_updates(token, saved_offset)
+    public_scan_complete = True
+    try:
+        visible_posts = scan_public_history()
+    except PublicHistoryError as exc:
+        public_scan_complete = False
+        visible_posts = []
+        print(f"Warning: public preview unavailable; processing bot updates only ({exc}).", file=sys.stderr)
     hydrated = _refresh_public_albums(listings, visible_posts)
-    updated_listings, next_offset = apply_updates(hydrated, fetch_updates(token, saved_offset))
+    updated_listings, next_offset = apply_updates(hydrated, updates)
     next_offset = max(saved_offset, next_offset)
-    updated_listings, state = reconcile_missing(
-        updated_listings, _visible_ids(visible_posts), state
-    )
+    if public_scan_complete:
+        updated_listings, state = reconcile_missing(
+            updated_listings, _visible_ids(visible_posts), state
+        )
     _persist_sync(updated_listings, listings, {**state, "last_update_id": next_offset},
                   token, listings_path, state_path, media_path)
     return updated_listings, next_offset
@@ -462,8 +470,16 @@ def main(argv: list[str] | None = None) -> int:
             run_bootstrap()
         else:
             run_incremental(os.environ.get("TELEGRAM_BOT_TOKEN", ""))
-    except Exception:
-        print("Telegram synchronization failed; no successful publication was produced.", file=sys.stderr)
+    except Exception as exc:
+        token = os.environ.get("TELEGRAM_BOT_TOKEN", "")
+        details = str(exc)
+        if token:
+            details = details.replace(token, "[REDACTED]")
+        print(
+            f"Telegram synchronization failed ({type(exc).__name__}: {details}); "
+            "no successful publication was produced.",
+            file=sys.stderr,
+        )
         return 1
     return 0
 
