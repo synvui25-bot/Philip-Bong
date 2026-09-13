@@ -160,7 +160,7 @@
     loadMoreListings.addEventListener('click',renderTelegramBatch);
     async function loadTelegramListings(){
       try{
-        const response=await fetch('data/telegram-listings.json');
+        const response=await fetch('data/telegram-listings.json',{cache:'no-store'});
         if(!response.ok)throw new Error('Unable to load listings');
         const records=await response.json();
         if(!Array.isArray(records))throw new Error('Invalid listings data');
