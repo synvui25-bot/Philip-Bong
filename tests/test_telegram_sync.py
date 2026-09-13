@@ -68,7 +68,7 @@ def test_edit_replaces_existing_record_and_advances_offset():
     assert offset == 6
 
 
-def test_later_album_edit_replaces_caption_and_keeps_album_file_ids():
+def test_later_same_member_snapshot_replaces_caption_and_photo():
     updates = [
         {
             "update_id": 5,
@@ -93,8 +93,42 @@ def test_later_album_edit_replaces_caption_and_keeps_album_file_ids():
     listings, offset = apply_updates([], updates)
 
     assert listings[0]["price"] == "RM480,000"
-    assert listings[0]["file_ids"] == ["p1", "p2"]
+    assert listings[0]["file_ids"] == ["p2"]
     assert offset == 7
+
+
+@pytest.mark.parametrize("stored", [False, True])
+def test_latest_empty_album_caption_clears_listing_in_same_batch(stored):
+    initial = listing_message(20, "House For Sale RM500,000", media_group_id="a")
+    current, _ = apply_updates([], [{"update_id": 1, "channel_post": initial}]) if stored else ([], 0)
+    updates = [
+        {"update_id": 5, "edited_channel_post": initial},
+        {"update_id": 6, "edited_channel_post": {**initial, "caption": ""}},
+        {"update_id": 7, "channel_post": listing_message(21, "", media_group_id="a", file_id="p2")},
+    ]
+    listings, offset = apply_updates(current, updates)
+    assert listings == []
+    assert offset == 8
+
+
+def test_same_batch_photo_replacement_preserves_only_latest_member_and_other_members():
+    updates = [
+        {"update_id": 5, "channel_post": listing_message(20, "House For Sale RM500,000", media_group_id="a")},
+        {"update_id": 6, "channel_post": listing_message(21, "", media_group_id="a", file_id="p2")},
+        {"update_id": 7, "edited_channel_post": listing_message(20, "House For Sale RM480,000", media_group_id="a", file_id="p3")},
+    ]
+    listings, _ = apply_updates([], list(reversed(updates)))
+    assert listings[0]["file_ids"] == ["p3", "p2"]
+    assert listings[0]["album_members"] == {"20": ["p3"], "21": ["p2"]}
+
+
+def test_noncaption_album_edit_updates_explicit_edit_time():
+    initial = listing_message(20, "House For Sale RM500,000", media_group_id="a")
+    current, _ = apply_updates([], [{"update_id": 1, "channel_post": initial}])
+    edited = {**listing_message(21, "", media_group_id="a", file_id="p2"), "edit_date": 200}
+    listings, _ = apply_updates(current, [{"update_id": 2, "edited_channel_post": edited}])
+    assert listings[0].get("edited_at") == 200
+    assert listings[0]["price"] == "RM500,000"
 
 
 def test_new_listing_includes_album_photos_and_sorts_newest_first():
@@ -320,3 +354,4 @@ def test_first_legacy_photo_replacement_does_not_guess_which_unknown_file_to_rem
               "file_ids": ["p1", "p2"], "price": "RM500,000"}
     migrated, _ = apply_updates([legacy], [{"update_id": 5, "edited_channel_post": listing_message(20, "House For Sale RM480,000", media_group_id="a", file_id="p3")}])
     assert migrated[0]["file_ids"] == ["p1", "p2", "p3"]
+
