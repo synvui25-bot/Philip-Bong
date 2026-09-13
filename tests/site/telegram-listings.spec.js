@@ -108,6 +108,26 @@ test('empty feed shows an honest empty state', () => withPage(375, [], async pag
   await page.getByRole('status').filter({ hasText: /No.*listings/i }).waitFor();
   assert.equal(await page.locator('#telegramListings .listing-card').count(), 0);
   assert.equal(await page.locator('#loadMoreListings').isVisible(), false);
+  const link = page.locator('#telegramListingsStatus a');
+  assert.equal(await link.count(), 1);
+  assert.equal(await link.getAttribute('href'), 'https://t.me/sarawakpropertyguru');
+  assert.equal(await link.getAttribute('target'), '_blank');
+  assert.match(await link.getAttribute('rel'), /noopener/);
+}));
+
+test('renders explicit structured fields safely and omits missing fields', () => withPage(375, [
+  { ...fixture[0], location: 'Kuching <img src=x onerror=alert(1)>', property_type: 'Semi-detached house',
+    bedrooms: 4, bathrooms: 3, parking: 2, negotiable: false, edited_at: 1789092600 },
+  { ...fixture[1], status: undefined, facts: [] }
+], async page => {
+  const cards = page.locator('#telegramListings .listing-card');
+  await cards.first().waitFor();
+  assert.equal(await cards.first().locator('.listing-location').textContent(), 'Kuching <img src=x onerror=alert(1)>');
+  const facts = await cards.first().locator('.listing-facts').textContent();
+  for (const value of ['Semi-detached house', '4 bedrooms', '3 bathrooms', '2 car parks', 'Not negotiable']) assert.ok(facts.includes(value), value);
+  assert.equal(await cards.first().locator('.listing-updated time').getAttribute('datetime'), '2026-09-11T02:10:00.000Z');
+  assert.equal(await cards.first().locator('.listing-location img').count(), 0);
+  assert.equal(await cards.nth(1).locator('.listing-location,.listing-facts,.listing-updated').count(), 0);
 }));
 for (const [name, data, status] of [['HTTP failure', [], 503], ['invalid JSON', '{', 200], ['invalid shape', {}, 200]]) {
   test(name + ' shows an error state', () => withPage(375, data, async page => {
@@ -178,3 +198,4 @@ test('newly loaded cards open their registered gallery and wrap a single image',
   console.log((tests.length - failures) + ' passed, ' + failures + ' failed');
   process.exitCode = failures ? 1 : 0;
 })().catch(error => { console.error(error); process.exitCode = 1; });
+
