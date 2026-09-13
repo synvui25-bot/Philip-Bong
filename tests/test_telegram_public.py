@@ -46,6 +46,36 @@ def test_full_scan_follows_only_older_channel_pagination():
     assert [post["message_id"] for post in posts] == [10, 11, 20, 21]
 
 
+def test_full_scan_ignores_trusted_newer_link_on_intermediate_page():
+    newest = FIXTURE.replace("before=20", "before=40").replace(
+        "sarawakpropertyguru/20", "sarawakpropertyguru/40"
+    ).replace("sarawakpropertyguru/21", "sarawakpropertyguru/41")
+    middle = FIXTURE.replace(
+        '</section>',
+        '<a class="tme_messages_more" href="/s/sarawakpropertyguru?after=39">Newer</a></section>',
+    )
+    pages = {
+        public.PUBLIC_URL: newest,
+        public.PUBLIC_URL + "?before=40": middle,
+        public.PUBLIC_URL + "?before=20": terminal_page(),
+    }
+
+    posts = public.scan_public_history(fetch=pages.__getitem__)
+
+    assert [post["message_id"] for post in posts] == [10, 11, 20, 21, 40, 41]
+
+
+def test_full_scan_finishes_when_oldest_page_has_only_newer_link():
+    oldest = terminal_page().replace(
+        '</section>',
+        '<a class="tme_messages_more" href="/s/sarawakpropertyguru?after=11">Newer</a></section>',
+    )
+
+    posts = public.scan_public_history(fetch=lambda url: oldest)
+
+    assert [post["message_id"] for post in posts] == [10, 11]
+
+
 @pytest.mark.parametrize("href", ["https://evil.example/?before=20", "/s/other?before=20", "?before=20&extra=1", "?before=1"])
 def test_scan_rejects_untrusted_pagination(href):
     html = FIXTURE.replace("/s/sarawakpropertyguru?before=20", href)
