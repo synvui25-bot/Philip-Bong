@@ -7,7 +7,7 @@ PROPERTY_TERMS = re.compile(
     re.I,
 )
 PRICE = re.compile(r"\bRM\s?[\d,.]+(?:\s*(?:/|per)\s*(?:month|bulan|psf))?", re.I)
-SIZE = re.compile(r"\b(?:approx\.?\s*)?[\d,.]+\s*(?:sq\s*ft|sqft|ft²|acres?)\b", re.I)
+SIZE = re.compile(r"\b(?:approx\.?\s*)?[\d,.]+k?\s*(?:sq\s*ft|sqft|ft²|acres?)\b", re.I)
 REFERENCE = re.compile(r"(?:refer(?:ence)?\s*code|ref)\s*:\s*([\w-]+)", re.I)
 
 
@@ -72,7 +72,7 @@ def parse_listing(post: dict) -> dict | None:
     for field, label in [("location", r"location|lokasi"),
                          ("property_type", r"property type|jenis hartanah")]:
         values = {match[1].strip() for line in lines
-                  if (match := re.fullmatch(rf"(?:{label})\s*:\s*(.+)", line, re.I))}
+                  if (match := re.search(rf"(?:{label})\s*:\s*(.+)$", line, re.I))}
         if len(values) == 1:
             item[field] = values.pop()
     for field, label in [("bedrooms", r"bedrooms?|bilik tidur"),
