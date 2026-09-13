@@ -248,6 +248,43 @@ def test_fetch_updates_returns_bot_result(monkeypatch):
     assert telegram_client.fetch_updates("secret-token", 5) == payload["result"]
 
 
+def test_fetch_updates_ignores_surrounding_secret_whitespace(monkeypatch):
+    from scripts import telegram_client
+
+    requested_urls = []
+
+    class Response:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, traceback):
+            return False
+
+    def capture_request(request, timeout):
+        requested_urls.append(request.full_url)
+        return Response()
+
+    monkeypatch.setattr(telegram_client, "urlopen", capture_request)
+    monkeypatch.setattr(
+        telegram_client.json,
+        "load",
+        lambda response: {"ok": True, "result": []},
+    )
+
+    assert telegram_client.fetch_updates("  secret-token\r\n", 5) == []
+    assert requested_urls == [
+        "https://api.telegram.org/botsecret-token/getUpdates?"
+        "offset=5&timeout=0&allowed_updates=%5B%22channel_post%22%2C+%22edited_channel_post%22%5D"
+    ]
+
+
+def test_fetch_updates_rejects_whitespace_inside_secret():
+    from scripts import telegram_client
+
+    with pytest.raises(telegram_client.TelegramError, match="invalid characters"):
+        telegram_client.fetch_updates("secret token", 5)
+
+
 def test_fetch_updates_raises_for_api_error(monkeypatch):
     from scripts import telegram_client
 
