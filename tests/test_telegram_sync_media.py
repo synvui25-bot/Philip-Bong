@@ -63,8 +63,7 @@ def test_normal_sync_downloads_bot_photos_and_deduplicates_identical_bytes(monke
     assert json.loads(paths[1].read_text())["last_update_id"] == 7
 
 
-@pytest.mark.parametrize("bootstrap", [False, True])
-def test_failed_scan_preserves_json_counts_and_existing_media(monkeypatch, tmp_path, bootstrap):
+def test_failed_bootstrap_scan_preserves_json_counts_and_existing_media(monkeypatch, tmp_path):
     paths = setup_files(tmp_path, [{"id": "telegram-20", "message_id": 20, "images": ["assets/telegram/20-0.webp"]}],
                         {"last_update_id": 5, "missing_counts": {"20": 1}})
     paths[2].mkdir(parents=True)
@@ -76,9 +75,31 @@ def test_failed_scan_preserves_json_counts_and_existing_media(monkeypatch, tmp_p
     monkeypatch.setattr(sync, "scan_public_history", fail)
     monkeypatch.setattr(sync, "fetch_updates", lambda token, offset: [])
     with pytest.raises(PublicHistoryError):
-        sync.run_bootstrap(*paths) if bootstrap else sync.run_incremental("secret", *paths)
+        sync.run_bootstrap(*paths)
     assert [path.read_bytes() for path in paths[:2]] == before
     assert image_path.read_bytes() == b"old image"
+
+
+def test_incremental_sync_processes_bot_updates_when_public_preview_fails(monkeypatch, tmp_path, capsys):
+    paths = setup_files(tmp_path, [{"id": "telegram-20", "message_id": 20}],
+                        {"last_update_id": 5, "missing_counts": {"20": 1}})
+    def fail():
+        raise PublicHistoryError("temporary preview failure")
+    monkeypatch.setattr(sync, "scan_public_history", fail)
+    monkeypatch.setattr(sync, "fetch_updates", lambda token, offset: [{
+        "update_id": 5,
+        "channel_post": {"message_id": 30, "text": "House For Sale RM500,000",
+                         "chat": {"username": "sarawakpropertyguru"},
+                         "date": 1789300000,
+                         "photo": [{"file_id": "new-photo"}]},
+    }])
+
+    listings, offset = sync.run_incremental("secret", *paths)
+
+    assert {item["message_id"] for item in listings} == {20, 30}
+    assert offset == 6
+    assert json.loads(paths[1].read_text())["missing_counts"] == {"20": 1}
+    assert "public preview unavailable" in capsys.readouterr().err.lower()
 
 
 def test_second_complete_scan_deletes_only_removed_listing_assets(monkeypatch, tmp_path):
@@ -180,7 +201,9 @@ def test_cli_failed_scan_returns_nonzero_and_does_not_print_token(monkeypatch, c
     monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "secret-token")
     monkeypatch.setattr(sync, "run_incremental", fail)
     assert sync.main([]) == 1
-    assert "secret-token" not in capsys.readouterr().err
+    error = capsys.readouterr().err
+    assert "secret-token" not in error
+    assert "PublicHistoryError" in error
 
 
 def test_unchanged_bootstrap_preserves_json_and_asset_mtimes(monkeypatch, tmp_path):
