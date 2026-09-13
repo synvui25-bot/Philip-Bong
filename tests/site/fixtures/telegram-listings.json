@@ -1,0 +1,320 @@
+[
+  {
+    "id": "telegram-100",
+    "message_id": 100,
+    "published_at": 1789092000,
+    "title": "Kuching <script>window.injected=true</script> & Home",
+    "source_text": "For Sale <img src=x onerror=window.injected=true> & enquiry #1?\nLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLong",
+    "telegram_url": "https://t.me/sarawakpropertyguru/100",
+    "status": "For Sale",
+    "price": "RM 450,000",
+    "facts": [
+      "1,200 sq ft"
+    ],
+    "reference": "WC",
+    "images": [
+      "assets/telegram/100-0.webp",
+      "assets/telegram/100-1.webp",
+      "assets/telegram/100-2.webp"
+    ]
+  },
+  {
+    "id": "telegram-99",
+    "message_id": 99,
+    "published_at": 1789091999,
+    "title": "Property 2",
+    "source_text": "For Rent in Kuching",
+    "telegram_url": "https://t.me/sarawakpropertyguru/99",
+    "status": "For Rent",
+    "images": []
+  },
+  {
+    "id": "telegram-98",
+    "message_id": 98,
+    "published_at": 1789091998,
+    "title": "Property 3",
+    "source_text": "For Rent in Kuching",
+    "telegram_url": "https://t.me/sarawakpropertyguru/98",
+    "status": "For Rent",
+    "price": "RM 450,000",
+    "facts": [
+      "1,200 sq ft"
+    ],
+    "reference": "WC",
+    "images": [
+      "assets/telegram/98-0.webp"
+    ]
+  },
+  {
+    "id": "telegram-97",
+    "message_id": 97,
+    "published_at": 1789091997,
+    "title": "Property 4",
+    "source_text": "For Rent in Kuching",
+    "telegram_url": "https://t.me/sarawakpropertyguru/97",
+    "status": "For Rent",
+    "price": "RM 450,000",
+    "facts": [
+      "1,200 sq ft"
+    ],
+    "reference": "WC",
+    "images": [
+      "assets/telegram/97-0.webp"
+    ]
+  },
+  {
+    "id": "telegram-96",
+    "message_id": 96,
+    "published_at": 1789091996,
+    "title": "Property 5",
+    "source_text": "For Rent in Kuching",
+    "telegram_url": "https://t.me/sarawakpropertyguru/96",
+    "status": "For Rent",
+    "price": "RM 450,000",
+    "facts": [
+      "1,200 sq ft"
+    ],
+    "reference": "WC",
+    "images": [
+      "assets/telegram/96-0.webp"
+    ]
+  },
+  {
+    "id": "telegram-95",
+    "message_id": 95,
+    "published_at": 1789091995,
+    "title": "Property 6",
+    "source_text": "For Rent in Kuching",
+    "telegram_url": "https://t.me/sarawakpropertyguru/95",
+    "status": "For Rent",
+    "price": "RM 450,000",
+    "facts": [
+      "1,200 sq ft"
+    ],
+    "reference": "WC",
+    "images": [
+      "assets/telegram/95-0.webp"
+    ]
+  },
+  {
+    "id": "telegram-94",
+    "message_id": 94,
+    "published_at": 1789091994,
+    "title": "Property 7",
+    "source_text": "For Rent in Kuching",
+    "telegram_url": "https://t.me/sarawakpropertyguru/94",
+    "status": "For Rent",
+    "price": "RM 450,000",
+    "facts": [
+      "1,200 sq ft"
+    ],
+    "reference": "WC",
+    "images": [
+      "assets/telegram/94-0.webp"
+    ]
+  },
+  {
+    "id": "telegram-93",
+    "message_id": 93,
+    "published_at": 1789091993,
+    "title": "Property 8",
+    "source_text": "For Rent in Kuching",
+    "telegram_url": "https://t.me/sarawakpropertyguru/93",
+    "status": "For Rent",
+    "price": "RM 450,000",
+    "facts": [
+      "1,200 sq ft"
+    ],
+    "reference": "WC",
+    "images": [
+      "assets/telegram/93-0.webp"
+    ]
+  },
+  {
+    "id": "telegram-92",
+    "message_id": 92,
+    "published_at": 1789091992,
+    "title": "Property 9",
+    "source_text": "For Rent in Kuching",
+    "telegram_url": "https://t.me/sarawakpropertyguru/92",
+    "status": "For Rent",
+    "price": "RM 450,000",
+    "facts": [
+      "1,200 sq ft"
+    ],
+    "reference": "WC",
+    "images": [
+      "assets/telegram/92-0.webp"
+    ]
+  },
+  {
+    "id": "telegram-91",
+    "message_id": 91,
+    "published_at": 1789091991,
+    "title": "Property 10",
+    "source_text": "For Rent in Kuching",
+    "telegram_url": "https://t.me/sarawakpropertyguru/91",
+    "status": "For Rent",
+    "price": "RM 450,000",
+    "facts": [
+      "1,200 sq ft"
+    ],
+    "reference": "WC",
+    "images": [
+      "assets/telegram/91-0.webp"
+    ]
+  },
+  {
+    "id": "telegram-90",
+    "message_id": 90,
+    "published_at": 1789091990,
+    "title": "Property 11",
+    "source_text": "For Rent in Kuching",
+    "telegram_url": "https://t.me/sarawakpropertyguru/90",
+    "status": "For Rent",
+    "price": "RM 450,000",
+    "facts": [
+      "1,200 sq ft"
+    ],
+    "reference": "WC",
+    "images": [
+      "assets/telegram/90-0.webp"
+    ]
+  },
+  {
+    "id": "telegram-89",
+    "message_id": 89,
+    "published_at": 1789091989,
+    "title": "Property 12",
+    "source_text": "For Rent in Kuching",
+    "telegram_url": "https://t.me/sarawakpropertyguru/89",
+    "status": "For Rent",
+    "price": "RM 450,000",
+    "facts": [
+      "1,200 sq ft"
+    ],
+    "reference": "WC",
+    "images": [
+      "assets/telegram/89-0.webp"
+    ]
+  },
+  {
+    "id": "telegram-88",
+    "message_id": 88,
+    "published_at": 1789091988,
+    "title": "Property 13",
+    "source_text": "For Rent in Kuching",
+    "telegram_url": "https://t.me/sarawakpropertyguru/88",
+    "status": "For Rent",
+    "price": "RM 450,000",
+    "facts": [
+      "1,200 sq ft"
+    ],
+    "reference": "WC",
+    "images": [
+      "assets/telegram/88-0.webp"
+    ]
+  },
+  {
+    "id": "telegram-87",
+    "message_id": 87,
+    "published_at": 1789091987,
+    "title": "Property 14",
+    "source_text": "For Rent in Kuching",
+    "telegram_url": "https://t.me/sarawakpropertyguru/87",
+    "status": "For Rent",
+    "price": "RM 450,000",
+    "facts": [
+      "1,200 sq ft"
+    ],
+    "reference": "WC",
+    "images": [
+      "assets/telegram/87-0.webp"
+    ]
+  },
+  {
+    "id": "telegram-86",
+    "message_id": 86,
+    "published_at": 1789091986,
+    "title": "Property 15",
+    "source_text": "For Rent in Kuching",
+    "telegram_url": "https://t.me/sarawakpropertyguru/86",
+    "status": "For Rent",
+    "price": "RM 450,000",
+    "facts": [
+      "1,200 sq ft"
+    ],
+    "reference": "WC",
+    "images": [
+      "assets/telegram/86-0.webp"
+    ]
+  },
+  {
+    "id": "telegram-85",
+    "message_id": 85,
+    "published_at": 1789091985,
+    "title": "Property 16",
+    "source_text": "For Rent in Kuching",
+    "telegram_url": "https://t.me/sarawakpropertyguru/85",
+    "status": "For Rent",
+    "price": "RM 450,000",
+    "facts": [
+      "1,200 sq ft"
+    ],
+    "reference": "WC",
+    "images": [
+      "assets/telegram/85-0.webp"
+    ]
+  },
+  {
+    "id": "telegram-84",
+    "message_id": 84,
+    "published_at": 1789091984,
+    "title": "Property 17",
+    "source_text": "For Rent in Kuching",
+    "telegram_url": "https://t.me/sarawakpropertyguru/84",
+    "status": "For Rent",
+    "price": "RM 450,000",
+    "facts": [
+      "1,200 sq ft"
+    ],
+    "reference": "WC",
+    "images": [
+      "assets/telegram/84-0.webp"
+    ]
+  },
+  {
+    "id": "telegram-83",
+    "message_id": 83,
+    "published_at": 1789091983,
+    "title": "Property 18",
+    "source_text": "For Rent in Kuching",
+    "telegram_url": "https://t.me/sarawakpropertyguru/83",
+    "status": "For Rent",
+    "price": "RM 450,000",
+    "facts": [
+      "1,200 sq ft"
+    ],
+    "reference": "WC",
+    "images": [
+      "assets/telegram/83-0.webp"
+    ]
+  },
+  {
+    "id": "telegram-82",
+    "message_id": 82,
+    "published_at": 1789091982,
+    "title": "Property 19",
+    "source_text": "For Rent in Kuching",
+    "telegram_url": "https://t.me/sarawakpropertyguru/82",
+    "status": "For Rent",
+    "price": "RM 450,000",
+    "facts": [
+      "1,200 sq ft"
+    ],
+    "reference": "WC",
+    "images": [
+      "assets/telegram/82-0.webp"
+    ]
+  }
+]

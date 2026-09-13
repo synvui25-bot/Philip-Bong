@@ -1,0 +1,35 @@
+{
+  "rental_listing": {
+    "message_id": 42,
+    "date": 1789092000,
+    "caption": "🏭 Demak Laut Warehouse For RENT\nRM27,300/month\n21,000 sq ft\nRefer code: WC",
+    "photo": [
+      {"file_id": "small"},
+      {"file_id": "large"}
+    ]
+  },
+  "malay_sale_link_only": {
+    "message_id": 43,
+    "date": 1789092060,
+    "text": "\n  Rumah Teres untuk dijual  \nRM 450,000\nMore details: t.me/sarawakpropertyguru/43  \n"
+  },
+  "english_structured": {
+    "message_id": 44,
+    "date": 1789092000,
+    "edit_date": 1789092600,
+    "caption": "Kuching House For Sale\nRM500,000 negotiable\nLocation: Tabuan Jaya, Kuching\nProperty type: Semi-detached house\nBedrooms: 4\nBathrooms: 3\nCar parks: 2",
+    "photo": [{"file_id": "p1"}]
+  },
+  "malay_structured": {
+    "message_id": 45,
+    "date": 1789092000,
+    "edit_date": 1789092660,
+    "caption": "Rumah untuk dijual\nRM450,000 harga tetap\nLokasi: Kota Samarahan\nJenis hartanah: Rumah teres\n3 bilik tidur\n2 bilik air\n1 tempat letak kereta",
+    "photo": [{"file_id": "p2"}]
+  },
+  "announcement": {
+    "message_id": 7,
+    "text": "Happy Malaysia Day!"
+  }
+}
+
