@@ -11,7 +11,7 @@ def test_sync_workflow_is_scheduled_manual_and_secret_scoped():
     """A missing trigger, unsafe scope, or unpinned action must block publishing."""
     workflow = WORKFLOW_PATH.read_text(encoding="utf-8")
 
-    assert "cron: '*/15 * * * *'" in workflow
+    assert "cron: '*/5 * * * *'" in workflow
     assert "workflow_dispatch:" in workflow
     assert "bootstrap:" in workflow
     assert "type: boolean" in workflow
