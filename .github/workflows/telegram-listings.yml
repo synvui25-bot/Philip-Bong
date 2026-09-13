@@ -11,8 +11,7 @@ on:
         default: false
         type: boolean
 
-permissions:
-  contents: write
+permissions: {}
 
 concurrency:
   group: telegram-listing-sync
@@ -20,6 +19,9 @@ concurrency:
 
 jobs:
   sync:
+    permissions:
+      contents: write
+      pages: read
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -42,3 +44,31 @@ jobs:
             git commit -m "chore: sync Telegram listings"
             git push
           fi
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
+      - name: Stage the static root site
+        run: |
+          mkdir -p _site/data
+          cp index.html *.webp _site/
+          cp -R assets _site/
+          cp data/telegram-listings.json _site/data/
+      - name: Upload synchronized site
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
+        with:
+          path: _site
+
+  deploy:
+    needs: sync
+    permissions:
+      pages: write
+      id-token: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
+
