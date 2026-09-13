@@ -120,14 +120,27 @@
       if(typeof listing.status==='string'&&listing.status&&images.length)photo.append(text('span',listing.status,'listing-label'));
       const content=text('div','','listing-content');
       if(typeof listing.status==='string'&&listing.status&&!images.length)content.append(text('p',listing.status,'listing-location'));
+      if(typeof listing.location==='string'&&listing.location)content.append(text('p',listing.location,'listing-location'));
       content.append(text('h3',listing.title));
       if(typeof listing.price==='string'&&listing.price)content.append(text('p',listing.price,'listing-price'));
-      if(Array.isArray(listing.facts)){
+      {
         const facts=text('div','','listing-facts');
-        listing.facts.filter(fact=>typeof fact==='string'&&fact).forEach(fact=>facts.append(text('span',fact)));
+        if(typeof listing.property_type==='string'&&listing.property_type)facts.append(text('span',listing.property_type));
+        for(const [key,label] of [['bedrooms','bedrooms'],['bathrooms','bathrooms'],['parking','car parks']]){
+          if(Number.isInteger(listing[key])&&listing[key]>=0)facts.append(text('span',`${listing[key]} ${label}`));
+        }
+        if(typeof listing.negotiable==='boolean')facts.append(text('span',listing.negotiable?'Negotiable':'Not negotiable'));
+        if(Array.isArray(listing.facts))listing.facts.filter(fact=>typeof fact==='string'&&fact).forEach(fact=>facts.append(text('span',fact)));
         if(facts.childElementCount)content.append(facts);
       }
       content.append(text('p',listing.source_text,'listing-description'));
+      if(typeof listing.edited_at==='number'&&listing.edited_at>0){
+        const edited=new Date(listing.edited_at*1000);
+        if(Number.isFinite(edited.getTime())){
+          const updated=text('p','Updated ','listing-updated listing-description'),time=text('time',edited.toLocaleDateString('en-MY'));
+          time.setAttribute('datetime',edited.toISOString());updated.append(time);content.append(updated);
+        }
+      }
       if(typeof listing.reference==='string'&&listing.reference)content.append(text('p',`Reference: ${listing.reference}`,'listing-code'));
       const source=telegramSourceUrl(listing.telegram_url);
       if(source)content.append(listingLink('View on Telegram',source,'btn btn-gold'));
@@ -141,7 +154,8 @@
       batch.forEach(listing=>fragment.append(createTelegramCard(listing)));
       telegramListings.append(fragment);renderedTelegramCount+=batch.length;
       loadMoreListings.hidden=renderedTelegramCount>=telegramRecords.length;
-      telegramStatus.textContent=telegramRecords.length?`Showing ${renderedTelegramCount} of ${telegramRecords.length} listings.`:'No synchronized listings are available yet. Please check back soon.';
+      telegramStatus.textContent=telegramRecords.length?`Showing ${renderedTelegramCount} of ${telegramRecords.length} listings.`:'No synchronized listings are available yet. ';
+      if(!telegramRecords.length)telegramStatus.append(listingLink('Visit Sarawak Property Guru on Telegram','https://t.me/sarawakpropertyguru'));
     }
     loadMoreListings.addEventListener('click',renderTelegramBatch);
     async function loadTelegramListings(){
@@ -161,4 +175,5 @@
   </script>
 </body>
 </html>
+
 
