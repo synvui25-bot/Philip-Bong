@@ -188,6 +188,11 @@ def scan_public_history(*, fetch=None, max_pages: int = 100) -> list[dict]:
             for link in links:
                 parsed = urlsplit(urljoin(PUBLIC_URL, link))
                 query = parse_qs(parsed.query, keep_blank_values=True)
+                trusted_channel = (parsed.scheme == "https" and parsed.netloc == "t.me"
+                                   and parsed.path == "/s/sarawakpropertyguru" and not parsed.fragment)
+                if (trusted_channel and set(query) == {"after"} and len(query["after"]) == 1
+                        and re.fullmatch(r"[1-9][0-9]*", query["after"][0])):
+                    continue
                 if (parsed.scheme != "https" or parsed.netloc != "t.me"
                         or parsed.path != "/s/sarawakpropertyguru" or parsed.fragment
                         or set(query) != {"before"} or len(query["before"]) != 1
@@ -197,6 +202,8 @@ def scan_public_history(*, fetch=None, max_pages: int = 100) -> list[dict]:
                 if cursor != lowest or (before is not None and cursor >= before):
                     raise PublicHistoryError("public pagination did not progress")
                 cursors.append(cursor)
+            if not cursors:
+                return [by_id[key] for key in sorted(by_id)]
             before = min(cursors)
             url = f"{PUBLIC_URL}?before={before}"
         raise PublicHistoryError("public scan reached page limit before completion")
