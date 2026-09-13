@@ -102,9 +102,11 @@ def _parse_page(html: str) -> tuple[list[dict], list[str]]:
                 raise PublicHistoryError("invalid public post timestamp")
             text_nodes = [child for child in children if child.has_class("tgme_widget_message_text")]
             media = []
+            media_members = {}
             message_ids = {message_id}
             for child in children:
                 if child.has_class("tgme_widget_message_photo_wrap"):
+                    member_id = message_id
                     if child.attrs.get("href"):
                         link = urlsplit(child.attrs["href"])
                         member = re.fullmatch(r"/sarawakpropertyguru/([1-9][0-9]*)", link.path)
@@ -113,14 +115,19 @@ def _parse_page(html: str) -> tuple[list[dict], list[str]]:
                                 or link.fragment or query not in ({}, {"single": [""]})):
                             raise PublicHistoryError("invalid public album permalink")
                         message_ids.add(int(member[1]))
+                        member_id = int(member[1])
                     style = child.attrs.get("style", "")
                     image = re.search(r"background-image\s*:\s*url\(\s*(['\"]?)(.*?)\1\s*\)", style)
                     if not image:
                         raise PublicHistoryError("public post image URL is missing")
-                    media.append(validate_public_media_url(image[2]))
+                    url = validate_public_media_url(image[2])
+                    media.append(url)
+                    media_members.setdefault(str(member_id), []).append(url)
             posts.append({
                 "message_id": message_id,
                 "message_ids": sorted(message_ids),
+                "caption_message_id": message_id,
+                "public_album_members": {key: list(dict.fromkeys(urls)) for key, urls in media_members.items()},
                 "chat": {"username": "sarawakpropertyguru"},
                 "date": int(timestamp.timestamp()),
                 "text": "\n".join(part.text() for part in text_nodes).strip(),
@@ -202,16 +209,43 @@ def scan_public_history(*, fetch=None, max_pages: int = 100) -> list[dict]:
 def reconcile_missing(listings: list[dict], visible_ids: set[int], state: dict) -> tuple[list[dict], dict]:
     """Caller must supply IDs from a successful, complete public scan only."""
     old_counts = state.get("missing_counts", {})
+    old_member_counts = state.get("missing_member_counts", {})
+    member_counts = {}
     counts = {}
     kept = []
     for listing in listings:
         message_id = listing["message_id"]
         if message_id in visible_ids:
-            kept.append(dict(listing))
+            item = dict(listing)
+            members = set(item.get("message_ids", [])) | {int(key) for key in item.get("album_members", {})} | {int(key) for key in item.get("public_album_members", {})}
+            removed = set()
+            for member_id in sorted(members - {message_id}):
+                if member_id in visible_ids:
+                    continue
+                key = f"{message_id}:{member_id}"
+                count = old_member_counts.get(key, 0) + 1
+                if count < 2:
+                    member_counts[key] = count
+                else:
+                    removed.add(member_id)
+            if removed:
+                item["message_ids"] = sorted(members - removed)
+                for mapping, flat in [("album_members", "file_ids"), ("public_album_members", "media_urls")]:
+                    if mapping in item:
+                        owned = item[mapping]
+                        removed_sources = {source for key, sources in owned.items() if int(key) in removed for source in sources}
+                        item[mapping] = {key: sources for key, sources in owned.items() if int(key) not in removed}
+                        retained_sources = {source for sources in item[mapping].values() for source in sources}
+                        item[flat] = [source for source in item.get(flat, []) if source not in removed_sources or source in retained_sources]
+            kept.append(item)
             continue
         key = str(message_id)
         count = old_counts.get(key, 0) + 1
         if count < 2:
             counts[key] = count
             kept.append(dict(listing))
-    return kept, {**state, "missing_counts": counts}
+    new_state = {**state, "missing_counts": counts}
+    if member_counts or "missing_member_counts" in state:
+        new_state["missing_member_counts"] = member_counts
+    return kept, new_state
+
