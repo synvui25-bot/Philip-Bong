@@ -42,7 +42,8 @@ def parse_listing(post: dict) -> dict | None:
 
     lines = [_normalize_whitespace(line) for line in text.splitlines()]
     title = next((line for line in lines if line), "")
-    source_text = _normalize_whitespace(text)
+    source_text = text.strip()
+    normalized_text = _normalize_whitespace(text)
     item = {
         "id": f"telegram-{message_id}",
         "title": title,
@@ -50,19 +51,19 @@ def parse_listing(post: dict) -> dict | None:
         "telegram_url": canonical_url,
     }
 
-    status = _status(source_text)
+    status = _status(normalized_text)
     if status:
         item["status"] = status
 
-    price = PRICE.search(source_text)
+    price = PRICE.search(normalized_text)
     if price:
         item["price"] = price.group(0)
 
-    facts = [match.group(0) for match in SIZE.finditer(source_text)]
+    facts = [match.group(0) for match in SIZE.finditer(normalized_text)]
     if facts:
         item["facts"] = facts
 
-    reference = REFERENCE.search(source_text)
+    reference = REFERENCE.search(normalized_text)
     if reference:
         item["reference"] = reference.group(1)
 
@@ -89,12 +90,12 @@ def parse_listing(post: dict) -> dict | None:
         r"\b(?:non[- ]negotiable|not(?:\s+\w+){0,2}\s+negotiable|"
         r"tidak boleh runding|tak boleh runding|harga tetap|fixed price|"
         r"negotiable\s*:\s*(?:no|false))\b",
-        source_text,
+        normalized_text,
         re.I,
     )
     positive_negotiability = re.search(
         r"\b(?:negotiable\s*:\s*(?:yes|true)|negotiable(?!\s*\?)|boleh runding)\b",
-        source_text,
+        normalized_text,
         re.I,
     )
     if negative_negotiability:
