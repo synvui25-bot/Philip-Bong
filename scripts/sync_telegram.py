@@ -34,7 +34,14 @@ def group_media_posts(messages: list[dict]) -> list[dict]:
     groups: dict[str, list[dict]] = {}
     grouped: list[dict] = []
 
+    # A Bot API message is a complete snapshot, including an empty caption.
+    # Coalesce edits before grouping so stale captions/photos cannot accumulate.
+    latest = {}
     for message in messages:
+        if not isinstance(message.get("message_id"), int):
+            raise ValueError("Telegram post is missing an integer message_id")
+        latest[message["message_id"]] = message
+    for message in latest.values():
         media_group_id = message.get("media_group_id")
         if isinstance(media_group_id, str) and media_group_id:
             groups.setdefault(media_group_id, []).append(message)
@@ -44,6 +51,7 @@ def group_media_posts(messages: list[dict]) -> list[dict]:
             grouped.append(item)
 
     for group in groups.values():
+        group.sort(key=lambda message: message["message_id"])
         primary = next(
             (
                 message
@@ -65,6 +73,11 @@ def group_media_posts(messages: list[dict]) -> list[dict]:
             key = str(message["message_id"])
             members[key] = list(dict.fromkeys([*members.get(key, []), *_photo_file_ids(message)]))
         item["album_members"] = members
+        item["_edited_message_ids"] = [member["message_id"] for member in group
+                                       if member.get("_sync_event_type") == "edited_channel_post"]
+        edit_dates = [member["edit_date"] for member in group if _is_valid_published_at(member.get("edit_date"))]
+        if edit_dates:
+            item["edit_date"] = max(edit_dates)
         grouped.append(item)
 
     return grouped
@@ -147,9 +160,12 @@ def apply_updates(listings: list[dict], updates: list[dict]) -> tuple[list[dict]
         media_group_id = message.get("media_group_id")
         existing_album = next(
             (item for item in by_id.values() if media_group_id
-             and item.get("media_group_id") == media_group_id), None
+             and (item.get("media_group_id") == media_group_id
+                  or (not item.get("media_group_id") and message_id in item.get("message_ids", [])))), None
         )
         legacy = by_id.get(identifier)
+        if existing_album is None and "public_album_members" in message and legacy:
+            existing_album = legacy
         if (existing_album is None and media_group_id and legacy
                 and not legacy.get("media_group_id") and "album_members" not in legacy):
             # Base-version records kept only the primary ID and flat file IDs.
@@ -159,13 +175,15 @@ def apply_updates(listings: list[dict], updates: list[dict]) -> tuple[list[dict]
         if existing_album:
             identifier = existing_album["id"]
         listing = parse_listing(message)
+        has_listing_caption = listing is not None
+        caption_owner = (existing_album or {}).get("caption_message_id", (existing_album or {}).get("message_id"))
         if listing is None:
-            if existing_album and message_id != existing_album["message_id"]:
+            if existing_album and caption_owner not in message.get("_edited_message_ids", [message_id]):
                 # Telegram sends each album member independently, including later
                 # photo edits with no caption. Such an event does not clear the
                 # caption-bearing listing or replace its other members.
                 listing = dict(existing_album)
-            elif message.get("_sync_event_type") == "edited_channel_post":
+            elif message.get("_sync_event_type") == "edited_channel_post" or message.get("_edited_message_ids"):
                 by_id.pop(identifier, None)
                 continue
             else:
@@ -179,6 +197,25 @@ def apply_updates(listings: list[dict], updates: list[dict]) -> tuple[list[dict]
         listing["id"] = identifier
         listing["telegram_url"] = f"https://t.me/{CHANNEL_USERNAME}/{listing['message_id']}"
         listing["published_at"] = existing_album["published_at"] if existing_album else published_at
+        if has_listing_caption:
+            # A public wrapper cannot override caption ownership learned from
+            # an individual Bot message in an earlier run.
+            listing["caption_message_id"] = (existing_album.get("caption_message_id", message_id)
+                                              if existing_album and "public_album_members" in message
+                                              else message.get("caption_message_id", message_id))
+        edit_dates = [value for value in [message.get("edit_date"), (existing_album or {}).get("edited_at")]
+                      if _is_valid_published_at(value)]
+        if edit_dates:
+            listing["edited_at"] = max(edit_dates)
+        for key in ("message_ids", "public_album_members", "media_urls"):
+            if key in message and (key != "media_urls" or not media_group_id):
+                listing[key] = message[key]
+            elif existing_album and key in existing_album:
+                listing[key] = existing_album[key]
+        if existing_album and "message_ids" in listing:
+            listing["message_ids"] = sorted(set(existing_album.get("message_ids", [])) | set(listing["message_ids"]))
+        if existing_album and "public_album_members" in listing:
+            listing["public_album_members"] = {**existing_album.get("public_album_members", {}), **listing["public_album_members"]}
         if media_group_id:
             # A media_group_id identifies the complete album. An incoming batch
             # describes only the members it contains, not an authoritative album
@@ -186,6 +223,7 @@ def apply_updates(listings: list[dict], updates: list[dict]) -> tuple[list[dict]
             members = {**(existing_album or {}).get("album_members", {}), **message["album_members"]}
             listing["media_group_id"] = media_group_id
             listing["album_members"] = {key: members[key] for key in sorted(members, key=int)}
+            listing["message_ids"] = sorted(set(listing.get("message_ids", [])) | {int(key) for key in members})
             listing["file_ids"] = list(dict.fromkeys(
                 file_id for photos in listing["album_members"].values() for file_id in photos
             ))
@@ -295,7 +333,9 @@ def _prepare_media(listings, previous, token, media_path):
         old_images = [image for image in old.get("images", [])
                       if (path := _asset_path(image, media_path)) is not None and path.is_file()]
         if not urls and not file_ids:
-            listing["images"] = old_images
+            # An authoritative removal of the final known source must also drop
+            # its image; legacy records without source metadata keep their fallback.
+            listing["images"] = [] if old.get("media_urls") or old.get("file_ids") else old_images
             continue
         if (old_images and urls == old.get("media_urls", [])
                 and file_ids == old.get("file_ids", []) and not old.get("media_retry")):
@@ -347,6 +387,27 @@ def _visible_ids(posts):
             for message_id in post.get("message_ids", [post["message_id"]])}
 
 
+def _refresh_public_albums(listings, posts):
+    """Refresh known public media; missing members await two-scan reconciliation."""
+    visible = {message_id: post for post in posts
+               for message_id in post.get("message_ids", [post["message_id"]])}
+    refreshed = []
+    for stored in listings:
+        listing = dict(stored)
+        post = visible.get(listing["message_id"])
+        if "media_urls" in listing and post is not None:
+            listing["message_ids"] = sorted(set(listing.get("message_ids", [listing["message_id"]]))
+                                             | set(post.get("message_ids", [post["message_id"]])))
+            if "public_album_members" in post:
+                members = {**listing.get("public_album_members", {}), **post["public_album_members"]}
+                listing["public_album_members"] = {key: members[key] for key in sorted(members, key=int)}
+                listing["media_urls"] = list(dict.fromkeys(url for urls in listing["public_album_members"].values() for url in urls))
+            else:
+                listing["media_urls"] = post["media_urls"]
+        refreshed.append(listing)
+    return refreshed
+
+
 def run_bootstrap(
     listings_path: Path = DEFAULT_LISTINGS_PATH,
     state_path: Path = DEFAULT_STATE_PATH,
@@ -361,6 +422,7 @@ def run_bootstrap(
     for listing in listings:
         if listing["message_id"] in by_id:
             listing["media_urls"] = by_id[listing["message_id"]]["media_urls"]
+    listings = _refresh_public_albums(listings, posts)
     listings, state = reconcile_missing(listings, _visible_ids(posts), state)
     _persist_sync(listings, previous, state, "", listings_path, state_path, media_path)
     return listings
@@ -380,17 +442,8 @@ def run_incremental(
         raise ValueError("last_update_id must be an integer")
 
     visible_posts = scan_public_history()
-    updated_listings, next_offset = apply_updates(listings, fetch_updates(token, saved_offset))
-    public_albums = {item["id"] for item in listings if "media_urls" in item}
-    visible_by_id = {message_id: post for post in visible_posts
-                     for message_id in post.get("message_ids", [post["message_id"]])}
-    for listing in updated_listings:
-        public_post = visible_by_id.get(listing["message_id"])
-        if listing["id"] in public_albums and public_post is not None:
-            # Bootstrap albums have public URLs but no Bot API file identifiers.
-            # A member edit cannot describe all their photos; retain the complete
-            # media set from this successful scan for already-imported records.
-            listing["media_urls"] = public_post["media_urls"]
+    hydrated = _refresh_public_albums(listings, visible_posts)
+    updated_listings, next_offset = apply_updates(hydrated, fetch_updates(token, saved_offset))
     next_offset = max(saved_offset, next_offset)
     updated_listings, state = reconcile_missing(
         updated_listings, _visible_ids(visible_posts), state
@@ -417,3 +470,4 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
