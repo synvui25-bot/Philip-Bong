@@ -8,8 +8,11 @@ class TelegramError(RuntimeError):
 
 
 def fetch_updates(token: str, offset: int) -> list[dict]:
+    token = token.strip()
     if not token:
         raise TelegramError("Telegram bot token is required")
+    if any(ord(character) < 33 or ord(character) == 127 for character in token):
+        raise TelegramError("Telegram bot token contains invalid characters")
 
     query = urlencode(
         {
@@ -29,3 +32,4 @@ def fetch_updates(token: str, offset: int) -> list[dict]:
     if not isinstance(result, list):
         raise TelegramError("Telegram response did not contain updates")
     return result
+
