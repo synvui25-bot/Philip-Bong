@@ -1,3 +1,4 @@
+import math
 import re
 
 
@@ -63,4 +64,45 @@ def parse_listing(post: dict) -> dict | None:
     if reference:
         item["reference"] = reference.group(1)
 
+    # Only labeled values identify location/type. Counts must occupy an explicit
+    # fact segment; nearby schools, ranges, and "3+1" rooms are not bedroom counts.
+    for field, label in [("location", r"location|lokasi"),
+                         ("property_type", r"property type|jenis hartanah")]:
+        values = {match[1].strip() for line in lines
+                  if (match := re.fullmatch(rf"(?:{label})\s*:\s*(.+)", line, re.I))}
+        if len(values) == 1:
+            item[field] = values.pop()
+    for field, label in [("bedrooms", r"bedrooms?|bilik tidur"),
+                         ("bathrooms", r"bathrooms?|bilik air|bilik mandi"),
+                         ("parking", r"car parks?|parking(?: spaces?)?|tempat letak kereta")]:
+        values = set()
+        for segment in re.split(r"[\n;|]", text):
+            segment = segment.strip().lstrip("•").strip()
+            match = re.fullmatch(rf"(?:{label})\s*:\s*(\d+)|(\d+)\s+(?:{label})", segment, re.I)
+            if match:
+                values.add(int(match[1] or match[2]))
+        if len(values) == 1:
+            item[field] = values.pop()
+    negative_negotiability = re.search(
+        r"\b(?:non[- ]negotiable|not(?:\s+\w+){0,2}\s+negotiable|"
+        r"tidak boleh runding|tak boleh runding|harga tetap|fixed price|"
+        r"negotiable\s*:\s*(?:no|false))\b",
+        source_text,
+        re.I,
+    )
+    positive_negotiability = re.search(
+        r"\b(?:negotiable\s*:\s*(?:yes|true)|negotiable(?!\s*\?)|boleh runding)\b",
+        source_text,
+        re.I,
+    )
+    if negative_negotiability:
+        item["negotiable"] = False
+    elif positive_negotiability:
+        item["negotiable"] = True
+    edited_at = post.get("edit_date")
+    if (isinstance(edited_at, (int, float)) and not isinstance(edited_at, bool)
+            and math.isfinite(edited_at) and edited_at > 0):
+        item["edited_at"] = edited_at
+
     return item
+
