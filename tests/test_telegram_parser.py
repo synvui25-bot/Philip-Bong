@@ -51,6 +51,18 @@ def test_rejects_property_text_without_photo_or_telegram_link():
     assert not is_listing("House for sale RM 250,000", has_photo=False)
 
 
+def test_accepts_verified_public_channel_post_without_downloadable_photo():
+    item = parse_listing({
+        "message_id": 52,
+        "text": "Kuching House For Sale\nRM 250,000",
+        "photo": False,
+        "telegram_url": "https://t.me/sarawakpropertyguru/52",
+    })
+
+    assert item is not None
+    assert item["id"] == "telegram-52"
+
+
 def test_rejects_announcement_without_property_intent():
     assert parse_listing(FIXTURES["announcement"]) is None
 
