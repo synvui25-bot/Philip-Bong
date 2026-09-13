@@ -22,7 +22,7 @@
     .site-footer{padding:26px 0 92px;color:rgba(255,255,255,.5);background:#061522;font-size:.74rem}.footer-row{display:flex;flex-direction:column;gap:8px}.footer-row strong{color:#fff}.wa-float{position:fixed;right:18px;bottom:18px;z-index:45;width:58px;height:58px;display:grid;place-items:center;border-radius:50%;color:#fff;background:#25d366;box-shadow:0 14px 34px rgba(9,40,25,.3);transition:.2s}.wa-float:hover{transform:scale(1.07)}.wa-float svg{width:29px;height:29px;fill:currentColor}
     .gallery[hidden],.gallery-data{display:none}.gallery{position:fixed;inset:0;z-index:100;display:grid;grid-template-columns:46px minmax(0,1fr) 46px;align-items:center;gap:5px;padding:70px 8px 24px;color:#fff;background:rgba(3,12,22,.97);backdrop-filter:blur(12px)}.gallery-figure{min-width:0;margin:0;text-align:center}.gallery-image{display:block;width:auto;height:auto;max-width:100%;max-height:calc(100vh - 155px);margin:auto;object-fit:contain;border-radius:12px;box-shadow:0 30px 90px rgba(0,0,0,.46)}.gallery-caption{display:flex;justify-content:center;gap:15px;margin-top:12px;padding-inline:6px;color:rgba(255,255,255,.7);font-size:.7rem}.gallery-counter{flex:0 0 auto;color:var(--g2);font-weight:700}.gallery-control{width:42px;height:42px;display:grid;place-items:center;padding:0;border:1px solid rgba(255,255,255,.22);border-radius:50%;color:#fff;background:rgba(255,255,255,.08);cursor:pointer}.gallery-prev,.gallery-next{font-size:1.7rem}.gallery-close{position:absolute;top:14px;right:14px;font-size:1.5rem}
     @media(min-width:560px){.hero-actions{display:flex;flex-wrap:wrap}.trust-stats,.testimonial-grid,.listing-grid{grid-template-columns:repeat(2,1fr)}.listing-card:first-child{grid-column:1/-1}.trust-stats .stat:last-child{grid-column:1/-1}.footer-row{flex-direction:row;justify-content:space-between}.gallery{grid-template-columns:64px minmax(0,1fr) 64px;gap:14px;padding:35px}.gallery-control{width:54px;height:54px}.gallery-caption{font-size:.8rem}}@media(min-width:760px){.container{width:min(calc(100% - 48px),var(--max))}.section{padding:100px 0}.about-grid,.contact-grid{grid-template-columns:.9fr 1.1fr;gap:clamp(50px,8vw,100px)}.trust-stats{grid-template-columns:repeat(3,1fr)}.trust-stats .stat:last-child{grid-column:auto}.reason-grid{grid-template-columns:repeat(3,1fr)}.site-footer{padding-bottom:28px}}@media(min-width:920px){.nav{min-height:82px}.menu-toggle{display:none}.nav-links{position:static;display:flex;padding:0;flex-direction:row;gap:28px;background:transparent;box-shadow:none}.hero{min-height:690px;display:grid;align-items:center;padding:76px 0}.hero-grid{grid-template-columns:1.08fr .92fr;gap:clamp(55px,8vw,100px);align-items:center}.hero-portrait{min-height:520px}.hero-portrait img{height:510px}.listing-grid{grid-template-columns:repeat(3,1fr)}.listing-card:first-child{grid-column:auto}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition-duration:.01ms!important}}
-    #telegram-listings{padding-top:0}#telegramListings .listing-card{min-width:0;grid-column:auto}#telegramListings .listing-content{overflow-wrap:anywhere}#telegramListings .listing-content .btn{margin-top:12px}#telegramListings .listing-description{white-space:pre-line}#telegramListings .listing-photo:not(button){background:var(--c)}.listings-status{color:var(--m)}#loadMoreListings{display:flex;margin:30px auto 0}#loadMoreListings[hidden]{display:none}#galleryCaption{min-width:0;overflow-wrap:anywhere;max-height:5em;overflow-y:auto}
+    #telegram-listings{padding-top:0}#telegramListings .listing-card{min-width:0;grid-column:auto}#telegramListings .listing-content{overflow-wrap:anywhere}#telegramListings .listing-content .btn{margin-top:12px}#telegramListings .listing-description{white-space:pre-wrap}#telegramListings .listing-highlights{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 18px}#telegramListings .listing-highlights span{padding:7px 10px;border:1px solid rgba(190,145,62,.24);border-radius:999px;color:var(--n);background:var(--g2);font-size:.72rem;font-weight:650}#telegramListings .listing-photo:not(button){background:var(--c)}.listings-status{color:var(--m)}#loadMoreListings{display:flex;margin:30px auto 0}#loadMoreListings[hidden]{display:none}#galleryCaption{min-width:0;overflow-wrap:anywhere;max-height:5em;overflow-y:auto}
   </style>
 </head>
 <body>
@@ -120,18 +120,20 @@
       if(typeof listing.status==='string'&&listing.status&&images.length)photo.append(text('span',listing.status,'listing-label'));
       const content=text('div','','listing-content');
       if(typeof listing.status==='string'&&listing.status&&!images.length)content.append(text('p',listing.status,'listing-location'));
-      if(typeof listing.location==='string'&&listing.location)content.append(text('p',listing.location,'listing-location'));
       content.append(text('h3',listing.title));
-      if(typeof listing.price==='string'&&listing.price)content.append(text('p',listing.price,'listing-price'));
       {
-        const facts=text('div','','listing-facts');
-        if(typeof listing.property_type==='string'&&listing.property_type)facts.append(text('span',listing.property_type));
+        const candidates=[];
+        if(typeof listing.price==='string'&&listing.price)candidates.push(listing.price);
+        if(Array.isArray(listing.facts)){const primaryFact=listing.facts.find(fact=>typeof fact==='string'&&fact);if(primaryFact)candidates.push(primaryFact)}
+        if(typeof listing.location==='string'&&listing.location)candidates.push(listing.location);
+        if(typeof listing.reference==='string'&&listing.reference)candidates.push(`Ref ${listing.reference}`);
+        if(typeof listing.property_type==='string'&&listing.property_type)candidates.push(listing.property_type);
         for(const [key,label] of [['bedrooms','bedrooms'],['bathrooms','bathrooms'],['parking','car parks']]){
-          if(Number.isInteger(listing[key])&&listing[key]>=0)facts.append(text('span',`${listing[key]} ${label}`));
+          if(Number.isInteger(listing[key])&&listing[key]>=0)candidates.push(`${listing[key]} ${label}`);
         }
-        if(typeof listing.negotiable==='boolean')facts.append(text('span',listing.negotiable?'Negotiable':'Not negotiable'));
-        if(Array.isArray(listing.facts))listing.facts.filter(fact=>typeof fact==='string'&&fact).forEach(fact=>facts.append(text('span',fact)));
-        if(facts.childElementCount)content.append(facts);
+        if(typeof listing.negotiable==='boolean')candidates.push(listing.negotiable?'Negotiable':'Not negotiable');
+        const highlights=[...new Set(candidates)].slice(0,3);
+        if(highlights.length){const group=text('div','','listing-highlights');highlights.forEach(value=>group.append(text('span',value)));content.append(group)}
       }
       content.append(text('p',listing.source_text,'listing-description'));
       if(typeof listing.edited_at==='number'&&listing.edited_at>0){
@@ -141,7 +143,6 @@
           time.setAttribute('datetime',edited.toISOString());updated.append(time);content.append(updated);
         }
       }
-      if(typeof listing.reference==='string'&&listing.reference)content.append(text('p',`Reference: ${listing.reference}`,'listing-code'));
       const source=telegramSourceUrl(listing.telegram_url);
       if(source)content.append(listingLink('View on Telegram',source,'btn btn-gold'));
       const enquiry=`Hi Philip, I'm interested in ${listing.title}.${source?`\n\n${source}`:''}\n\nPlease confirm availability and viewing arrangements.`;
