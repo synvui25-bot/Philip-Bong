@@ -11,12 +11,13 @@ SIZE = re.compile(r"\b(?:approx\.?\s*)?[\d,.]+\s*(?:sq\s*ft|sqft|ft²|acres?)\b"
 REFERENCE = re.compile(r"(?:refer(?:ence)?\s*code|ref)\s*:\s*([\w-]+)", re.I)
 
 
-def is_listing(text: str, has_photo: bool) -> bool:
+def is_listing(text: str, has_photo: bool, has_source_link: bool = False) -> bool:
     has_price = bool(
         PRICE.search(text)
         or re.search(r"price\s+on\s+application|enquire\s+for\s+price", text, re.I)
     )
-    return bool(PROPERTY_TERMS.search(text) and has_price and (has_photo or "t.me/" in text))
+    return bool(PROPERTY_TERMS.search(text) and has_price
+                and (has_photo or has_source_link or "t.me/" in text))
 
 
 def _normalize_whitespace(text: str) -> str:
@@ -33,19 +34,20 @@ def _status(text: str) -> str | None:
 
 def parse_listing(post: dict) -> dict | None:
     text = post.get("text") or post.get("caption") or ""
-    if not isinstance(text, str) or not is_listing(text, bool(post.get("photo"))):
+    message_id = post.get("message_id")
+    canonical_url = f"https://t.me/sarawakpropertyguru/{message_id}"
+    has_source_link = post.get("telegram_url") == canonical_url
+    if not isinstance(text, str) or not is_listing(text, bool(post.get("photo")), has_source_link):
         return None
 
     lines = [_normalize_whitespace(line) for line in text.splitlines()]
     title = next((line for line in lines if line), "")
     source_text = _normalize_whitespace(text)
-    message_id = post["message_id"]
-
     item = {
         "id": f"telegram-{message_id}",
         "title": title,
         "source_text": source_text,
-        "telegram_url": f"https://t.me/sarawakpropertyguru/{message_id}",
+        "telegram_url": canonical_url,
     }
 
     status = _status(source_text)
