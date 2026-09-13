@@ -7,6 +7,7 @@
     "status": "For Rent",
     "price": "RM 1500",
     "reference": "JRL",
+    "location": "Jalan Uplands, Kenny Hill Residence",
     "message_id": 50,
     "published_at": 1789220091,
     "caption_message_id": 50,
@@ -29,6 +30,7 @@
       "1,488 sq ft"
     ],
     "reference": "ALW",
+    "location": "Galacity, near Premier 101 area",
     "message_id": 36,
     "published_at": 1789215568,
     "caption_message_id": 36,
@@ -47,7 +49,11 @@
     "telegram_url": "https://t.me/sarawakpropertyguru/25",
     "status": "For Rent",
     "price": "RM1.30",
+    "facts": [
+      "21k sqft"
+    ],
     "reference": "WC",
+    "location": "Near BCCK, Demak Laut",
     "message_id": 25,
     "published_at": 1789215335,
     "caption_message_id": 25,
