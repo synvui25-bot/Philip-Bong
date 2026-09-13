@@ -27,6 +27,17 @@ def test_parses_rental_listing():
     assert item["telegram_url"] == "https://t.me/sarawakpropertyguru/42"
 
 
+def test_extracts_emoji_prefixed_location_and_compact_thousand_size():
+    item = parse_listing({
+        "message_id": 99,
+        "text": "🏭 Warehouse For RENT\n📍 Location: Near BCCK, Demak Laut\n✅ Size 21k sqft\nRM1.30 PSF",
+        "telegram_url": "https://t.me/sarawakpropertyguru/99",
+    })
+
+    assert item["location"] == "Near BCCK, Demak Laut"
+    assert item["facts"] == ["21k sqft"]
+
+
 def test_parses_malay_sale_link_listing_and_omits_absent_fields():
     item = parse_listing(FIXTURES["malay_sale_link_only"])
 
