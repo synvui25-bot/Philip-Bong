@@ -64,7 +64,7 @@ for (const width of [1280, 375]) {
     assert.match(enquiry.searchParams.get('text'), /https:\/\/t.me\/sarawakpropertyguru\/100/);
     assert.equal([...enquiry.searchParams.keys()].join(','), 'text');
     const second = page.locator('#telegramListings .listing-card').nth(1);
-    assert.equal(await second.locator('.listing-price, .listing-facts, .listing-code, .gallery-trigger').count(), 0);
+    assert.equal(await second.locator('.listing-highlights, .listing-code, .gallery-trigger').count(), 0);
     assert.match(await second.locator('img').getAttribute('alt'), /unavailable/i);
     assert.equal(await first.locator('img').getAttribute('loading'), 'lazy');
     assert.ok(Number(await first.locator('img').getAttribute('width')) > 0);
@@ -122,12 +122,27 @@ test('renders explicit structured fields safely and omits missing fields', () =>
 ], async page => {
   const cards = page.locator('#telegramListings .listing-card');
   await cards.first().waitFor();
-  assert.equal(await cards.first().locator('.listing-location').textContent(), 'Kuching <img src=x onerror=alert(1)>');
-  const facts = await cards.first().locator('.listing-facts').textContent();
-  for (const value of ['Semi-detached house', '4 bedrooms', '3 bathrooms', '2 car parks', 'Not negotiable']) assert.ok(facts.includes(value), value);
+  const highlights = await cards.first().locator('.listing-highlights').textContent();
+  assert.ok(highlights.includes('Kuching <img src=x onerror=alert(1)>'));
+  assert.equal(await cards.first().locator('.listing-highlights img').count(), 0);
   assert.equal(await cards.first().locator('.listing-updated time').getAttribute('datetime'), '2026-09-11T02:10:00.000Z');
-  assert.equal(await cards.first().locator('.listing-location img').count(), 0);
-  assert.equal(await cards.nth(1).locator('.listing-location,.listing-facts,.listing-updated').count(), 0);
+  assert.equal(await cards.nth(1).locator('.listing-location,.listing-highlights,.listing-updated').count(), 0);
+}));
+test('preserves Telegram copy formatting and shows exactly three prioritized highlights', () => withPage(375, [{
+  ...fixture[0],
+  source_text: 'First line\n\n  Indented detail\nRefer code: JRL',
+  price: 'RM 1,500/month',
+  facts: ['1,200 sq ft', '4 acres'],
+  location: 'Jalan Uplands',
+  reference: 'JRL',
+  bedrooms: 3,
+}], async page => {
+  const card = page.locator('#telegramListings .listing-card').first();
+  await card.waitFor();
+  assert.equal(await card.locator('.listing-description').textContent(), 'First line\n\n  Indented detail\nRefer code: JRL');
+  assert.equal(await card.locator('.listing-description').evaluate(node => getComputedStyle(node).whiteSpace), 'pre-wrap');
+  assert.deepEqual(await card.locator('.listing-highlights span').allTextContents(), ['RM 1,500/month', '1,200 sq ft', 'Jalan Uplands']);
+  assert.equal(await card.locator('.listing-code').count(), 0);
 }));
 for (const [name, data, status] of [['HTTP failure', [], 503], ['invalid JSON', '{', 200], ['invalid shape', {}, 200]]) {
   test(name + ' shows an error state', () => withPage(375, data, async page => {
