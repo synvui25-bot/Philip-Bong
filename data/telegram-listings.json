@@ -1,42 +1,5 @@
 [
   {
-    "id": "telegram-69",
-    "title": "TEST PROPERTY FOR RENT RM1,000",
-    "source_text": "TEST PROPERTY FOR RENT RM1,000",
-    "telegram_url": "https://t.me/sarawakpropertyguru/69",
-    "status": "For Rent",
-    "price": "RM1,000",
-    "edited_at": 1789368331,
-    "message_id": 69,
-    "published_at": 1789368300,
-    "caption_message_id": 69,
-    "file_ids": [
-      "BQACAgUAAyEFAAS8ViHxAANFaqeX7Pb79Qx4pIWF-80iV5LDOSoAAhAjAALpbUFVRmdleUjQmMo9BA"
-    ],
-    "images": [
-      "assets/telegram/69-0.webp"
-    ]
-  },
-  {
-    "id": "telegram-65",
-    "title": "TEST PROPERTY FOR RENT RM1,000",
-    "source_text": "TEST PROPERTY FOR RENT RM1,000\n\n\ud83d\udccd Location: Kuching Sarawak \n\u2705 3bed 2 bath\n\u2705 Fully Furnished",
-    "telegram_url": "https://t.me/sarawakpropertyguru/65",
-    "status": "For Rent",
-    "price": "RM1,000",
-    "location": "Kuching Sarawak",
-    "edited_at": 1789364924,
-    "message_id": 65,
-    "published_at": 1789364652,
-    "caption_message_id": 65,
-    "file_ids": [
-      "AgACAgUAAyEFAAS8ViHxAANBaqeJrCSJp-YPoIFrVhRC7bJeVf4AAkoTaxvNDEFVZbF5-bwgaT0BAAMCAAN5AAM9BA"
-    ],
-    "images": [
-      "assets/telegram/65-0.webp"
-    ]
-  },
-  {
     "id": "telegram-58",
     "title": "\ud83c\udfe2 Kuching, 3 Storey Intermediate Shoplot @(Palm Road) for SALE",
     "source_text": "\ud83c\udfe2 Kuching, 3 Storey Intermediate Shoplot @(Palm Road) for SALE \n\n\ud83d\udccdJalan Tun Ahmad Zaidi Adruce, Kuching Sarawak.\n\n\u2705 With Full Ready Tenancy\n\u2705 112.8 sqm\n\u2705 Ground floor commercial, 1st floor office, 2nd floor residential \n\u2705 Leasehold till year 2806\n\n\ud83d\udcb0 Offer price RM 2mil\n\nFor more info and viewing please contact us: \n\ud83d\udcde Philip Bong (REN23177)@ 012-8810895\n.\n\ud83d\udcf2 Whatsapp link: Philip Bong \nhttp://wasap.my/60128810895/PalmRoad3FInterShop.2mil\n\n\u2b50\ufe0f\u2b50\ufe0f\u2b50\ufe0f\u2b50\ufe0f\u2b50\ufe0f\u2b50\ufe0f\u2b50\ufe0f\u2b50\ufe0f\u2b50\ufe0f\u2b50\ufe0f\u2b50\ufe0f\u2b50\ufe0f\u2b50\ufe0f\u2b50\ufe0f\nSALE\uff5cRENT\uff5cBUY\uff5cINVEST\nIndustrial \u2022 Commercial \u2022 Residential \u2022 Lands\nContact Us  012-8810895\n.\n\u51fa\u552e\uff5c\u51fa\u79df\uff5c\u8d2d\u4e70\uff5c\u6295\u8d44\n\u5de5\u4e1a \u2022 \u5546\u4e1a \u2022 \u4f4f\u5b85 \u2022 \u5730\u76ae\n\u6b22\u8fce\u8054\u7cfb  012-8810895\n\nThe Roof Realty Sdn Bhd\nE(1)1605/6\nRefer code: SPC 0001",
@@ -44,16 +7,16 @@
     "status": "For Sale",
     "price": "RM 2",
     "reference": "SPC",
+    "edited_at": 1789370725,
     "message_id": 58,
     "published_at": 1789361754,
     "caption_message_id": 58,
-    "message_ids": [
-      58
+    "file_ids": [
+      "BQACAgUAAyEFAAS8ViHxAAM6aqd-WiP424fjE77Z9qxh2et0iUUAAtggAALNDEFVYGk2IX83aE89BA"
     ],
-    "public_album_members": {},
-    "media_urls": [],
-    "file_ids": [],
-    "images": []
+    "images": [
+      "assets/telegram/58-0.webp"
+    ]
   },
   {
     "id": "telegram-50",
@@ -84,16 +47,16 @@
     "price": "RM 1500",
     "reference": "JRL",
     "location": "Jalan Uplands, Kenny Hill Residence",
+    "edited_at": 1789370671,
     "message_id": 38,
     "published_at": 1789220020,
     "caption_message_id": 38,
-    "message_ids": [
-      38
+    "file_ids": [
+      "BQACAgUAAyEFAAS8ViHxAAMmaqehMIlA7tDw0PYdIVgWCMSsLPMAAk8iAAIzdyhVtnVSn55SJKg9BA"
     ],
-    "public_album_members": {},
-    "media_urls": [],
-    "file_ids": [],
-    "images": []
+    "images": [
+      "assets/telegram/38-0.webp"
+    ]
   },
   {
     "id": "telegram-27",
