@@ -13,8 +13,9 @@
     "file_ids": [
       "BQACAgUAAyEFAAS8ViHxAANFaqeX7Pb79Qx4pIWF-80iV5LDOSoAAhAjAALpbUFVRmdleUjQmMo9BA"
     ],
-    "images": [],
-    "media_retry": true
+    "images": [
+      "assets/telegram/69-0.webp"
+    ]
   },
   {
     "id": "telegram-65",
@@ -31,8 +32,9 @@
     "file_ids": [
       "AgACAgUAAyEFAAS8ViHxAANBaqeJrCSJp-YPoIFrVhRC7bJeVf4AAkoTaxvNDEFVZbF5-bwgaT0BAAMCAAN5AAM9BA"
     ],
-    "images": [],
-    "media_retry": true
+    "images": [
+      "assets/telegram/65-0.webp"
+    ]
   },
   {
     "id": "telegram-50",
