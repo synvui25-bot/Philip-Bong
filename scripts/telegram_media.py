@@ -58,18 +58,24 @@ def download_bot_media(token: str, file_id: str) -> bytes:
         if (not isinstance(file_path, str) or not re.fullmatch(r"[A-Za-z0-9_/-]+\.[A-Za-z0-9]+", file_path)
                 or file_path.startswith("/") or ".." in file_path):
             raise MediaError("unsafe Telegram file path")
-        return download_image(f"https://api.telegram.org/file/bot{token}/{file_path}")
+        return download_image(
+            f"https://api.telegram.org/file/bot{token}/{file_path}",
+            allow_octet_stream=True,
+        )
     except MediaError:
         raise
     except Exception:
         raise MediaError("Telegram file lookup failed") from None
 
 
-def download_image(url: str) -> bytes:
+def download_image(url: str, *, allow_octet_stream: bool = False) -> bytes:
     """Transport for a URL already validated or constructed by the caller."""
     try:
         with build_opener(_NoRedirect()).open(Request(url), timeout=30) as response:
-            if response.headers.get_content_type() not in ALLOWED_TYPES:
+            content_type = response.headers.get_content_type()
+            if content_type not in ALLOWED_TYPES and not (
+                allow_octet_stream and content_type == "application/octet-stream"
+            ):
                 raise MediaError("unsupported media content type")
             content = response.read(MAX_BYTES + 1)
         if len(content) > MAX_BYTES:
@@ -110,3 +116,4 @@ def save_webp(content: bytes, destination: Path) -> None:
     finally:
         if temporary is not None:
             temporary.unlink(missing_ok=True)
+
