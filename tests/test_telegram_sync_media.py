@@ -120,7 +120,7 @@ def test_second_complete_scan_deletes_only_removed_listing_assets(monkeypatch, t
     assert json.loads(paths[0].read_text()) == []
 
 
-def test_media_failure_retains_existing_image(monkeypatch, tmp_path):
+def test_media_failure_retains_existing_image(monkeypatch, tmp_path, capsys):
     existing = {"id": "telegram-20", "message_id": 20, "images": ["assets/telegram/20-0.webp"]}
     paths = setup_files(tmp_path, [existing])
     paths[2].mkdir(parents=True)
@@ -132,6 +132,7 @@ def test_media_failure_retains_existing_image(monkeypatch, tmp_path):
     sync.run_bootstrap(*paths)
     assert json.loads(paths[0].read_text())[0]["images"] == existing["images"]
     assert (paths[2] / "20-0.webp").read_bytes() == b"old image"
+    assert "Telegram media unavailable: listing=telegram-20 reason=failed image" in capsys.readouterr().err
 
 
 def test_json_stage_failure_does_not_change_state_or_delete_media(monkeypatch, tmp_path):
