@@ -382,7 +382,11 @@ def _prepare_media(listings, previous, token, media_path):
             listing["images"] = images
             listing.pop("media_retry", None)
             payloads.update(generated)
-        except MediaError:
+        except MediaError as exc:
+            print(
+                f"Telegram media unavailable: listing={listing['id']} reason={exc}",
+                file=sys.stderr,
+            )
             listing["images"] = old_images
             listing["media_retry"] = True
     return payloads
