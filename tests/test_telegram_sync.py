@@ -337,6 +337,38 @@ def test_apply_updates_reports_safe_skip_reason(capsys):
     assert "General channel announcement" not in diagnostic
 
 
+def test_apply_updates_accepts_captioned_image_document():
+    message = listing_message(68, "TEST PROPERTY FOR RENT RM1,000", file_id=None)
+    message.pop("photo")
+    message["document"] = {
+        "file_id": "document-image-1",
+        "mime_type": "image/jpeg",
+        "file_name": "property.jpg",
+    }
+
+    listings, offset = apply_updates([], [{"update_id": 5, "channel_post": message}])
+
+    assert offset == 6
+    assert listings[0]["id"] == "telegram-68"
+    assert listings[0]["file_ids"] == ["document-image-1"]
+
+
+def test_apply_updates_rejects_captioned_non_image_document(capsys):
+    message = listing_message(69, "TEST PROPERTY FOR RENT RM1,000", file_id=None)
+    message.pop("photo")
+    message["document"] = {
+        "file_id": "document-pdf-1",
+        "mime_type": "application/pdf",
+        "file_name": "brochure.pdf",
+    }
+
+    listings, offset = apply_updates([], [{"update_id": 6, "channel_post": message}])
+
+    assert listings == []
+    assert offset == 7
+    assert "reason=not_a_listing" in capsys.readouterr().err
+
+
 def test_fetch_updates_raises_for_api_error(monkeypatch):
     from scripts import telegram_client
 
