@@ -85,6 +85,26 @@ def test_bot_file_ids_resolve_to_safe_file_download(monkeypatch):
     assert media.download_bot_media("secret", "photo one") == image_bytes()
 
 
+def test_bot_image_document_allows_octet_stream_transport(monkeypatch):
+    from types import SimpleNamespace
+    responses = {
+        "https://api.telegram.org/botsecret/getFile?file_id=document-image": Response(
+            b'{"ok": true, "result": {"file_path": "documents/property.jpg"}}',
+            "application/json",
+        ),
+        "https://api.telegram.org/file/botsecret/documents/property.jpg": Response(
+            image_bytes(), "application/octet-stream"
+        ),
+    }
+    monkeypatch.setattr(
+        media,
+        "build_opener",
+        lambda *args: SimpleNamespace(open=lambda req, **kw: responses[req.full_url]),
+    )
+
+    assert media.download_bot_media("secret", "document-image") == image_bytes()
+
+
 @pytest.mark.parametrize("file_path", ["../private", "https://evil.example/a.jpg", "photos/../../x", "photos/x?token=secret"])
 def test_bot_file_path_cannot_escape_constructed_api_url(monkeypatch, file_path):
     import json
@@ -102,3 +122,4 @@ def test_decompression_bomb_is_rejected_before_writing(monkeypatch, tmp_path):
     with pytest.raises(media.MediaError):
         media.save_webp(content, tmp_path / "20-0.webp")
     assert list(tmp_path.iterdir()) == []
+
