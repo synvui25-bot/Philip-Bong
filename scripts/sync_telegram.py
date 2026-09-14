@@ -8,7 +8,7 @@ import re
 import sys
 import tempfile
 
-from scripts.telegram_client import fetch_updates
+from scripts.telegram_client import fetch_bot_channel_status, fetch_updates
 from scripts.telegram_media import MediaError, download_bot_media, download_public_media, save_webp
 from scripts.telegram_parser import parse_listing
 from scripts.telegram_public import PublicHistoryError, reconcile_missing, scan_public_history
@@ -149,6 +149,7 @@ def apply_updates(listings: list[dict], updates: list[dict]) -> tuple[list[dict]
         message = dict(update[event_type])
         _validate_channel(message)
         message["_sync_event_type"] = event_type
+        message["_sync_update_id"] = update_id
         messages.append(message)
 
     for message in group_media_posts(messages):
@@ -187,6 +188,16 @@ def apply_updates(listings: list[dict], updates: list[dict]) -> tuple[list[dict]
                 by_id.pop(identifier, None)
                 continue
             else:
+                print(
+                    "Telegram update skipped: "
+                    f"update_id={message.get('_sync_update_id')} "
+                    f"message_id={message_id} "
+                    f"event={message.get('_sync_event_type')} "
+                    f"has_text={bool(message.get('text') or message.get('caption'))} "
+                    f"has_photo={bool(message.get('photo'))} "
+                    "reason=not_a_listing",
+                    file=sys.stderr,
+                )
                 continue
 
         published_at = message.get("date")
@@ -469,7 +480,19 @@ def main(argv: list[str] | None = None) -> int:
         if args.bootstrap:
             run_bootstrap()
         else:
-            run_incremental(os.environ.get("TELEGRAM_BOT_TOKEN", ""))
+            token = os.environ.get("TELEGRAM_BOT_TOKEN", "")
+            status = fetch_bot_channel_status(token, CHANNEL_USERNAME)
+            print(
+                "Telegram bot check: "
+                f"@{status['bot_username']} is {status['channel_status']} "
+                f"in @{CHANNEL_USERNAME}.",
+                file=sys.stderr,
+            )
+            if status["channel_status"] not in {"administrator", "creator"}:
+                raise RuntimeError(
+                    f"@{status['bot_username']} is not an administrator of @{CHANNEL_USERNAME}"
+                )
+            run_incremental(token)
     except Exception as exc:
         token = os.environ.get("TELEGRAM_BOT_TOKEN", "")
         details = str(exc)
