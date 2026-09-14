@@ -154,6 +154,15 @@ def test_cli_requires_explicit_bootstrap_flag(monkeypatch):
     calls = []
     monkeypatch.setattr(sync, "run_bootstrap", lambda: calls.append("bootstrap"))
     monkeypatch.setattr(sync, "run_incremental", lambda token: calls.append("incremental"))
+    monkeypatch.setattr(
+        sync,
+        "fetch_bot_channel_status",
+        lambda token, channel: {
+            "bot_id": 42,
+            "bot_username": "PhilipBListingSyncBot",
+            "channel_status": "administrator",
+        },
+    )
     assert sync.main([]) == 0
     assert sync.main(["--bootstrap"]) == 0
     assert calls == ["incremental", "bootstrap"]
@@ -199,6 +208,15 @@ def test_cli_failed_scan_returns_nonzero_and_does_not_print_token(monkeypatch, c
     def fail(token):
         raise PublicHistoryError(f"failed https://api.telegram.org/bot{token}/getUpdates")
     monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "secret-token")
+    monkeypatch.setattr(
+        sync,
+        "fetch_bot_channel_status",
+        lambda token, channel: {
+            "bot_id": 42,
+            "bot_username": "PhilipBListingSyncBot",
+            "channel_status": "administrator",
+        },
+    )
     monkeypatch.setattr(sync, "run_incremental", fail)
     assert sync.main([]) == 1
     error = capsys.readouterr().err
