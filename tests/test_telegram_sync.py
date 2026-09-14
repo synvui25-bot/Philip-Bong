@@ -285,6 +285,58 @@ def test_fetch_updates_rejects_whitespace_inside_secret():
         telegram_client.fetch_updates("secret token", 5)
 
 
+def test_fetch_bot_channel_status_reports_identity_and_membership(monkeypatch):
+    from scripts import telegram_client
+
+    payloads = iter([
+        {"ok": True, "result": {"id": 42, "username": "PhilipBListingSyncBot"}},
+        {"ok": True, "result": {"status": "administrator"}},
+    ])
+    requested_urls = []
+
+    class Response:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, traceback):
+            return False
+
+    def capture_request(request, timeout):
+        requested_urls.append(request.full_url)
+        return Response()
+
+    monkeypatch.setattr(telegram_client, "urlopen", capture_request)
+    monkeypatch.setattr(telegram_client.json, "load", lambda response: next(payloads))
+
+    assert telegram_client.fetch_bot_channel_status("secret-token", "sarawakpropertyguru") == {
+        "bot_id": 42,
+        "bot_username": "PhilipBListingSyncBot",
+        "channel_status": "administrator",
+    }
+    assert requested_urls == [
+        "https://api.telegram.org/botsecret-token/getMe",
+        "https://api.telegram.org/botsecret-token/getChatMember?chat_id=%40sarawakpropertyguru&user_id=42",
+    ]
+
+
+def test_apply_updates_reports_safe_skip_reason(capsys):
+    update = {
+        "update_id": 5,
+        "channel_post": listing_message(10, "General channel announcement", file_id="p1"),
+    }
+
+    listings, offset = apply_updates([], [update])
+
+    assert listings == []
+    assert offset == 6
+    diagnostic = capsys.readouterr().err
+    assert "update_id=5" in diagnostic
+    assert "message_id=10" in diagnostic
+    assert "has_photo=True" in diagnostic
+    assert "reason=not_a_listing" in diagnostic
+    assert "General channel announcement" not in diagnostic
+
+
 def test_fetch_updates_raises_for_api_error(monkeypatch):
     from scripts import telegram_client
 
