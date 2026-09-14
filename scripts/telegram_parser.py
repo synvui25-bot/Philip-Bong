@@ -37,7 +37,8 @@ def parse_listing(post: dict) -> dict | None:
     message_id = post.get("message_id")
     canonical_url = f"https://t.me/sarawakpropertyguru/{message_id}"
     has_source_link = post.get("telegram_url") == canonical_url
-    if not isinstance(text, str) or not is_listing(text, bool(post.get("photo")), has_source_link):
+    has_image = bool(post.get("photo") or post.get("file_ids"))
+    if not isinstance(text, str) or not is_listing(text, has_image, has_source_link):
         return None
 
     lines = [_normalize_whitespace(line) for line in text.splitlines()]
