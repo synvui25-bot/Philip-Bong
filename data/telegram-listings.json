@@ -1,5 +1,22 @@
 [
   {
+    "id": "telegram-69",
+    "title": "TEST PROPERTY FOR RENT RM1,000",
+    "source_text": "TEST PROPERTY FOR RENT RM1,000",
+    "telegram_url": "https://t.me/sarawakpropertyguru/69",
+    "status": "For Rent",
+    "price": "RM1,000",
+    "edited_at": 1789368331,
+    "message_id": 69,
+    "published_at": 1789368300,
+    "caption_message_id": 69,
+    "file_ids": [
+      "BQACAgUAAyEFAAS8ViHxAANFaqeX7Pb79Qx4pIWF-80iV5LDOSoAAhAjAALpbUFVRmdleUjQmMo9BA"
+    ],
+    "images": [],
+    "media_retry": true
+  },
+  {
     "id": "telegram-65",
     "title": "TEST PROPERTY FOR RENT RM1,000",
     "source_text": "TEST PROPERTY FOR RENT RM1,000\n\n\ud83d\udccd Location: Kuching Sarawak \n\u2705 3bed 2 bath\n\u2705 Fully Furnished",
