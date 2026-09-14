@@ -23,10 +23,17 @@ DEFAULT_MEDIA_PATH = ROOT / "assets" / "telegram"
 
 def _photo_file_ids(message: dict) -> list[str]:
     photos = message.get("photo")
-    if not isinstance(photos, list) or not photos:
-        return []
-    file_id = photos[-1].get("file_id") if isinstance(photos[-1], dict) else None
-    return [file_id] if isinstance(file_id, str) else []
+    if isinstance(photos, list) and photos:
+        file_id = photos[-1].get("file_id") if isinstance(photos[-1], dict) else None
+        if isinstance(file_id, str):
+            return [file_id]
+    document = message.get("document")
+    if isinstance(document, dict):
+        mime_type = document.get("mime_type")
+        file_id = document.get("file_id")
+        if isinstance(mime_type, str) and mime_type.startswith("image/") and isinstance(file_id, str):
+            return [file_id]
+    return []
 
 
 def group_media_posts(messages: list[dict]) -> list[dict]:
@@ -195,6 +202,7 @@ def apply_updates(listings: list[dict], updates: list[dict]) -> tuple[list[dict]
                     f"event={message.get('_sync_event_type')} "
                     f"has_text={bool(message.get('text') or message.get('caption'))} "
                     f"has_photo={bool(message.get('photo'))} "
+                    f"has_image_document={bool(message.get('file_ids'))} "
                     "reason=not_a_listing",
                     file=sys.stderr,
                 )
