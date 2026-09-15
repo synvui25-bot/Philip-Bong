@@ -30,8 +30,14 @@ def _photo_file_ids(message: dict) -> list[str]:
     document = message.get("document")
     if isinstance(document, dict):
         mime_type = document.get("mime_type")
+        file_name = document.get("file_name")
         file_id = document.get("file_id")
-        if isinstance(mime_type, str) and mime_type.startswith("image/") and isinstance(file_id, str):
+        has_image_type = isinstance(mime_type, str) and mime_type.startswith("image/")
+        has_image_extension = (
+            isinstance(file_name, str)
+            and re.search(r"\.(?:jpe?g|png|webp)\Z", file_name, re.IGNORECASE) is not None
+        )
+        if (has_image_type or has_image_extension) and isinstance(file_id, str):
             return [file_id]
     return []
 
